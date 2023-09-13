@@ -21,7 +21,7 @@ public class Principal extends Application {
     try {
       primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("diretorio")));
       primaryStage.setTitle("DataBus");
-      primaryStage.resizableProperty().setValue(false);
+      primaryStage.setResizable(false);
 
       Parent telaCamadaFisica = FXMLLoader.load(getClass().getResource("diretorio"));
       startTelaCamadaFisica = new Scene(telaCamadaFisica);
