@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,11 +18,19 @@
          <image>
             <Image url="@../assets/botaoCadastro.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fx:id="botaoLogin" fitHeight="32.0" fitWidth="114.0" layoutX="178.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="botaoLogin" fitHeight="32.0" fitWidth="114.0" layoutX="178.0" layoutY="432.0" onMouseClicked="#clickLogin" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/botaoLogin.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
+      <TextField fx:id="textUsuario" alignment="CENTER" layoutX="126.0" layoutY="317.0" prefHeight="25.0" prefWidth="218.0" stylesheets="@styles.css" />
+      <TextField fx:id="textSenha" alignment="CENTER" layoutX="126.0" layoutY="389.0" prefHeight="25.0" prefWidth="218.0" stylesheets="@styles.css" />
    </children>
 </AnchorPane>

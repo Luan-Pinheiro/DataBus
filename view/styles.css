@@ -1,0 +1,8 @@
+#textSenha{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textUsuario{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
