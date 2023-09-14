@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScreenController">
+   <children>
+      <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/backgroundInicial.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="botaoCadastro" fitHeight="32.0" fitWidth="171.0" layoutX="149.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/botaoCadastro.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="botaoLogin" fitHeight="32.0" fitWidth="114.0" layoutX="178.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/botaoLogin.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
