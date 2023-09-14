@@ -26,35 +26,26 @@ public Cliente(int identificador, String usuario, String senha, Date dataNascime
 public int getIdentificador() {
     return identificador;
 }
-
 public String getUsuario() {
     return usuario;
 }
-
 public String getSenha() {
     return senha;
 }
-
 public Date getDataNascimento() {
     return dataNascimento;
 }
-
 public String getNumeroTel() {
     return numeroTel;
 }
-
 public String getNome() {
     return nome;
 }
-
 public String getEndereco() {
     return endereco;
 }
-
 public String getCpf() {
     return cpf;
 }
-
-
 
 }

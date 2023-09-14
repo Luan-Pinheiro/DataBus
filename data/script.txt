@@ -1,0 +1,63 @@
+--Criar o Banco de dados, conectar a ele
+CREATE DATABASE databus
+
+--Executar o script
+CREATE SCHEMA databus
+
+CREATE TABLE if not exists databus.cliente( 
+                       identificador integer NOT NULL PRIMARY KEY,
+                       senha varchar(12),  
+                       login varchar(12),  
+                       dtNasc date,  
+                       telefone varchar(11),  
+                       nome varchar(50),
+					   sexo character(1),
+                       endereço varchar(70),  
+                       cpf numeric(11,0) NOT NULL,
+					   CHECK (sexo in ('M', 'F', 'm', 'f')) );
+	
+
+CREATE TABLE if not exists databus.passe(
+                       numCartao numeric(15,0) NOT NULL PRIMARY KEY,  
+                       saldo float,  
+                       validade date,  
+                       idCliente integer); 
+
+CREATE TABLE if not exists databus.passeAluno( 
+                       cpf numeric(11,0) NOT NULL PRIMARY KEY,  
+                       matricula varchar(10),  
+                       nome varchar(50),  
+                       instituição varchar(70),  
+                       numPasse numeric(15,0));
+
+CREATE TABLE if not exists databus.passeIdoso(
+                       rg numeric(11,0) NOT NULL,  
+                       numPasse numeric(15,0)); 
+
+CREATE TABLE if not exists databus.dadosPeriodicos(
+                       instituição varchar(70),  
+                       nome varchar(60),  
+                       matrícula integer,  
+                       cpf numeric(11,0) NOT NULL PRIMARY KEY); 
+
+CREATE TABLE if not exists databus.funcionario(
+                       login  varchar(12),  
+                       senha varchar(12),  
+                       codigoFuncionário integer NOT NULL PRIMARY KEY); 
+
+CREATE TABLE if not exists databus.rotas(
+                       codigoRota  varchar(3) NOT NULL PRIMARY KEY,  
+                       partida_destino varchar(70),
+                       nome  varchar(50)); 
+
+CREATE TABLE if not exists databus.horarios ( 
+                       codigoRota  varchar(3) NOT NULL); 
+
+CREATE TABLE if not exists databus.pontos (
+                       codigoRota  varchar(3) NOT NULL); 
+					   
+ALTER TABLE databus.passe ADD FOREIGN KEY(idCliente) REFERENCES databus.cliente(identificador);
+ALTER TABLE databus.passeAluno ADD FOREIGN KEY(numPasse) REFERENCES databus.passe(numCartao);
+ALTER TABLE databus.passeIdoso ADD FOREIGN KEY(numPasse) REFERENCES databus.passe(numCartao);
+ALTER TABLE databus.horarios ADD FOREIGN KEY(codigoRota) REFERENCES databus.rotas(codigoRota);
+ALTER TABLE databus.pontos ADD FOREIGN KEY(codigoRota) REFERENCES databus.rotas(codigoRota);
