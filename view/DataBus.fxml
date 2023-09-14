@@ -1,36 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScreenController">
    <children>
-      <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/backgroundInicial.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="botaoCadastro" fitHeight="32.0" fitWidth="171.0" layoutX="149.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/botaoCadastro.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <ImageView fx:id="botaoLogin" fitHeight="32.0" fitWidth="114.0" layoutX="178.0" layoutY="432.0" onMouseClicked="#clickLogin" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/botaoLogin.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <TextField fx:id="textUsuario" alignment="CENTER" layoutX="126.0" layoutY="317.0" prefHeight="25.0" prefWidth="218.0" stylesheets="@styles.css" />
-      <TextField fx:id="textSenha" alignment="CENTER" layoutX="126.0" layoutY="389.0" prefHeight="25.0" prefWidth="218.0" stylesheets="@styles.css" />
+      <Group>
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/backgroundCadastro01.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="passeIdoso" fitHeight="118.0" fitWidth="185.0" layoutX="239.0" layoutY="292.0" onMouseClicked="#clickIdoso" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/Idoso.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="passeCLT" fitHeight="118.0" fitWidth="184.0" layoutX="143.0" layoutY="419.0" onMouseClicked="#clickCLT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/PasseCLT.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="PasseEstudante" fitHeight="118.0" fitWidth="185.0" layoutX="45.0" layoutY="292.0" onMouseClicked="#ClickEstudante" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/PasseEstudante.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="groupInicialScreen">
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/backgroundInicial.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="botaoCadastro" fitHeight="32.0" fitWidth="171.0" layoutX="149.0" layoutY="539.0" onMouseClicked="#clickCadastro" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/botaoCadastro.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="botaoLogin" fitHeight="32.0" fitWidth="114.0" layoutX="178.0" layoutY="432.0" onMouseClicked="#clickLogin" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/botaoLogin.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <TextField fx:id="textUsuario" alignment="CENTER" layoutX="126.0" layoutY="317.0" prefHeight="25.0" prefWidth="218.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textSenha" alignment="CENTER" layoutX="126.0" layoutY="389.0" prefHeight="25.0" prefWidth="218.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+         </children>
+      </Group>
    </children>
 </AnchorPane>
