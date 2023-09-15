@@ -107,7 +107,7 @@ public class ScreenController implements Initializable {
   private TextField textSenha;
   @FXML
   private ImageView homeButton;
-  int tipoPasse = 0; 
+  int tipoPasse = 0;
 
   @FXML
   void ClickEstudante(MouseEvent event) { // Clicou no Passe Estudante
@@ -148,34 +148,34 @@ public class ScreenController implements Initializable {
   @FXML
   void clicouBotaoCadastrar(MouseEvent event) { // Botao Cadastrar
 
-      switch(tipoPasse){
-        case 1:
-        //System.out.println( Cliente.confereNome(textNome.getText()));
-       //System.out.println( Cliente.confereSenha(textSenha2.getText()));
-       //System.out.println(Cliente.confereCpf(textCPF.getText()));
-       //System.out.println(Cliente.confereEmail(textEmail.getText()));
+    switch (tipoPasse) {
+      case 1:
+        // System.out.println( Cliente.confereNome(textNome.getText()));
+        // System.out.println( Cliente.confereSenha(textSenha2.getText()));
+        // System.out.println(Cliente.confereCpf(textCPF.getText()));
+        // System.out.println(Cliente.confereEmail(textEmail.getText()));
         System.out.println(Cliente.confereNumero(textTelefone.getText()));
         break;
 
       case 2:
-       //System.out.println(Cliente.confereNome(textNomeCLT.getText()));
-       //System.out.println(Cliente.confereSenha(textSenhaCLT.getText()));
-       //System.out.println(Cliente.confereCpf(textCPFCLT.getText()));
-       //System.out.println(Cliente.confereEmail(textEmailCLT.getText()));
-       //System.out.println(cliente.confereNumero(textTelefoneCLT.getText()));
-       //System.out.println(Cliente.confereEndereco(textEnderecoCLT.getText()));
-       //System.out.println(cliente.confereData(textNascimentoCLT.getText()));
+        // System.out.println(Cliente.confereNome(textNomeCLT.getText()));
+        // System.out.println(Cliente.confereSenha(textSenhaCLT.getText()));
+        // System.out.println(Cliente.confereCpf(textCPFCLT.getText()));
+        // System.out.println(Cliente.confereEmail(textEmailCLT.getText()));
+        // System.out.println(cliente.confereNumero(textTelefoneCLT.getText()));
+        // System.out.println(Cliente.confereEndereco(textEnderecoCLT.getText()));
+        // System.out.println(cliente.confereData(textNascimentoCLT.getText()));
         break;
 
       case 3:
-       //System.out.println(Cliente.confereNome(textNomeIDOSO.getText()));
-       //System.out.println(Cliente.confereSenha(textSenhaIDOSO.getText()));
-       //System.out.println(Cliente.confereCpf(textCPFIDOSO.getText()));
-       //System.out.println(Cliente.confereEmail(textEmailIDOSO.getText()));
-       //System.out.println(cliente.confereNumero(textTelefoneIDOSO.getText()));
-       //System.out.println(Cliente.confereEndereco(textEnderecoIDOSO.getText()));
-       //System.out.println(cliente.confereData(textNascimentoIDOSO.getText()));
-       break;
+        // System.out.println(Cliente.confereNome(textNomeIDOSO.getText()));
+        // System.out.println(Cliente.confereSenha(textSenhaIDOSO.getText()));
+        // System.out.println(Cliente.confereCpf(textCPFIDOSO.getText()));
+        // System.out.println(Cliente.confereEmail(textEmailIDOSO.getText()));
+        // System.out.println(cliente.confereNumero(textTelefoneIDOSO.getText()));
+        // System.out.println(Cliente.confereEndereco(textEnderecoIDOSO.getText()));
+        // System.out.println(cliente.confereData(textNascimentoIDOSO.getText()));
+        break;
     }
   }
 
@@ -194,34 +194,34 @@ public class ScreenController implements Initializable {
     homeButton.setVisible(false);
   }
 
-    public void clearText(){
-   textCPFCLT.clear();
-   textEmailCLT.clear();
-   textCTPSCLT.clear();
-   textRGCLT.clear();
-   textNomeCLT.clear();
-   textNascimentoCLT.clear();
-   textTelefoneCLT.clear();
-   textSenhaCLT.clear();
-   textEnderecoCLT.clear();
-   textCPFIDOSO.clear();
-   textEmailIDOSO.clear();
-   textEnderecoIDOSO.clear();
-   textRGIDOSO.clear();
-   textNascimentoIDOSO.clear();
-   textNomeIDOSO.clear();
-   textSenhaIDOSO.clear();
-   textTelefoneIDOSO.clear();
-   textCPF.clear();
-   textEmail.clear();
-   textEndereco.clear();
-   textInstituicao.clear();
-   textMatricula.clear();
-   textNascimento.clear();
-   textNome.clear();
-   textSenha2.clear();
-   textTelefone.clear();
-    }
+  public void clearText() {
+    textCPFCLT.clear();
+    textEmailCLT.clear();
+    textCTPSCLT.clear();
+    textRGCLT.clear();
+    textNomeCLT.clear();
+    textNascimentoCLT.clear();
+    textTelefoneCLT.clear();
+    textSenhaCLT.clear();
+    textEnderecoCLT.clear();
+    textCPFIDOSO.clear();
+    textEmailIDOSO.clear();
+    textEnderecoIDOSO.clear();
+    textRGIDOSO.clear();
+    textNascimentoIDOSO.clear();
+    textNomeIDOSO.clear();
+    textSenhaIDOSO.clear();
+    textTelefoneIDOSO.clear();
+    textCPF.clear();
+    textEmail.clear();
+    textEndereco.clear();
+    textInstituicao.clear();
+    textMatricula.clear();
+    textNascimento.clear();
+    textNome.clear();
+    textSenha2.clear();
+    textTelefone.clear();
+  }
 
   private void showCaixaAlerta() { // metodo da caixa de alerta
     Alert alert = new Alert(AlertType.WARNING);
@@ -232,18 +232,116 @@ public class ScreenController implements Initializable {
     alert.showAndWait();
   }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-      // Formatação Texto do Telefone
-      textTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
-        if (newValue.matches("\\d{11}")) {
-          String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
-          newValue.substring(2, 7) + "-" +
-          newValue.substring(7);
-          textTelefone.setText(formattedNumber);
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    // Verifica o tamanho dos digitos da string e caso seja o tamanho do numero maximo
+    // insere a pontuação adequada para a formatacao necessaria e nao permite
+    // maiores quantidades que o limite
+    
+    // Formatação Texto do Telefone
+    textTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
+            newValue.substring(2, 7) + "-" +
+            newValue.substring(7);
+        textTelefone.setText(formattedNumber);
       }
-      if (textTelefone.getLength() > 14){
+      if (textTelefone.getLength() > 14) {
         textTelefone.setText(oldValue);
+      }
+    });
+    textTelefoneCLT.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
+            newValue.substring(2, 7) + "-" +
+            newValue.substring(7);
+        textTelefoneCLT.setText(formattedNumber);
+      }
+      if (textTelefoneCLT.getLength() > 14) {
+        textTelefoneCLT.setText(oldValue);
+      }
+    });
+    textTelefoneIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
+            newValue.substring(2, 7) + "-" +
+            newValue.substring(7);
+        textTelefoneIDOSO.setText(formattedNumber);
+      }
+      if (textTelefoneIDOSO.getLength() > 14) {
+        textTelefoneIDOSO.setText(oldValue);
+      }
+    });
+
+    // Formatacao das Datas
+    textNascimento.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{8}")) {
+        String formattedNumber = newValue.substring(0, 2) + "/" +
+            newValue.substring(2, 4) + "/" +
+            newValue.substring(4);
+        textNascimento.setText(formattedNumber);
+      }
+      if (textNascimento.getLength() > 10) {
+        textNascimento.setText(oldValue);
+      }
+    });
+    textNascimentoCLT.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{8}")) {
+        String formattedNumber = newValue.substring(0, 2) + "/" +
+            newValue.substring(2, 4) + "/" +
+            newValue.substring(4);
+        textNascimentoCLT.setText(formattedNumber);
+      }
+      if (textNascimentoCLT.getLength() > 10) {
+        textNascimentoCLT.setText(oldValue);
+      }
+    });
+    textNascimentoIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{8}")) {
+        String formattedNumber = newValue.substring(0, 2) + "/" +
+            newValue.substring(2, 4) + "/" +
+            newValue.substring(4);
+        textNascimentoIDOSO.setText(formattedNumber);
+      }
+      if (textNascimentoIDOSO.getLength() > 10) {
+        textNascimentoIDOSO.setText(oldValue);
+      }
+    });
+    // Formatacao dos CPFs
+    textCPF.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = newValue.substring(0, 3) + "." +
+            newValue.substring(3, 6) + "." +
+            newValue.substring(6, 9) + "-" +
+            newValue.substring(9);
+        textCPF.setText(formattedNumber);
+      }
+      if (textCPF.getLength() > 14) {
+        textCPF.setText(oldValue);
+      }
+    });
+    textCPFCLT.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = newValue.substring(0, 3) + "." +
+            newValue.substring(3, 6) + "." +
+            newValue.substring(6, 9) + "-" +
+            newValue.substring(9);
+        textCPFCLT.setText(formattedNumber);
+      }
+      if (textCPFCLT.getLength() > 14) {
+        textCPFCLT.setText(oldValue);
+      }
+    });
+    textCPFIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = newValue.substring(0, 3) + "." +
+            newValue.substring(3, 6) + "." +
+            newValue.substring(6, 9) + "-" +
+            newValue.substring(9);
+        textCPFIDOSO.setText(formattedNumber);
+      }
+      if (textCPFIDOSO.getLength() > 14) {
+        textCPFIDOSO.setText(oldValue);
       }
     });
   }
