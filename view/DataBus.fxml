@@ -17,14 +17,6 @@
                   <Image url="@../assets/backgroundCadastroEstudante.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="botaoCadastrar" fitHeight="32.0" fitWidth="148.0" layoutX="161.0" layoutY="567.0" onMouseClicked="#clicouBotaoCadastrar" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/botaoCadastrar.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
             <TextField fx:id="textNome" alignment="CENTER" layoutX="179.0" layoutY="180.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
@@ -72,6 +64,117 @@
             </TextField>
          </children>
       </Group>
+      <Group fx:id="groupCLT" visible="false">
+         <children>
+            <ImageView fx:id="backgroundCLT" fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/backgroundCadastroCLT.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="textNomeCLT" alignment="CENTER" layoutX="179.0" layoutY="178.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textNascimentoCLT" alignment="CENTER" layoutX="179.0" layoutY="218.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textCPFCLT" alignment="CENTER" layoutX="179.0" layoutY="259.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textEnderecoCLT" alignment="CENTER" layoutX="179.0" layoutY="300.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textTelefoneCLT" alignment="CENTER" layoutX="179.0" layoutY="341.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textEmailCLT" alignment="CENTER" layoutX="179.0" layoutY="383.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textSenhaCLT" alignment="CENTER" layoutX="179.0" layoutY="425.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textRGCLT" alignment="CENTER" layoutX="179.0" layoutY="467.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textCTPSCLT" alignment="CENTER" layoutX="179.0" layoutY="509.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+         </children>
+      </Group>
+      <Group fx:id="groupIDOSO" visible="false">
+         <children>
+            <ImageView fx:id="backgroundIDOSO" fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/backgroundCadastroIdoso.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="textNomeIDOSO" alignment="CENTER" layoutX="179.0" layoutY="203.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textNascimentoIDOSO" alignment="CENTER" layoutX="179.0" layoutY="243.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textCPFIDOSO" alignment="CENTER" layoutX="179.0" layoutY="284.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textEnderecoIDOSO" alignment="CENTER" layoutX="179.0" layoutY="325.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textTelefoneIDOSO" alignment="CENTER" layoutX="179.0" layoutY="366.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textEmailIDOSO" alignment="CENTER" layoutX="179.0" layoutY="408.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textSenhaIDOSO" alignment="CENTER" layoutX="179.0" layoutY="450.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="textRGIDOSO" alignment="CENTER" layoutX="179.0" layoutY="492.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+         </children>
+      </Group>
+      <ImageView fx:id="botaoCadastrar" fitHeight="32.0" fitWidth="148.0" layoutX="161.0" layoutY="568.0" onMouseClicked="#clicouBotaoCadastrar" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../assets/botaoCadastrar.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
       <Group fx:id="groupCadastro01" visible="false">
          <children>
             <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
@@ -140,5 +243,13 @@
             </TextField>
          </children>
       </Group>
+      <ImageView fx:id="homeButton" fitHeight="36.0" fitWidth="36.0" layoutX="36.0" layoutY="33.0" onMouseClicked="#clickHomeButton" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../assets/homeButton.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>
