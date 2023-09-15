@@ -6,3 +6,40 @@
     -fx-text-fill: white;
     -fx-background-color: transparent;
   }
+  #textMatricula{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textCPF{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textEndereco{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textInstituicao{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textNascimento{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textNome{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textSenha2{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textTelefone{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textEmail{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  
