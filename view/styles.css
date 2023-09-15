@@ -6,3 +6,122 @@
     -fx-text-fill: white;
     -fx-background-color: transparent;
   }
+  #textMatricula{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textCPF{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textEndereco{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textInstituicao{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textNascimento{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textNome{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textSenha2{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textTelefone{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textEmail{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+
+
+
+
+  #textRGCLT{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textCPFCLT{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textEnderecoCLT{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textCTPSCLT{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textNascimentoCLT{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textNomeCLT{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textSenhaCLT{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textTelefoneCLT{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textEmailCLT{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+
+
+
+  #textRGIDOSO{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textCPFIDOSO{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textEnderecoIDOSO{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textInstituicaoIDOSO{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textNascimentoIDOSO{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textNomeIDOSO{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textSenhaIDOSO{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textTelefoneIDOSO{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #textEmailIDOSO{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+  #nascimentoIDOSO{
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }  
