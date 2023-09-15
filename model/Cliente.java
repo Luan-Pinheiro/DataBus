@@ -7,6 +7,8 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import controller.ScreenController;
+
 public class Cliente {
   private int identificador;
   private String email;
@@ -16,6 +18,7 @@ public class Cliente {
   private String nome;
   private String endereco;
   private String cpf;
+  ScreenController sc; 
 
 public Cliente(int identificador, String email, String senha, Date dataNascimento, String numeroTel, String nome,String endereco, String cpf) {
     this.identificador = identificador++;
@@ -35,49 +38,74 @@ public static boolean confereNome(String nome){
     if(nome.length() < 3 ){
        valido = false;
     }
-    if(!nome.matches("[a-zA-Z]*")){
+    if(!nome.matches("[a-zA-Z\\s]*")){
         valido = false;
      }
+
+     if (valido == false){
+        ScreenController.showCaixaAlerta("O nome digitado nao e valido! Confira  o nome e tente novamente.");
+     }
+    
      return valido;
   }
 
 
   public static boolean confereSenha (String senha){
     senha.toUpperCase();
-    if (senha.length() < 6) return false;
-    else
-    return true; 
+    Boolean valido = true; 
+    if (senha.length() < 6) {
+        valido = false;
+    } 
+     if (valido == false){
+        ScreenController.showCaixaAlerta("O senha digitada eh invalida! Confira  o nome e tente novamente.");
+     }
+    
+    return valido; 
 }
   
 public static boolean confereCpf(String cpf){
     boolean valido = true;
-    if (cpf.length() != 11){
+    if (cpf.length() != 14){
         valido = false;
     } 
     if(!cpf.matches("[0-9]*")){
         return false;
      }
+      if (valido == false){
+        ScreenController.showCaixaAlerta("O cpf digitado esta incorreto! Confira e tente novamente.");
+     }
+
     return valido; 
 }
 
   public static boolean confereEmail(String email) {
-        boolean isEmailIdValid = false;
+        boolean valido = false;
         if (email != null && email.length() > 0) {
             String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
             Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(email);
             if (matcher.matches()) {
-                isEmailIdValid = true;
+                valido = true;
             }
+            if (valido == false){
+        ScreenController.showCaixaAlerta("O email digitado eh invalido! Confira e tente novamente.");
+     }
         }
-        return isEmailIdValid;
+        
+        return valido;
     }
 
     public static Boolean confereNumero( String numero){
+        numero = numero.replaceAll("[^a-zA-Z0-9]", "");
         boolean valido = true;
     if (numero.length() != 11){
         valido = false;
     } 
+
+    if (valido == false){
+        ScreenController.showCaixaAlerta("O numero digitado eh invalido! Confira e tente novamente.");
+     }
+
     if(!numero.matches("[0-9]*")){
         return false;
      }
@@ -92,22 +120,26 @@ public static boolean confereCpf(String cpf){
         if (endereco.length() < 15){
             valido = false;
         }
+
+        if (valido == false){
+        ScreenController.showCaixaAlerta("O endereco digitado eh invalido! Confira  o nome e tente novamente.");
+     }
         
         return valido; 
     }
 
-    public boolean confereData (String dataNascimento){
+    public static boolean confereData (String dataNascimento){
+        Boolean valido;
             try {
          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
          LocalDate d = LocalDate.parse(dataNascimento, formatter);    
-         return true;
+         valido = true;
       } catch (DateTimeParseException e) {
-        return false;
-      }   
+        valido = false; 
+      }  
+      return valido; 
    }
     
-
-
 
 
 

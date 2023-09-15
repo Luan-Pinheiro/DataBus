@@ -150,11 +150,14 @@ public class ScreenController implements Initializable {
 
     switch (tipoPasse) {
       case 1:
-        // System.out.println( Cliente.confereNome(textNome.getText()));
+
+        //System.out.println( Cliente.confereNome(textNome.getText()));
         // System.out.println( Cliente.confereSenha(textSenha2.getText()));
-        // System.out.println(Cliente.confereCpf(textCPF.getText()));
+         System.out.println(Cliente.confereCpf(textCPF.getText()));
         // System.out.println(Cliente.confereEmail(textEmail.getText()));
-        System.out.println(Cliente.confereNumero(textTelefone.getText()));
+        //System.out.println(Cliente.confereNumero(textTelefone.getText()));
+        //System.out.println(Cliente.confereEndereco(textEndereco.getText()));
+        //System.out.println(Cliente.confereData(textNascimento.getText()));
         break;
 
       case 2:
@@ -223,11 +226,11 @@ public class ScreenController implements Initializable {
     textTelefone.clear();
   }
 
-  private void showCaixaAlerta() { // metodo da caixa de alerta
+  public static void showCaixaAlerta(String texto) { // metodo da caixa de alerta
     Alert alert = new Alert(AlertType.WARNING);
     alert.setTitle("Aviso");
-    alert.setHeaderText("Digite alguma coisa!");
-    alert.setContentText("Para enviar uma mensagem voce deve digitar algo bacana primeiro :)   ");
+    alert.setHeaderText("Ocorreu um erro!");
+    alert.setContentText(texto);
 
     alert.showAndWait();
   }
