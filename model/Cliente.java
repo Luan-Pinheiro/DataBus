@@ -27,18 +27,14 @@ public Cliente(int identificador, String email, String senha, Date dataNasciment
 
 public static boolean confereNome(String nome){
     nome.toUpperCase();
-    //nome.replaceAll("[^a-zA-Z]", "");
     System.out.println(nome);
-
     boolean valido = true;
-
     if(nome.length() < 3 ){
        valido = false;
     }
     if(!nome.matches("[a-zA-Z]*")){
         valido = false;
      }
-    
      return valido;
   }
 
@@ -46,23 +42,18 @@ public static boolean confereNome(String nome){
   public static boolean confereSenha (String senha){
     senha.toUpperCase();
     if (senha.length() < 6) return false;
-
     else
     return true; 
 }
   
 public static boolean confereCpf(String cpf){
     boolean valido = true;
-
     if (cpf.length() != 11){
         valido = false;
     } 
     if(!cpf.matches("[0-9]*")){
         return false;
      }
-
-
-
     return valido; 
 }
 
@@ -80,8 +71,8 @@ public static boolean confereCpf(String cpf){
     }
 
     public static Boolean confereNumero( String numero){
+        
         boolean valido = true;
-
     if (numero.length() != 11){
         valido = false;
     } 

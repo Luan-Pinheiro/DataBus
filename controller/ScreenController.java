@@ -1,13 +1,25 @@
 package controller;
 
+import java.net.URL;
+import java.text.ParseException;
+import java.util.ResourceBundle;
+
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.Cliente;
 
-public class ScreenController {
+public class ScreenController implements Initializable {
 
   @FXML private ImageView PasseEstudante;
   @FXML private ImageView backgroundCLT;
@@ -60,7 +72,6 @@ public class ScreenController {
   @FXML private TextField textSenha;
   @FXML private ImageView homeButton;
   int tipoPasse = 0;
-  Cliente cliente; 
 
     @FXML
     void ClickEstudante(MouseEvent event) { // Clicou no Passe Estudante
@@ -106,7 +117,7 @@ public class ScreenController {
        //System.out.println( Cliente.confereSenha(textSenha2.getText()));
        //System.out.println(Cliente.confereCpf(textCPF.getText()));
        //System.out.println(Cliente.confereEmail(textEmail.getText()));
-        System.out.println(cliente.confereNumero(textTelefone.getText()));
+        System.out.println(Cliente.confereNumero(textTelefone.getText()));
         break;
 
         case 2:
@@ -160,5 +171,21 @@ public class ScreenController {
    textSenha2.clear();
    textTelefone.clear();
     }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+      // Formatação Texto do Telefone
+      textTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (newValue.matches("\\d{11}")) {
+          String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
+          newValue.substring(2, 7) + "-" +
+          newValue.substring(7);
+          textTelefone.setText(formattedNumber);
+      }
+      if (textTelefone.getLength() > 14){
+        textTelefone.setText(oldValue);
+      }
+    });
+  }
 
 }
