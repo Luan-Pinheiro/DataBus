@@ -1,6 +1,9 @@
 package model;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +18,7 @@ public class Cliente {
   private String cpf;
 
 public Cliente(int identificador, String email, String senha, Date dataNascimento, String numeroTel, String nome,String endereco, String cpf) {
-    this.identificador = identificador;
+    this.identificador = identificador++;
     this.email = email;
     this.senha = senha;
     this.dataNascimento = dataNascimento;
@@ -66,7 +69,7 @@ public static boolean confereCpf(String cpf){
     return valido; 
 }
 
-  public boolean confereEmail(String email) {
+  public static boolean confereEmail(String email) {
         boolean isEmailIdValid = false;
         if (email != null && email.length() > 0) {
             String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
@@ -79,7 +82,7 @@ public static boolean confereCpf(String cpf){
         return isEmailIdValid;
     }
 
-    public static Boolean confereNumero( String numero){
+    public Boolean confereNumero( String numero){
         boolean valido = true;
 
     if (numero.length() != 11){
@@ -93,6 +96,26 @@ public static boolean confereCpf(String cpf){
 
     return valido; 
     }
+
+    public static boolean confereEndereco(String endereco){
+        boolean valido = true;
+        if (endereco.length() < 15){
+            valido = false;
+        }
+        
+        return valido; 
+    }
+
+    public boolean confereData (String dataNascimento){
+            try {
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+         LocalDate d = LocalDate.parse(dataNascimento, formatter);    
+         return true;
+      } catch (DateTimeParseException e) {
+        return false;
+      }   
+   }
+    
 
 
 
