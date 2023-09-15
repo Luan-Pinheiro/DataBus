@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import model.Cliente;
 
 public class ScreenController {
 
@@ -59,6 +60,7 @@ public class ScreenController {
   @FXML private TextField textSenha;
   @FXML private ImageView homeButton;
   int tipoPasse = 0;
+  Cliente cliente; 
 
     @FXML
     void ClickEstudante(MouseEvent event) { // Clicou no Passe Estudante
@@ -97,8 +99,14 @@ public class ScreenController {
     
     @FXML
     void clicouBotaoCadastrar(MouseEvent event) { // Botao Cadastrar
+
       switch(tipoPasse){
         case 1:
+        //System.out.println( Cliente.confereNome(textNome.getText()));
+       //System.out.println( Cliente.confereSenha(textSenha2.getText()));
+       //System.out.println(Cliente.confereCpf(textCPF.getText()));
+       //System.out.println(Cliente.confereEmail(textEmail.getText()));
+        System.out.println(cliente.confereNumero(textTelefone.getText()));
         break;
 
         case 2:

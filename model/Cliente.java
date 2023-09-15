@@ -1,6 +1,8 @@
 package model;
 
 import java.sql.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Cliente {
   private int identificador;
@@ -22,6 +24,79 @@ public Cliente(int identificador, String email, String senha, Date dataNasciment
     this.endereco = endereco;
     this.cpf = cpf;
 }
+
+public static boolean confereNome(String nome){
+    nome.toUpperCase();
+    //nome.replaceAll("[^a-zA-Z]", "");
+    System.out.println(nome);
+
+    boolean valido = true;
+
+    if(nome.length() < 3 ){
+       valido = false;
+    }
+    if(!nome.matches("[a-zA-Z]*")){
+        valido = false;
+     }
+    
+     return valido;
+  }
+
+
+  public static boolean confereSenha (String senha){
+    senha.toUpperCase();
+    if (senha.length() < 6) return false;
+
+    else
+    return true; 
+}
+  
+public static boolean confereCpf(String cpf){
+    boolean valido = true;
+
+    if (cpf.length() != 11){
+        valido = false;
+    } 
+    if(!cpf.matches("[0-9]*")){
+        return false;
+     }
+
+
+
+    return valido; 
+}
+
+  public boolean confereEmail(String email) {
+        boolean isEmailIdValid = false;
+        if (email != null && email.length() > 0) {
+            String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+            Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(email);
+            if (matcher.matches()) {
+                isEmailIdValid = true;
+            }
+        }
+        return isEmailIdValid;
+    }
+
+    public static Boolean confereNumero( String numero){
+        boolean valido = true;
+
+    if (numero.length() != 11){
+        valido = false;
+    } 
+    if(!numero.matches("[0-9]*")){
+        return false;
+     }
+
+
+
+    return valido; 
+    }
+
+
+
+
 
 public int getIdentificador() {
     return identificador;
