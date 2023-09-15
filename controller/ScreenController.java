@@ -121,6 +121,7 @@ public class ScreenController {
       groupIDOSO.setVisible(false);
       groupCLT.setVisible(false);
       clearText();
+      homeButton.setVisible(false);
     }
 
     public void clearText(){

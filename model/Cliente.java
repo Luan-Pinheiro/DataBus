@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Cliente {
   private int identificador;
-  private String usuario;
+  private String email;
   private String senha;
   private Date dataNascimento;
   private String numeroTel;
@@ -12,9 +12,9 @@ public class Cliente {
   private String endereco;
   private String cpf;
 
-public Cliente(int identificador, String usuario, String senha, Date dataNascimento, String numeroTel, String nome,String endereco, String cpf) {
+public Cliente(int identificador, String email, String senha, Date dataNascimento, String numeroTel, String nome,String endereco, String cpf) {
     this.identificador = identificador;
-    this.usuario = usuario;
+    this.email = email;
     this.senha = senha;
     this.dataNascimento = dataNascimento;
     this.numeroTel = numeroTel;
@@ -26,8 +26,8 @@ public Cliente(int identificador, String usuario, String senha, Date dataNascime
 public int getIdentificador() {
     return identificador;
 }
-public String getUsuario() {
-    return usuario;
+public String getemail() {
+    return email;
 }
 public String getSenha() {
     return senha;
