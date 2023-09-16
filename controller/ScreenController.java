@@ -237,7 +237,7 @@ public class ScreenController implements Initializable {
     // Verifica o tamanho dos digitos da string e caso seja o tamanho do numero maximo
     // insere a pontuação adequada para a formatacao necessaria e nao permite
     // maiores quantidades que o limite
-    
+
     // Formatação Texto do Telefone
     textTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue.matches("\\d{11}")) {
