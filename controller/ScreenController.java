@@ -13,7 +13,6 @@ import javafx.scene.input.MouseEvent;
 import model.Cliente;
 
 public class ScreenController implements Initializable {
-
   @FXML
   private ImageView PasseEstudante;
   @FXML

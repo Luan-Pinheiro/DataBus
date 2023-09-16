@@ -1,8 +1,12 @@
+import java.util.ArrayList;
+
+import data.ClienteDaoJDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Cliente;
 
 public class Principal extends Application {
   private static Scene telaEntrada; // Cena inicial
@@ -22,6 +26,15 @@ public class Principal extends Application {
   }
 
   public static void main(String[] args) {
+    ClienteDaoJDBC teste= new ClienteDaoJDBC();
+    ArrayList<Cliente> clientes = teste.getAllClientes();
+    for (Cliente cliente : clientes) {
+      System.out.println(cliente.getNome());
+      System.out.println(cliente.getEndereco());
+      System.out.println(cliente.getemail());
+      System.out.println(cliente.getDataNascimento());
+      System.out.println("______________________________");
+    }
     launch(args);
   }
 }
