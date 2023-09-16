@@ -81,7 +81,7 @@ public class ScreenController implements Initializable {
   @FXML
   private TextField textTelefoneIDOSO;
 
-  // ITENS ESTUDADANTE
+  // ITENS ESTUDADANTES
   @FXML
   private TextField textCPF;
   @FXML
