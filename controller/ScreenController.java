@@ -160,6 +160,7 @@ public class ScreenController implements Initializable {
       if (!Cliente.confereData(textNascimento.getText()))verify = false;
       if(verify == false){
         showCaixaAlerta(Cliente.alertas());
+        Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
       }
         break;
 

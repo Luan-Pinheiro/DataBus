@@ -35,6 +35,10 @@ public class Cliente {
         return textAlerta;
     }
 
+    public static void setTextAlerta(String textAlerta) {
+        Cliente.textAlerta = textAlerta;
+    }
+
     public static boolean confereNome(String nome) {
         nome.toUpperCase();
         System.out.println(nome);
