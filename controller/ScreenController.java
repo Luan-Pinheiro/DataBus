@@ -1,7 +1,11 @@
 package controller;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
+
+import data.ClienteDaoJDBC;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -114,6 +118,7 @@ public class ScreenController implements Initializable {
   private ImageView imgSeePassword;
 
   TrocaTelas trocaTelas = new TrocaTelas();
+  ClienteDaoJDBC CDao = new ClienteDaoJDBC();
   
   private boolean flag = true;
   Image openedEye = new Image("./assets/eye.png");
@@ -189,6 +194,10 @@ public class ScreenController implements Initializable {
       if(!verify){
         showCaixaAlerta(Cliente.alertas());
         Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
+      }else{
+        Cliente Estudante = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(), textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText());
+        CDao.createCliente(Estudante, Estudante.getIdentificador());
+        System.out.println("ENTROU AQ NO CADASTRO CARAIU");
       }
         break;
 

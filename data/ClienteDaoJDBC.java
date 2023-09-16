@@ -28,7 +28,7 @@ public class ClienteDaoJDBC implements iClienteDao {
           cliente.setIdentificador(resultSet.getInt("identificador"));
           cliente.setTelefone(resultSet.getString("telefone"));
           cliente.setCpf(resultSet.getString("cpf"));
-          cliente.setDataNascimento(resultSet.getDate("dtNasc"));
+          cliente.setDataNascimento(resultSet.getString("dtNasc"));
           cliente.setEndereco(resultSet.getString("endereço"));
           cliente.setEmail(resultSet.getString("login"));
           cliente.setNome(resultSet.getString("nome"));
@@ -47,7 +47,7 @@ public class ClienteDaoJDBC implements iClienteDao {
 
   @Override
   public void createCliente(Cliente cliente, int id) {
-    String sqlQuery = "insert into databus.cliente (id,senha,login,dtNasc,telefone,nome,sexo,endereço,cpf)values (?,?,?,?,?,?,?,?,?);";
+    String sqlQuery = "insert into databus.cliente (identificador,senha,login,dtNasc,telefone,nome,sexo,endereço,cpf)values (?,?,?,?,?,?,?,?,?);";
     PreparedStatement pst;
     Connection connection;
     try {
@@ -56,7 +56,7 @@ public class ClienteDaoJDBC implements iClienteDao {
       pst.setInt(1, cliente.getIdentificador());
       pst.setString(2, cliente.getSenha());
       pst.setString(3, cliente.getemail());
-      pst.setDate(4, cliente.getDataNascimento());
+      pst.setString(4, cliente.getDataNascimento());
       pst.setString(5, cliente.getTelefone());
       pst.setString(6, cliente.getNome());
       pst.setString(7, String.valueOf(cliente.getSexo()));

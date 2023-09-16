@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -12,7 +11,7 @@ public class Cliente {
   private static int identificador;
   private String email;
   private String senha;
-  private Date dataNascimento;
+  private String dataNascimento;
   private String telefone;
   private String nome;
   private String endereco;
@@ -26,8 +25,8 @@ public class Cliente {
   public Cliente() {
   };
 
-  public Cliente(String email, String senha, Date dataNascimento, String numeroTel, String nome,
-    String endereco, String cpf) {
+  public Cliente(String email, String senha, String dataNascimento, String numeroTel, String nome, String endereco,
+      String cpf) {
     identificador = contador++;
     this.email = email;
     this.senha = senha;
@@ -37,13 +36,15 @@ public class Cliente {
     this.endereco = endereco;
     this.cpf = cpf;
   }
+
   public static String alertas() {
     return textAlerta;
-}
+  }
 
   public static void setTextAlerta(String textAlerta) {
     Cliente.textAlerta = textAlerta;
   }
+
   public static boolean confereNome(String nome) {
     nome.toUpperCase();
     System.out.println(nome);
@@ -56,7 +57,7 @@ public class Cliente {
     }
 
     if (valido == false) {
-      ScreenController.showCaixaAlerta("O nome digitado nao e valido! Confira  o nome e tente novamente.");
+      textAlerta += "Nome, ";
     }
 
     return valido;
@@ -68,23 +69,25 @@ public class Cliente {
     if (senha.length() < 6) {
       valido = false;
     }
-    if (!valido) {
-      ScreenController.showCaixaAlerta("O senha digitada eh invalida! Confira  o nome e tente novamente.");
+    if (valido == false) {
+      textAlerta += "Senha, ";
     }
 
     return valido;
   }
 
   public static boolean confereCpf(String cpf) {
+
+    cpf = cpf.replaceAll("[.-]", "");
     boolean valido = true;
-    if (cpf.length() != 14) {
+    if (cpf.length() != 11) {
       valido = false;
     }
     if (!cpf.matches("[0-9]*")) {
-      return false;
+      valido = false;
     }
-    if (!valido) {
-      ScreenController.showCaixaAlerta("O cpf digitado esta incorreto! Confira e tente novamente.");
+    if (valido == false) {
+      textAlerta += "CPF, ";
     }
 
     return valido;
@@ -99,27 +102,27 @@ public class Cliente {
       if (matcher.matches()) {
         valido = true;
       }
-      if (!valido) {
-        ScreenController.showCaixaAlerta("O email digitado eh invalido! Confira e tente novamente.");
-      }
-    }
 
+    }
+    if (valido == false) {
+      textAlerta += "Email, ";
+    }
     return valido;
   }
 
   public static Boolean confereNumero(String numero) {
-    numero = numero.replaceAll("[^a-zA-Z0-9]", "");
+    numero = numero.replaceAll("[()-]", "");
     boolean valido = true;
     if (numero.length() != 11) {
       valido = false;
     }
 
-    if (!valido) {
-      ScreenController.showCaixaAlerta("O numero digitado eh invalido! Confira e tente novamente.");
+    if (!numero.matches("[0-9]*")) {
+      valido = false;
     }
 
-    if (!numero.matches("[0-9]*")) {
-      return false;
+    if (valido == false) {
+      textAlerta += "Telefone, ";
     }
 
     return valido;
@@ -131,9 +134,10 @@ public class Cliente {
       valido = false;
     }
 
-    if (!valido) {
-      ScreenController.showCaixaAlerta("O endereco digitado eh invalido! Confira  o nome e tente novamente.");
+    if (valido == false) {
+      textAlerta += "Endereco, ";
     }
+
     return valido;
   }
 
@@ -146,6 +150,9 @@ public class Cliente {
     } catch (DateTimeParseException e) {
       valido = false;
     }
+    if (valido == false) {
+      textAlerta += "Data, ";
+    }
     return valido;
   }
 
@@ -153,27 +160,35 @@ public class Cliente {
   public char getSexo() {
     return sexo;
   }
+
   public void setSexo(char sexo) {
     this.sexo = sexo;
   }
+
   public void setEndereco(String endereco) {
     this.endereco = endereco;
   }
+
   public void setCpf(String cpf) {
     this.cpf = cpf;
   }
+
   public void setEmail(String email) {
     this.email = email;
   }
-  public void setDataNascimento(Date dataNascimento) {
+
+  public void setDataNascimento(String dataNascimento) {
     this.dataNascimento = dataNascimento;
   }
+
   public void setNome(String nome) {
     this.nome = nome;
   }
+
   public void setTelefone(String telefone) {
     this.telefone = telefone;
   }
+
   public void setSenha(String senha) {
     this.senha = senha;
   }
@@ -190,7 +205,7 @@ public class Cliente {
     return senha;
   }
 
-  public Date getDataNascimento() {
+  public String getDataNascimento() {
     return dataNascimento;
   }
 

@@ -8,7 +8,7 @@ CREATE TABLE if not exists databus.cliente(
                        identificador integer NOT NULL PRIMARY KEY,
                        senha varchar(12),  
                        login varchar(12),  
-                       dtNasc date,  
+                       dtNasc varchar(10),  
                        telefone varchar(11),  
                        nome varchar(50),
 					   sexo character(1),
