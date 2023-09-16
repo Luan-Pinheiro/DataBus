@@ -115,7 +115,9 @@ public class ScreenController implements Initializable {
   @FXML
   private ImageView imgSeePassword;
   private Cliente estudante;
-  private boolean loginFlag = false;
+  private boolean emailFlag = false;
+  private boolean senhaFlag = false;
+  private boolean login = false;
 
 
   TrocaTelas trocaTelas = new TrocaTelas();
@@ -227,14 +229,13 @@ public class ScreenController implements Initializable {
   @FXML
   void clickLogin(MouseEvent event) {
     ArrayList<Cliente> clientes = CDao.getAllClientes();
-    for (int i = 0 ; i < clientes.size(); i++) {
-      System.out.println("index: " + i);
-      System.out.println(clientes.get(i));
-      if(verifyExist(clientes.get(i))){
+    for (Cliente cliente : clientes) {
+      System.out.println(cliente);
+      if(verifyExist(cliente)){
         trocaTelas.changeScreen("cliente");
-      }
+      } 
     }
-    if(!loginFlag){
+    if(!login){
       showCaixaAlerta("Login e/ou Senha Digitados Incorretamente");
     }
      
@@ -244,10 +245,14 @@ public class ScreenController implements Initializable {
     //VERIFICAR PSWDF E TEXTFILD DA SENHA - cunsultar cpf atraves
     String email = textUsuario.getText();
     String senha = pwdFSenha.getText();
-    loginFlag = (CDao.readCliente(cliente.getCpf()).getemail().equals(email)) ? true : false;
-    loginFlag = (CDao.readCliente(cliente.getCpf()).getSenha().equals(senha)) ? true : false;
-    System.out.println("FLAG:" + loginFlag);
-    return loginFlag;
+    emailFlag = (CDao.queryAccount(cliente.getCpf()).getemail().equals(email)) ? true : false;
+    if(emailFlag){
+      senhaFlag = (CDao.queryAccount(cliente.getCpf()).getSenha().equals(senha)) ? true : false;
+    }
+    login = (emailFlag & senhaFlag);
+
+    System.out.println("FLAG:" + login);
+    return login;
   }
 
   @FXML

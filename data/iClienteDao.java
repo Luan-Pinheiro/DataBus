@@ -8,4 +8,5 @@ public interface iClienteDao {
     Cliente readCliente (String cpf);
     void updateCliente (Cliente cliente);
     void deleteCliente (Cliente cliente);
+    Cliente queryAccount (String cpf);
 }

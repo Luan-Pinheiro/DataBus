@@ -98,6 +98,33 @@ public class ClienteDaoJDBC implements iClienteDao {
     }
     return cliente;
   }
+  @Override
+  public Cliente queryAccount(String cpf) {
+    String sqlQuery = "select * from databus.cliente where cpf=?";
+    PreparedStatement pst;
+    Connection connection;
+    ResultSet resultSet;
+    Cliente cliente = null;
+    try {
+      connection = new ConnectionFactory().getConnection();
+      pst = connection.prepareStatement(sqlQuery);
+      pst.setString(1, cpf);
+      resultSet = pst.executeQuery();
+      if (resultSet != null) {
+        while (resultSet.next()) {
+          cliente = new Cliente();
+          cliente.setEmail(resultSet.getString("email"));
+          cliente.setSenha(resultSet.getString("senha"));
+        }
+        resultSet.close();
+        pst.close();
+        connection.close();
+      }
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+    return cliente;
+  }
 
   @Override
   public void updateCliente(Cliente cliente) {
