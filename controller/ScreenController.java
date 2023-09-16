@@ -1,10 +1,8 @@
 package controller;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import data.ClienteDaoJDBC;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -116,6 +114,8 @@ public class ScreenController implements Initializable {
   private ImageView homeButton;
   @FXML
   private ImageView imgSeePassword;
+  private Cliente estudante;
+  private boolean loginFlag = false;
 
   TrocaTelas trocaTelas = new TrocaTelas();
   ClienteDaoJDBC CDao = new ClienteDaoJDBC();
@@ -195,8 +195,9 @@ public class ScreenController implements Initializable {
         showCaixaAlerta(Cliente.alertas());
         Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
       }else{
-        Cliente Estudante = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(), textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText());
-        CDao.createCliente(Estudante, Estudante.getIdentificador());
+        estudante = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(), textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText());
+        CDao.createCliente(estudante);
+        clickHomeButton(event);
         System.out.println("ENTROU AQ NO CADASTRO CARAIU");
       }
         break;
@@ -225,9 +226,19 @@ public class ScreenController implements Initializable {
 
   @FXML
   void clickLogin(MouseEvent event) {
-    //if(login = sucessfull) 
+    ArrayList<Cliente> clientes = CDao.getAllClientes();
+    for (Cliente cliente : clientes) {
+      if(verifyExist(cliente)){
+        //changescreen
+      }
+    }
     trocaTelas.changeScreen("teste");
-    //else (alertBox)
+  }
+
+  public boolean verifyExist(Cliente cliente){
+    boolean aux = false;
+    loginFlag = (CDao.readCliente(cliente.getCpf()).equals(cliente)) ? true : false;
+    return loginFlag;
   }
 
   @FXML

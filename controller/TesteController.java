@@ -1,8 +1,7 @@
 package controller;
+
 import model.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 public class TesteController { //TESTANDO TELA

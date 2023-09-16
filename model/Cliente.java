@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import controller.ScreenController;
 
 public class Cliente {
-  private static int identificador;
   private String email;
   private String senha;
   private String dataNascimento;
@@ -16,8 +15,6 @@ public class Cliente {
   private String nome;
   private String endereco;
   private String cpf;
-  private char sexo;
-  private int contador = 0;
   static String textAlerta = "Voce digitou incorretamente os campos: ";
 
   ScreenController sc;
@@ -25,9 +22,7 @@ public class Cliente {
   public Cliente() {
   };
 
-  public Cliente(String email, String senha, String dataNascimento, String numeroTel, String nome, String endereco,
-      String cpf) {
-    identificador = contador++;
+  public Cliente(String email, String senha, String dataNascimento, String numeroTel, String nome, String endereco,String cpf) {
     this.email = email;
     this.senha = senha;
     this.dataNascimento = dataNascimento;
@@ -55,7 +50,6 @@ public class Cliente {
     if (!nome.matches("[a-zA-Z\\s]*")) {
       valido = false;
     }
-
     if (valido == false) {
       textAlerta += "Nome, ";
     }
@@ -72,12 +66,10 @@ public class Cliente {
     if (valido == false) {
       textAlerta += "Senha, ";
     }
-
     return valido;
   }
 
   public static boolean confereCpf(String cpf) {
-
     cpf = cpf.replaceAll("[.-]", "");
     boolean valido = true;
     if (cpf.length() != 11) {
@@ -89,7 +81,6 @@ public class Cliente {
     if (valido == false) {
       textAlerta += "CPF, ";
     }
-
     return valido;
   }
 
@@ -102,7 +93,6 @@ public class Cliente {
       if (matcher.matches()) {
         valido = true;
       }
-
     }
     if (valido == false) {
       textAlerta += "Email, ";
@@ -116,15 +106,12 @@ public class Cliente {
     if (numero.length() != 11) {
       valido = false;
     }
-
     if (!numero.matches("[0-9]*")) {
       valido = false;
     }
-
     if (valido == false) {
       textAlerta += "Telefone, ";
     }
-
     return valido;
   }
 
@@ -157,75 +144,46 @@ public class Cliente {
   }
 
   // Getters e Setters
-  public char getSexo() {
-    return sexo;
-  }
-
-  public void setSexo(char sexo) {
-    this.sexo = sexo;
-  }
-
   public void setEndereco(String endereco) {
     this.endereco = endereco;
   }
-
   public void setCpf(String cpf) {
     this.cpf = cpf;
   }
-
   public void setEmail(String email) {
     this.email = email;
   }
-
   public void setDataNascimento(String dataNascimento) {
     this.dataNascimento = dataNascimento;
   }
-
   public void setNome(String nome) {
     this.nome = nome;
   }
-
   public void setTelefone(String telefone) {
     this.telefone = telefone;
   }
-
   public void setSenha(String senha) {
     this.senha = senha;
   }
-
-  public int getIdentificador() {
-    return identificador;
-  }
-
   public String getemail() {
     return email;
   }
-
   public String getSenha() {
     return senha;
   }
-
   public String getDataNascimento() {
     return dataNascimento;
   }
-
   public String getTelefone() {
     return telefone;
   }
-
   public String getNome() {
     return nome;
   }
-
   public String getEndereco() {
     return endereco;
   }
-
   public String getCpf() {
     return cpf;
-  }
-
-  public void setIdentificador(int id) {
-    identificador = id;
   }
 }
