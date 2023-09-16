@@ -25,12 +25,11 @@ public class ClienteDaoJDBC implements iClienteDao {
         clientes = new ArrayList<Cliente>();
         while (resultSet.next()) {
           Cliente cliente = new Cliente();
-          cliente.setIdentificador(resultSet.getInt("identificador"));
           cliente.setTelefone(resultSet.getString("telefone"));
           cliente.setCpf(resultSet.getString("cpf"));
           cliente.setDataNascimento(resultSet.getString("dtNasc"));
-          cliente.setEndereco(resultSet.getString("endereço"));
-          cliente.setEmail(resultSet.getString("login"));
+          cliente.setEndereco(resultSet.getString("endereco"));
+          cliente.setEmail(resultSet.getString("email"));
           cliente.setNome(resultSet.getString("nome"));
           cliente.setSenha(resultSet.getString("senha"));
           clientes.add(cliente);
@@ -46,22 +45,20 @@ public class ClienteDaoJDBC implements iClienteDao {
   }
 
   @Override
-  public void createCliente(Cliente cliente, int id) {
-    String sqlQuery = "insert into databus.cliente (identificador,senha,login,dtNasc,telefone,nome,sexo,endereço,cpf)values (?,?,?,?,?,?,?,?,?);";
+  public void createCliente(Cliente cliente){
+    String sqlQuery = "insert into databus.cliente (senha,email,dtNasc,telefone,nome,endereco,cpf) values (?,?,?,?,?,?,?);";
     PreparedStatement pst;
     Connection connection;
     try {
       connection = new ConnectionFactory().getConnection();
       pst = connection.prepareStatement(sqlQuery);
-      pst.setInt(1, cliente.getIdentificador());
-      pst.setString(2, cliente.getSenha());
-      pst.setString(3, cliente.getemail());
-      pst.setString(4, cliente.getDataNascimento());
-      pst.setString(5, cliente.getTelefone());
-      pst.setString(6, cliente.getNome());
-      pst.setString(7, String.valueOf(cliente.getSexo()));
-      pst.setString(8, cliente.getEndereco());
-      pst.setString(9, cliente.getCpf());
+      pst.setString(1, cliente.getSenha());
+      pst.setString(2, cliente.getemail());
+      pst.setString(3, cliente.getDataNascimento());
+      pst.setString(4, cliente.getTelefone());
+      pst.setString(5, cliente.getNome());
+      pst.setString(6, cliente.getEndereco());
+      pst.setString(7, cliente.getCpf());
       pst.execute();
       pst.close();
       connection.close();
@@ -71,8 +68,8 @@ public class ClienteDaoJDBC implements iClienteDao {
   }
 
   @Override
-  public Cliente readCliente(long id) {
-    String sqlQuery = "select * from databus.cliente where identificador=?";
+  public Cliente readCliente(String cpf) {
+    String sqlQuery = "select * from databus.cliente where cpf=?";
     PreparedStatement pst;
     Connection connection;
     ResultSet resultSet;
@@ -80,16 +77,17 @@ public class ClienteDaoJDBC implements iClienteDao {
     try {
       connection = new ConnectionFactory().getConnection();
       pst = connection.prepareStatement(sqlQuery);
-      pst.setLong(1, id);
+      pst.setString(1, cpf);
       resultSet = pst.executeQuery();
       if (resultSet != null) {
         while (resultSet.next()) {
           cliente = new Cliente();
-          cliente.setIdentificador(resultSet.getInt("identificador"));
           cliente.setNome(resultSet.getString("nome"));
           cliente.setCpf(resultSet.getString("cpf"));
+          cliente.setEmail(resultSet.getString("email"));
+          cliente.setSenha(resultSet.getString("senha"));
           cliente.setTelefone(resultSet.getString("telefone"));
-          cliente.setEndereco(resultSet.getString("endereço"));
+          cliente.setEndereco(resultSet.getString("endereco"));
         }
         resultSet.close();
         pst.close();
@@ -103,14 +101,9 @@ public class ClienteDaoJDBC implements iClienteDao {
 
   @Override
   public void updateCliente(Cliente cliente) {
-    String sqlQuery = "update databus.cliente set senha=?, login=?, telefone=?, nome=?, endereço=? where identificador=?";
+    String sqlQuery = "update databus.cliente set senha=?, email=?, telefone=?, nome=?, endereco=? where cpf=?";
     PreparedStatement pst;
     Connection connection;
-    //
-    //
-    // CONFERIR parameterINDEX
-    //
-    //
     try {
       connection = new ConnectionFactory().getConnection();
       pst = connection.prepareStatement(sqlQuery);
@@ -129,18 +122,13 @@ public class ClienteDaoJDBC implements iClienteDao {
 
   @Override
   public void deleteCliente(Cliente cliente) {
-    String sqlQuery = "delete from databus.cliente where identificador=?";
+    String sqlQuery = "delete from databus.cliente where cpf=?";
     PreparedStatement pst;
     Connection connection;
-    //
-    //
-    // CONFERIR parameterINDEX
-    //
-    //
     try {
       connection = new ConnectionFactory().getConnection();
       pst = connection.prepareStatement(sqlQuery);
-      pst.setLong(1, cliente.getIdentificador());
+      pst.setString(1, cliente.getCpf());
       pst.execute();
       pst.close();
       connection.close();

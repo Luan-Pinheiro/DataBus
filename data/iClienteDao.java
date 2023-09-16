@@ -4,8 +4,8 @@ import model.*;
 
 public interface iClienteDao {
     ArrayList<Cliente> getAllClientes();
-    void createCliente (Cliente Cliente, int id);
-    Cliente readCliente (long id);
-    void updateCliente (Cliente Cliente);
-    void deleteCliente (Cliente Cliente);
+    void createCliente (Cliente cliente);
+    Cliente readCliente (String cpf);
+    void updateCliente (Cliente cliente);
+    void deleteCliente (Cliente cliente);
 }
