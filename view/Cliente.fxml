@@ -36,7 +36,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="65.0" fitWidth="317.0" layoutX="76.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="textOperacao" fitHeight="65.0" fitWidth="317.0" layoutX="76.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/escolhaOperacao.png" />
          </image>
@@ -45,6 +45,14 @@
       <ImageView fx:id="homeButton" fitHeight="36.0" fitWidth="36.0" layoutX="38.0" layoutY="43.0" onMouseClicked="#voltarCena" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/homeButton.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="botaoVoltar" fitHeight="36.0" fitWidth="50.0" layoutX="217.0" layoutY="567.0" onMouseClicked="#botaoVoltar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/botaoVoltar.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
