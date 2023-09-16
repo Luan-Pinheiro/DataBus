@@ -72,7 +72,7 @@ public class ClienteDaoJDBC implements iClienteDao {
 
   @Override
   public Cliente readCliente(long id) {
-    String sqlQuery = "select * from databus.cliente where id = ?";
+    String sqlQuery = "select * from databus.cliente where identificador=?";
     PreparedStatement pst;
     Connection connection;
     ResultSet resultSet;
@@ -80,12 +80,12 @@ public class ClienteDaoJDBC implements iClienteDao {
     try {
       connection = new ConnectionFactory().getConnection();
       pst = connection.prepareStatement(sqlQuery);
-      pst.setLong(3, id);
+      pst.setLong(1, id);
       resultSet = pst.executeQuery();
       if (resultSet != null) {
         while (resultSet.next()) {
           cliente = new Cliente();
-          cliente.setIdentificador(resultSet.getInt("identidicador"));
+          cliente.setIdentificador(resultSet.getInt("identificador"));
           cliente.setNome(resultSet.getString("nome"));
           cliente.setCpf(resultSet.getString("cpf"));
           cliente.setTelefone(resultSet.getString("telefone"));
@@ -103,7 +103,7 @@ public class ClienteDaoJDBC implements iClienteDao {
 
   @Override
   public void updateCliente(Cliente cliente) {
-    String sqlQuery = "update databus.cliente set senha=?, login=?, telefone=?, nome=?, endereço=? where id=?";
+    String sqlQuery = "update databus.cliente set senha=?, login=?, telefone=?, nome=?, endereço=? where identificador=?";
     PreparedStatement pst;
     Connection connection;
     //
@@ -129,7 +129,7 @@ public class ClienteDaoJDBC implements iClienteDao {
 
   @Override
   public void deleteCliente(Cliente cliente) {
-    String sqlQuery = "delete from databus.cliente where id=?";
+    String sqlQuery = "delete from databus.cliente where identificador=?";
     PreparedStatement pst;
     Connection connection;
     //
