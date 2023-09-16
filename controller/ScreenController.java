@@ -180,7 +180,6 @@ public class ScreenController implements Initializable {
 
   @FXML
   void clicouBotaoCadastrar(MouseEvent event) { // Botao Cadastrar
-
     switch (tipoPasse) {
       case 1:
       boolean verify = true;
@@ -227,17 +226,23 @@ public class ScreenController implements Initializable {
   @FXML
   void clickLogin(MouseEvent event) {
     ArrayList<Cliente> clientes = CDao.getAllClientes();
-    for (Cliente cliente : clientes) {
-      if(verifyExist(cliente)){
-        //changescreen
+    for (int i = 0 ; i < clientes.size(); i++) {
+      System.out.println("index: " + i);
+      System.out.println(clientes.get(i));
+      if(verifyExist(clientes.get(i))){
+        trocaTelas.changeScreen("cliente");
       }
     }
-    trocaTelas.changeScreen("teste");
+     
   }
 
   public boolean verifyExist(Cliente cliente){
-    boolean aux = false;
-    loginFlag = (CDao.readCliente(cliente.getCpf()).equals(cliente)) ? true : false;
+    //VERIFICAR PSWDF E TEXTFILD DA SENHA - cunsultar cpf atraves
+    String email = textUsuario.getText();
+    String senha = pwdFSenha.getText();
+    loginFlag = (CDao.readCliente(cliente.getCpf()).getemail().equals(email)) ? true : false;
+    loginFlag = (CDao.readCliente(cliente.getCpf()).getSenha().equals(senha)) ? true : false;
+    System.out.println("FLAG:" + flag);
     return loginFlag;
   }
 

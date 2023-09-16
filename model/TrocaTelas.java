@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class TrocaTelas extends Application{
   private static Stage stage;
   private static Scene telaEntrada; // Cena inicial
-  private static Scene telaTeste;
+  private static Scene telaCliente; // Cena cliente
 
   @Override
   public void start(Stage stagePrimary) throws Exception {
@@ -22,8 +22,8 @@ public class TrocaTelas extends Application{
     Parent fxmlStart = FXMLLoader.load(getClass().getResource("/view/DataBus.fxml")); // Carregamento do FXML Tela
     telaEntrada = new Scene(fxmlStart); // Definicao cena nova com o fxml carregado
 
-    Parent fxmlTeste = FXMLLoader.load(getClass().getResource("/view/teste.fxml"));
-    telaTeste = new Scene(fxmlTeste); 
+    Parent fxmlCliente = FXMLLoader.load(getClass().getResource("/view/Cliente.fxml"));
+    telaCliente = new Scene(fxmlCliente); 
 
     stagePrimary.setScene(telaEntrada); // setando a Cena no stage
     stagePrimary.setResizable(false); // Impossibilitando mudar tamanho da janela
@@ -35,8 +35,8 @@ public class TrocaTelas extends Application{
       case "menu": //caso usuario queira voltar para o menu
         stage.setScene(telaEntrada);
         break;
-      case "teste":
-        stage.setScene(telaTeste);
+      case "cliente":
+        stage.setScene(telaCliente);
         break;
     }
   }

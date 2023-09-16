@@ -84,6 +84,8 @@ public class ClienteDaoJDBC implements iClienteDao {
           cliente = new Cliente();
           cliente.setNome(resultSet.getString("nome"));
           cliente.setCpf(resultSet.getString("cpf"));
+          cliente.setEmail(resultSet.getString("email"));
+          cliente.setSenha(resultSet.getString("senha"));
           cliente.setTelefone(resultSet.getString("telefone"));
           cliente.setEndereco(resultSet.getString("endereco"));
         }
