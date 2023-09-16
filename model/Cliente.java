@@ -96,11 +96,11 @@ public class Cliente {
             if (matcher.matches()) {
                 valido = true;
             }
-            if (valido == false) {
+            
+        }
+       if (valido == false) {
                 textAlerta += "Email, ";
             }
-        }
-
         return valido;
     }
 
