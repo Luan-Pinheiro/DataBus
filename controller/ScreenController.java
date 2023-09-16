@@ -226,7 +226,7 @@ public class ScreenController implements Initializable {
   @FXML
   void clickLogin(MouseEvent event) {
     //if(login = sucessfull) 
-    trocaTelas.changeScreen("teste");
+    trocaTelas.changeScreen("cliente");
     //else (alertBox)
   }
 
