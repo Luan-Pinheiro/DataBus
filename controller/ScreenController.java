@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import model.Cliente;
+import model.*;
 
 public class ScreenController implements Initializable {
   @FXML
@@ -112,12 +112,13 @@ public class ScreenController implements Initializable {
   private ImageView homeButton;
   @FXML
   private ImageView imgSeePassword;
+
+  TrocaTelas trocaTelas = new TrocaTelas();
   
   private boolean flag = true;
-  Image  openedEye = new Image("./assets/eye.png");
+  Image openedEye = new Image("./assets/eye.png");
   Image closedEye = new Image("./assets/closed_eye.png");
   int tipoPasse = 0;
-
 
   @FXML
   void ClickEstudante(MouseEvent event) { // Clicou no Passe Estudante
@@ -215,6 +216,9 @@ public class ScreenController implements Initializable {
 
   @FXML
   void clickLogin(MouseEvent event) {
+    //if(login = sucessfull) 
+    trocaTelas.changeScreen("teste");
+    //else (alertBox)
   }
 
   @FXML

@@ -1,29 +1,10 @@
 import java.util.ArrayList;
-
 import data.ClienteDaoJDBC;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import model.Cliente;
+import model.*;
 
-public class Principal extends Application {
-  private static Scene telaEntrada; // Cena inicial
-
-  @Override
-  public void start(Stage stagePrimary) throws Exception {
-    stagePrimary.getIcons().add(new Image("/assets/icon.png"));//Definindo icone do programa
-    stagePrimary.setTitle("DataBus"); // Setando Nome na barra de pesquisa
-    Parent fxmlStart = FXMLLoader.load(getClass().getResource("/view/DataBus.fxml")); // Carregamento do FXML Tela
-    telaEntrada = new Scene(fxmlStart); // Definicao cena nova com o fxml carregado
-
-    stagePrimary.setScene(telaEntrada); // setando a Cena no stage
-    stagePrimary.setResizable(false); // Impossibilitando mudar tamanho da janela
-    stagePrimary.show(); // mostrando o stage
-  }
-
+public class Principal extends Application{
   public static void main(String[] args) {
     //TESTE DO DAO ABAIXO, JA FUNCIONOU, SO COMENTEI PQ ESVAZIOU O BANCO COM OS DELETES
     /*
@@ -48,6 +29,12 @@ public class Principal extends Application {
     System.out.println("************\n***Lendo o cliente na ultima posicao do array***\n************");
     System.out.println(teste.readCliente(clientes.size()-1));
      */
+
     launch(args);
+  }
+  @Override
+  public void start(Stage primaryStage) throws Exception {
+    TrocaTelas trocaTelas = new TrocaTelas();
+    trocaTelas.start(primaryStage);
   }
 }
