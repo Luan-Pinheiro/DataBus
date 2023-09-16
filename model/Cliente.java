@@ -17,6 +17,8 @@ public class Cliente {
   private String nome;
   private String endereco;
   private String cpf;
+  private char sexo;
+
   ScreenController sc;
 
   public Cliente() {
@@ -140,6 +142,12 @@ public class Cliente {
   }
 
   // Getters e Setters
+  public char getSexo() {
+    return sexo;
+  }
+  public void setSexo(char sexo) {
+    this.sexo = sexo;
+  }
   public void setEndereco(String endereco) {
     this.endereco = endereco;
   }

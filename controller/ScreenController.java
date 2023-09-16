@@ -42,7 +42,7 @@ public class ScreenController implements Initializable {
   @FXML
   private Group groupInicialScreen;
 
-  // ITENS CLT
+  //ITENS CLT
   @FXML
   private TextField textCPFCLT;
   @FXML
@@ -62,7 +62,7 @@ public class ScreenController implements Initializable {
   @FXML
   private TextField textEnderecoCLT;
 
-  // ITENS IDOSO
+  //ITENS IDOSO
   @FXML
   private TextField textCPFIDOSO;
   @FXML
@@ -80,7 +80,7 @@ public class ScreenController implements Initializable {
   @FXML
   private TextField textTelefoneIDOSO;
 
-  // ITENS ESTUDADANTE
+  // ITENS ESTUDADANTES
   @FXML
   private TextField textCPF;
   @FXML
@@ -149,14 +149,18 @@ public class ScreenController implements Initializable {
 
     switch (tipoPasse) {
       case 1:
-
-        //System.out.println( Cliente.confereNome(textNome.getText()));
-        // System.out.println( Cliente.confereSenha(textSenha2.getText()));
-         System.out.println(Cliente.confereCpf(textCPF.getText()));
-        // System.out.println(Cliente.confereEmail(textEmail.getText()));
-        //System.out.println(Cliente.confereNumero(textTelefone.getText()));
-        //System.out.println(Cliente.confereEndereco(textEndereco.getText()));
-        //System.out.println(Cliente.confereData(textNascimento.getText()));
+      boolean verify = true;
+      if (!Cliente.confereNome(textNome.getText()))verify = false;
+      if (!Cliente.confereSenha(textSenha2.getText()))verify = false;
+      if (!Cliente.confereCpf(textCPF.getText()))verify = false;
+      if (!Cliente.confereEmail(textEmail.getText()))verify = false;
+      if (!Cliente.confereNumero(textTelefone.getText()))verify = false;
+      if (!Cliente.confereEndereco(textEndereco.getText()))verify = false;
+      if (!Cliente.confereData(textNascimento.getText()))verify = false;
+      if(verify == false){
+        showCaixaAlerta(Cliente.alertas());
+        Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
+      }
         break;
 
       case 2:
@@ -239,7 +243,7 @@ public class ScreenController implements Initializable {
     // Verifica o tamanho dos digitos da string e caso seja o tamanho do numero maximo
     // insere a pontuação adequada para a formatacao necessaria e nao permite
     // maiores quantidades que o limite
-    
+
     // Formatação Texto do Telefone
     textTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue.matches("\\d{11}")) {
