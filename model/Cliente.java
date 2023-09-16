@@ -107,7 +107,29 @@ public class Cliente {
     public static Boolean confereNumero(String numero) {
         numero = numero.replaceAll("[()-]", "");
         boolean valido = true;
+<<<<<<< HEAD
         if (numero.length() != 11) {
+=======
+    if (numero.length() != 11){
+        valido = false;
+    } 
+
+     if(!numero.matches("[0-9]*")){
+        valido = false;
+     }
+
+    if (valido == false){
+        ScreenController.showCaixaAlerta("O numero digitado eh invalido! Confira e tente novamente.");
+
+     }
+
+    return valido; 
+    }
+
+    public static boolean confereEndereco(String endereco){
+        boolean valido = true;
+        if (endereco.length() < 15){
+>>>>>>> 19f3a32def53ea939f0afe1c8e058149342a44ac
             valido = false;
         }
 
