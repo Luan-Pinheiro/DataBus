@@ -117,6 +117,7 @@ public class ScreenController implements Initializable {
   private Cliente estudante;
   private boolean loginFlag = false;
 
+
   TrocaTelas trocaTelas = new TrocaTelas();
   ClienteDaoJDBC CDao = new ClienteDaoJDBC();
   
@@ -233,6 +234,9 @@ public class ScreenController implements Initializable {
         trocaTelas.changeScreen("cliente");
       }
     }
+    if(!loginFlag){
+      showCaixaAlerta("Login e/ou Senha Digitados Incorretamente");
+    }
      
   }
 
@@ -242,7 +246,7 @@ public class ScreenController implements Initializable {
     String senha = pwdFSenha.getText();
     loginFlag = (CDao.readCliente(cliente.getCpf()).getemail().equals(email)) ? true : false;
     loginFlag = (CDao.readCliente(cliente.getCpf()).getSenha().equals(senha)) ? true : false;
-    System.out.println("FLAG:" + flag);
+    System.out.println("FLAG:" + loginFlag);
     return loginFlag;
   }
 
