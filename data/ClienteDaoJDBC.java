@@ -18,7 +18,7 @@ public class ClienteDaoJDBC implements iClienteDao {
         ResultSet resultSet;
         ArrayList<Cliente> clientes = null;
         try{
-            connection = new FabricaConnection().getConnection();
+            connection = new ConnectionFactory().getConnection();
             pst = connection.prepareStatement(sqlQuery);
             resultSet = pst.executeQuery();
             if(resultSet != null){
@@ -51,7 +51,7 @@ public class ClienteDaoJDBC implements iClienteDao {
         PreparedStatement pst;
         Connection connection;
         try{
-            connection = new FabricaConnection().getConnection();
+            connection = new ConnectionFactory().getConnection();
             pst = connection.prepareStatement(sqlQuery);
             pst.setInt(1, id);
             pst.setString(2,cliente.getSenha());
