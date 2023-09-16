@@ -111,12 +111,7 @@ public static boolean confereCpf(String cpf){
     if (valido == false){
         ScreenController.showCaixaAlerta("O numero digitado eh invalido! Confira e tente novamente.");
 
-        return valido;
      }
-
-   
-
-
 
     return valido; 
     }
