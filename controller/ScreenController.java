@@ -150,14 +150,17 @@ public class ScreenController implements Initializable {
 
     switch (tipoPasse) {
       case 1:
-
-        //System.out.println( Cliente.confereNome(textNome.getText()));
-        // System.out.println( Cliente.confereSenha(textSenha2.getText()));
-        //System.out.println(Cliente.confereCpf(textCPF.getText()));
-        //System.out.println(Cliente.confereEmail(textEmail.getText()));
-        System.out.println(Cliente.confereNumero(textTelefone.getText()));
-        //System.out.println(Cliente.confereEndereco(textEndereco.getText()));
-        //System.out.println(Cliente.confereData(textNascimento.getText()));
+      boolean verify = true;
+      if (!Cliente.confereNome(textNome.getText()))verify = false;
+      if (!Cliente.confereSenha(textSenha2.getText()))verify = false;
+      if (!Cliente.confereCpf(textCPF.getText()))verify = false;
+      if (!Cliente.confereEmail(textEmail.getText()))verify = false;
+      if (!Cliente.confereNumero(textTelefone.getText()))verify = false;
+      if (!Cliente.confereEndereco(textEndereco.getText()))verify = false;
+      if (!Cliente.confereData(textNascimento.getText()))verify = false;
+      if(verify == false){
+        showCaixaAlerta(Cliente.alertas());
+      }
         break;
 
       case 2:

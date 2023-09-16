@@ -19,6 +19,7 @@ public class Cliente {
     private String endereco;
     private String cpf;
     int contador = 0;
+    static String textAlerta = "Voce digitou incorretamente os campos: ";
 
     public Cliente(int identificador, String email, String senha, Date dataNascimento, String numeroTel, String nome,String endereco, String cpf) {
         this.identificador = identificador++;
@@ -30,13 +31,8 @@ public class Cliente {
         this.endereco = endereco;
         this.cpf = cpf;
     }
-
-    public void alertas(String Text) {
-        contador++;
-        if (contador != 7) {
-
-        }
-
+    public static String alertas() {
+        return textAlerta;
     }
 
     public static boolean confereNome(String nome) {
@@ -51,7 +47,7 @@ public class Cliente {
         }
 
         if (valido == false) {
-            ScreenController.showCaixaAlerta("O nome digitado nao e valido! Confira  o nome e tente novamente.");
+            textAlerta += "Nome, ";
         }
 
         return valido;
@@ -64,7 +60,7 @@ public class Cliente {
             valido = false;
         }
         if (valido == false) {
-            ScreenController.showCaixaAlerta("O senha digitada eh invalida! Confira e tente novamente.");
+            textAlerta += "Senha, ";
         }
 
         return valido;
@@ -78,10 +74,10 @@ public class Cliente {
             valido = false;
         }
         if (!cpf.matches("[0-9]*")) {
-            return false;
+            valido = false;
         }
         if (valido == false) {
-            ScreenController.showCaixaAlerta("O cpf digitado esta incorreto! Confira e tente novamente.");
+            textAlerta += "CPF, ";
         }
 
         return valido;
@@ -97,7 +93,7 @@ public class Cliente {
                 valido = true;
             }
             if (valido == false) {
-                ScreenController.showCaixaAlerta("O email digitado eh invalido! Confira e tente novamente.");
+                textAlerta += "Email, ";
             }
         }
 
@@ -107,29 +103,7 @@ public class Cliente {
     public static Boolean confereNumero(String numero) {
         numero = numero.replaceAll("[()-]", "");
         boolean valido = true;
-<<<<<<< HEAD
         if (numero.length() != 11) {
-=======
-    if (numero.length() != 11){
-        valido = false;
-    } 
-
-     if(!numero.matches("[0-9]*")){
-        valido = false;
-     }
-
-    if (valido == false){
-        ScreenController.showCaixaAlerta("O numero digitado eh invalido! Confira e tente novamente.");
-
-     }
-
-    return valido; 
-    }
-
-    public static boolean confereEndereco(String endereco){
-        boolean valido = true;
-        if (endereco.length() < 15){
->>>>>>> 19f3a32def53ea939f0afe1c8e058149342a44ac
             valido = false;
         }
 
@@ -138,10 +112,8 @@ public class Cliente {
         }
 
         if (valido == false) {
-            ScreenController.showCaixaAlerta("O numero digitado eh invalido! Confira e tente novamente.");
-
-            return valido;
-        }
+            textAlerta += "Telefone, ";
+     }
 
         return valido;
     }
@@ -153,7 +125,7 @@ public class Cliente {
         }
 
         if (valido == false) {
-            ScreenController.showCaixaAlerta("O endereco digitado eh invalido! Confira  o nome e tente novamente.");
+            textAlerta += "Endereco, ";
         }
 
         return valido;
@@ -169,7 +141,7 @@ public class Cliente {
             valido = false;
         }
         if (valido == false) {
-            ScreenController.showCaixaAlerta("A data digitada eh invalido! Confira e tente novamente.");
+            textAlerta += "Data, ";
         }
         return valido;
     }
@@ -205,5 +177,6 @@ public class Cliente {
     public String getCpf() {
         return cpf;
     }
+    
 
 }
