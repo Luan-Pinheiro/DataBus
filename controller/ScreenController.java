@@ -43,7 +43,7 @@ public class ScreenController implements Initializable {
   @FXML
   private Group groupInicialScreen;
 
-  // ITENS CLT
+  //ITENS CLT
   @FXML
   private TextField textCPFCLT;
   @FXML
@@ -63,7 +63,7 @@ public class ScreenController implements Initializable {
   @FXML
   private TextField textEnderecoCLT;
 
-  // ITENS IDOSO
+  //ITENS IDOSO
   @FXML
   private TextField textCPFIDOSO;
   @FXML
