@@ -7,13 +7,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.Cliente;
 
 public class ScreenController implements Initializable {
-
   @FXML
   private ImageView PasseEstudante;
   @FXML
@@ -106,8 +107,17 @@ public class ScreenController implements Initializable {
   @FXML
   private TextField textSenha;
   @FXML
+  private PasswordField pwdFSenha;
+  @FXML
   private ImageView homeButton;
+  @FXML
+  private ImageView imgSeePassword;
+  
+  private boolean flag = true;
+  Image  openedEye = new Image("./assets/eye.png");
+  Image closedEye = new Image("./assets/closed_eye.png");
   int tipoPasse = 0;
+
 
   @FXML
   void ClickEstudante(MouseEvent event) { // Clicou no Passe Estudante
@@ -116,6 +126,23 @@ public class ScreenController implements Initializable {
     groupESTUDANTE.setVisible(true);
     botaoCadastrar.setVisible(true);
     tipoPasse = 1;
+  }
+  
+  @FXML
+  void OnClick(MouseEvent event) {
+    if(flag){
+      imgSeePassword.setImage(closedEye);
+      textSenha.setText(String.valueOf(pwdFSenha.getText()));
+      textSenha.setVisible(true);
+      pwdFSenha.setVisible(false);
+      flag = false;
+    }else{
+      imgSeePassword.setImage(openedEye);
+      pwdFSenha.setText(String.valueOf(textSenha.getText()));
+      textSenha.setVisible(false);
+      pwdFSenha.setVisible(true);
+      flag = true;
+    }
   }
 
   @FXML
@@ -158,7 +185,7 @@ public class ScreenController implements Initializable {
       if (!Cliente.confereNumero(textTelefone.getText()))verify = false;
       if (!Cliente.confereEndereco(textEndereco.getText()))verify = false;
       if (!Cliente.confereData(textNascimento.getText()))verify = false;
-      if(verify == false){
+      if(!verify){
         showCaixaAlerta(Cliente.alertas());
         Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
       }
@@ -244,7 +271,8 @@ public class ScreenController implements Initializable {
     // Verifica o tamanho dos digitos da string e caso seja o tamanho do numero maximo
     // insere a pontuação adequada para a formatacao necessaria e nao permite
     // maiores quantidades que o limite
-
+    imgSeePassword.setImage(openedEye);
+    textSenha.setVisible(false);
     // Formatação Texto do Telefone
     textTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue.matches("\\d{11}")) {

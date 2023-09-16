@@ -2,7 +2,9 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,46 +23,73 @@
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira seu nome completo aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textNascimento" alignment="CENTER" layoutX="179.0" layoutY="220.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira sua data de nascimento aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textCPF" alignment="CENTER" layoutX="179.0" layoutY="261.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Informe seu CPF aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textEndereco" alignment="CENTER" layoutX="179.0" layoutY="302.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira seu endereço (Bairro, Rua, Nº)" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textTelefone" alignment="CENTER" layoutX="179.0" layoutY="343.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira seu búmero de telefone aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textEmail" alignment="CENTER" layoutX="179.0" layoutY="385.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Cadastre seu email aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textSenha2" alignment="CENTER" layoutX="179.0" layoutY="427.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Cadastre sua senha aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textMatricula" alignment="CENTER" layoutX="179.0" layoutY="469.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Informe seu número de matricula" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textInstituicao" alignment="CENTER" layoutX="179.0" layoutY="511.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira a Instituição onde você estuda" />
+               </tooltip>
             </TextField>
          </children>
       </Group>
@@ -75,46 +104,73 @@
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira seu nome completo aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textNascimentoCLT" alignment="CENTER" layoutX="179.0" layoutY="218.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira sua data de nascimento aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textCPFCLT" alignment="CENTER" layoutX="179.0" layoutY="259.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Informe seu CPF aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textEnderecoCLT" alignment="CENTER" layoutX="179.0" layoutY="300.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira seu endereço (Bairro, Rua, Nº)" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textTelefoneCLT" alignment="CENTER" layoutX="179.0" layoutY="341.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira seu búmero de telefone aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textEmailCLT" alignment="CENTER" layoutX="179.0" layoutY="383.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Cadastre seu email aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textSenhaCLT" alignment="CENTER" layoutX="179.0" layoutY="425.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Cadastre sua senha aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textRGCLT" alignment="CENTER" layoutX="179.0" layoutY="467.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Informe seu RG aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textCTPSCLT" alignment="CENTER" layoutX="179.0" layoutY="509.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Informe o número da sua CTPS" />
+               </tooltip>
             </TextField>
          </children>
       </Group>
@@ -129,41 +185,65 @@
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira seu nome completo aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textNascimentoIDOSO" alignment="CENTER" layoutX="179.0" layoutY="243.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira sua data de nascimento aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textCPFIDOSO" alignment="CENTER" layoutX="179.0" layoutY="284.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Informe seu CPF aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textEnderecoIDOSO" alignment="CENTER" layoutX="179.0" layoutY="325.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira seu endereço (Bairro, Rua, Nº)" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textTelefoneIDOSO" alignment="CENTER" layoutX="179.0" layoutY="366.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira seu número de telefone aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textEmailIDOSO" alignment="CENTER" layoutX="179.0" layoutY="408.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Cadastre seu email aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textSenhaIDOSO" alignment="CENTER" layoutX="179.0" layoutY="450.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Cadastre sua senha aqui" />
+               </tooltip>
             </TextField>
             <TextField fx:id="textRGIDOSO" alignment="CENTER" layoutX="179.0" layoutY="492.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Informe seu RG aqui" />
+               </tooltip>
             </TextField>
          </children>
       </Group>
@@ -231,16 +311,31 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <TextField fx:id="textUsuario" alignment="CENTER" layoutX="126.0" layoutY="317.0" prefHeight="25.0" prefWidth="218.0" stylesheets="@styles.css">
+            <TextField fx:id="textUsuario" alignment="CENTER" layoutX="126.0" layoutY="319.0" prefHeight="25.0" prefWidth="215.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+               <tooltip>
+                  <Tooltip text="Insira seu email aqui" />
+               </tooltip>
             </TextField>
-            <TextField fx:id="textSenha" alignment="CENTER" layoutX="126.0" layoutY="389.0" prefHeight="25.0" prefWidth="218.0" stylesheets="@styles.css">
+            <PasswordField fx:id="pwdFSenha" alignment="CENTER" layoutX="126.0" layoutY="390.0" prefHeight="25.0" prefWidth="210.0" stylesheets="@styles.css">
+               <tooltip>
+                  <Tooltip text="Insira sua senha aqui" />
+               </tooltip>
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
+            </PasswordField>
+            <TextField fx:id="textSenha" alignment="CENTER" layoutX="126.0" layoutY="390.0" prefHeight="25.0" prefWidth="210.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+               <tooltip>
+                  <Tooltip text="Insira seu email aqui" />
+               </tooltip>
             </TextField>
+            <ImageView fx:id="imgSeePassword" fitHeight="24.0" fitWidth="24.0" layoutX="336.0" layoutY="391.0" onMouseClicked="#OnClick" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Group>
       <ImageView fx:id="homeButton" fitHeight="36.0" fitWidth="36.0" layoutX="36.0" layoutY="33.0" onMouseClicked="#clickHomeButton" pickOnBounds="true" preserveRatio="true" visible="false">
