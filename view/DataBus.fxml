@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
@@ -56,7 +57,7 @@
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
                <tooltip>
-                  <Tooltip text="Insira seu búmero de telefone aqui" />
+                  <Tooltip text="Insira seu número de telefone aqui" />
                </tooltip>
             </TextField>
             <TextField fx:id="textEmail" alignment="CENTER" layoutX="179.0" layoutY="385.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
@@ -137,7 +138,7 @@
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
                <tooltip>
-                  <Tooltip text="Insira seu búmero de telefone aqui" />
+                  <Tooltip text="Insira seu número de telefone aqui" />
                </tooltip>
             </TextField>
             <TextField fx:id="textEmailCLT" alignment="CENTER" layoutX="179.0" layoutY="383.0" prefHeight="25.0" prefWidth="207.0" stylesheets="@styles.css">
@@ -336,6 +337,67 @@
                </tooltip>
             </TextField>
             <ImageView fx:id="imgSeePassword" fitHeight="24.0" fitWidth="24.0" layoutX="336.0" layoutY="391.0" onMouseClicked="#OnClick" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Group>
+      <Group fx:id="groupCliente">
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/backgroundCliente.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="botaoConsultarDados" fitHeight="41.0" fitWidth="227.0" layoutX="119.0" layoutY="369.0" onMouseClicked="#consultarDados" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/botaoConsultarDados.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="botaoConsultarRotas" fitHeight="41.0" fitWidth="227.0" layoutX="119.0" layoutY="423.0" onMouseClicked="#consultarRotas" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/botaoConsultarRotas.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Label fx:id="nomeUsuario" alignment="CENTER" layoutX="67.0" layoutY="190.0" prefHeight="54.0" prefWidth="338.0" textFill="#0099ff">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="28.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="botaoRecarregar" fitHeight="41.0" fitWidth="227.0" layoutX="119.0" layoutY="479.0" onMouseClicked="#recarregar" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/botaoRecarregar.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="textOperacao" fitHeight="25.0" fitWidth="279.0" layoutX="97.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/escolhaOperacao.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="botaoVoltar" fitHeight="36.0" fitWidth="50.0" layoutX="217.0" layoutY="568.0" onMouseClicked="#botaoVoltar" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../assets/botaoVoltar.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="saldoIMG" fitHeight="36.0" fitWidth="114.0" layoutX="104.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/saldo.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="saldoCliente" layoutX="228.0" layoutY="237.0" prefHeight="36.0" prefWidth="153.0" text="R$ 0,00" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="32.0" />
+               </font>
+            </Label>
          </children>
       </Group>
       <ImageView fx:id="homeButton" fitHeight="36.0" fitWidth="36.0" layoutX="36.0" layoutY="33.0" onMouseClicked="#clickHomeButton" pickOnBounds="true" preserveRatio="true" visible="false">
