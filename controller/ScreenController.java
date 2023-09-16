@@ -154,8 +154,8 @@ public class ScreenController implements Initializable {
         //System.out.println( Cliente.confereNome(textNome.getText()));
         // System.out.println( Cliente.confereSenha(textSenha2.getText()));
         //System.out.println(Cliente.confereCpf(textCPF.getText()));
-        // System.out.println(Cliente.confereEmail(textEmail.getText()));
-        //System.out.println(Cliente.confereNumero(textTelefone.getText()));
+        //System.out.println(Cliente.confereEmail(textEmail.getText()));
+        System.out.println(Cliente.confereNumero(textTelefone.getText()));
         //System.out.println(Cliente.confereEndereco(textEndereco.getText()));
         //System.out.println(Cliente.confereData(textNascimento.getText()));
         break;
