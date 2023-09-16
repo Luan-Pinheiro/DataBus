@@ -57,15 +57,17 @@ public static boolean confereNome(String nome){
         valido = false;
     } 
      if (valido == false){
-        ScreenController.showCaixaAlerta("O senha digitada eh invalida! Confira  o nome e tente novamente.");
+        ScreenController.showCaixaAlerta("O senha digitada eh invalida! Confira e tente novamente.");
      }
     
     return valido; 
 }
   
 public static boolean confereCpf(String cpf){
+
+    cpf = cpf.replaceAll("[.-]", "");
     boolean valido = true;
-    if (cpf.length() != 14){
+    if (cpf.length() != 11){
         valido = false;
     } 
     if(!cpf.matches("[0-9]*")){
@@ -96,19 +98,23 @@ public static boolean confereCpf(String cpf){
     }
 
     public static Boolean confereNumero( String numero){
-        numero = numero.replaceAll("[^a-zA-Z0-9]", "");
+       numero = numero.replaceAll("[()-]", "");
         boolean valido = true;
     if (numero.length() != 11){
         valido = false;
     } 
 
-    if (valido == false){
-        ScreenController.showCaixaAlerta("O numero digitado eh invalido! Confira e tente novamente.");
+     if(!numero.matches("[0-9]*")){
+        valido = false;
      }
 
-    if(!numero.matches("[0-9]*")){
-        return false;
+    if (valido == false){
+        ScreenController.showCaixaAlerta("O numero digitado eh invalido! Confira e tente novamente.");
+
+        return valido;
      }
+
+   
 
 
 
@@ -137,11 +143,12 @@ public static boolean confereCpf(String cpf){
       } catch (DateTimeParseException e) {
         valido = false; 
       }  
+         if (valido == false){
+        ScreenController.showCaixaAlerta("A data digitada eh invalido! Confira e tente novamente.");
+     }
       return valido; 
    }
     
-
-
 
 public int getIdentificador() {
     return identificador;
