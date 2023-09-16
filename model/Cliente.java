@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import controller.ScreenController;
 
 public class Cliente {
-  private int identificador;
+  private static int identificador;
   private String email;
   private String senha;
   private Date dataNascimento;
@@ -18,6 +18,7 @@ public class Cliente {
   private String endereco;
   private String cpf;
   private char sexo;
+  private int contador = 0;
   static String textAlerta = "Voce digitou incorretamente os campos: ";
 
   ScreenController sc;
@@ -25,9 +26,9 @@ public class Cliente {
   public Cliente() {
   };
 
-  public Cliente(int identificador, String email, String senha, Date dataNascimento, String numeroTel, String nome,
-      String endereco, String cpf) {
-    this.identificador = identificador++;
+  public Cliente(String email, String senha, Date dataNascimento, String numeroTel, String nome,
+    String endereco, String cpf) {
+    identificador = contador++;
     this.email = email;
     this.senha = senha;
     this.dataNascimento = dataNascimento;
@@ -209,8 +210,7 @@ public class Cliente {
     return cpf;
   }
 
-  public void setIdentificador(int identificador) {
-    this.identificador = identificador;
+  public void setIdentificador(int id) {
+    identificador = id;
   }
-
 }
