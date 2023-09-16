@@ -7,8 +7,6 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import controller.ScreenController;
-
 public class Cliente {
     private int identificador;
     private String email;
