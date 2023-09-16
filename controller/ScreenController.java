@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -46,7 +47,7 @@ public class ScreenController implements Initializable {
   @FXML
   private Group groupInicialScreen;
 
-  //ITENS CLT
+  // ITENS CLT
   @FXML
   private TextField textCPFCLT;
   @FXML
@@ -66,7 +67,7 @@ public class ScreenController implements Initializable {
   @FXML
   private TextField textEnderecoCLT;
 
-  //ITENS IDOSO
+  // ITENS IDOSO
   @FXML
   private TextField textCPFIDOSO;
   @FXML
@@ -114,15 +115,34 @@ public class ScreenController implements Initializable {
   private ImageView homeButton;
   @FXML
   private ImageView imgSeePassword;
+
+  // Itens Cliente
+  @FXML
+  private ImageView botaoConsultarDados;
+  @FXML
+  private ImageView botaoConsultarRotas;
+  @FXML
+  private ImageView botaoRecarregar;
+  @FXML
+  private ImageView botaoVoltar;
+  @FXML
+  private Label nomeUsuario;
+  @FXML
+  private ImageView textOperacao;
+  @FXML
+  private Group groupCliente;
+  @FXML
+  private Label saldoCliente;
+  @FXML
+  private ImageView saldoIMG;
+
+
   private Cliente estudante;
   private boolean emailFlag = false;
   private boolean senhaFlag = false;
   private boolean login = false;
-
-
-  TrocaTelas trocaTelas = new TrocaTelas();
   ClienteDaoJDBC CDao = new ClienteDaoJDBC();
-  
+
   private boolean flag = true;
   Image openedEye = new Image("./assets/eye.png");
   Image closedEye = new Image("./assets/closed_eye.png");
@@ -136,16 +156,16 @@ public class ScreenController implements Initializable {
     botaoCadastrar.setVisible(true);
     tipoPasse = 1;
   }
-  
+
   @FXML
   void OnClick(MouseEvent event) {
-    if(flag){
+    if (flag) {
       imgSeePassword.setImage(closedEye);
       textSenha.setText(String.valueOf(pwdFSenha.getText()));
       textSenha.setVisible(true);
       pwdFSenha.setVisible(false);
       flag = false;
-    }else{
+    } else {
       imgSeePassword.setImage(openedEye);
       pwdFSenha.setText(String.valueOf(textSenha.getText()));
       textSenha.setVisible(false);
@@ -185,23 +205,31 @@ public class ScreenController implements Initializable {
   void clicouBotaoCadastrar(MouseEvent event) { // Botao Cadastrar
     switch (tipoPasse) {
       case 1:
-      boolean verify = true;
-      if (!Cliente.confereNome(textNome.getText()))verify = false;
-      if (!Cliente.confereSenha(textSenha2.getText()))verify = false;
-      if (!Cliente.confereCpf(textCPF.getText()))verify = false;
-      if (!Cliente.confereEmail(textEmail.getText()))verify = false;
-      if (!Cliente.confereNumero(textTelefone.getText()))verify = false;
-      if (!Cliente.confereEndereco(textEndereco.getText()))verify = false;
-      if (!Cliente.confereData(textNascimento.getText()))verify = false;
-      if(!verify){
-        showCaixaAlerta(Cliente.alertas());
-        Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
-      }else{
-        estudante = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(), textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText());
-        CDao.createCliente(estudante);
-        clickHomeButton(event);
-        System.out.println("ENTROU AQ NO CADASTRO CARAIU");
-      }
+        boolean verify = true;
+        if (!Cliente.confereNome(textNome.getText()))
+          verify = false;
+        if (!Cliente.confereSenha(textSenha2.getText()))
+          verify = false;
+        if (!Cliente.confereCpf(textCPF.getText()))
+          verify = false;
+        if (!Cliente.confereEmail(textEmail.getText()))
+          verify = false;
+        if (!Cliente.confereNumero(textTelefone.getText()))
+          verify = false;
+        if (!Cliente.confereEndereco(textEndereco.getText()))
+          verify = false;
+        if (!Cliente.confereData(textNascimento.getText()))
+          verify = false;
+        if (!verify) {
+          showCaixaAlerta(Cliente.alertas());
+          Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
+        } else {
+          estudante = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(),
+              textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText());
+          CDao.createCliente(estudante);
+          clickHomeButton(event);
+          System.out.println("ENTROU AQ NO CADASTRO CARAIU");
+        }
         break;
 
       case 2:
@@ -231,22 +259,36 @@ public class ScreenController implements Initializable {
     ArrayList<Cliente> clientes = CDao.getAllClientes();
     for (Cliente cliente : clientes) {
       System.out.println(cliente);
-      if(verifyExist(cliente)){
-        trocaTelas.changeScreen("cliente");
-      } 
+      if (verifyExist(cliente)) {
+        ClienteLogado(cliente);
+        break;
+      }
     }
-    if(!login){
+    if (!login) {
       showCaixaAlerta("Login e/ou Senha Digitados Incorretamente");
     }
-     
+
   }
 
-  public boolean verifyExist(Cliente cliente){
-    //VERIFICAR PSWDF E TEXTFILD DA SENHA - cunsultar cpf atraves
+  public void ClienteLogado(Cliente cliente){
+    groupInicialScreen.setVisible(false);
+    groupInicialScreen.setDisable(true);
+    groupCliente.setVisible(true);
+    groupCliente.setDisable(false);
+    homeButton.setVisible(true);
+
+    nomeUsuario.setText("Olá, " + cliente.getNome());
+  }
+
+  public boolean verifyExist(Cliente cliente) {
+    // VERIFICAR PSWDF E TEXTFILD DA SENHA - cunsultar cpf atraves
     String email = textUsuario.getText();
+    if(pwdFSenha.getLength() < textSenha.getLength()){
+      pwdFSenha.setText(textSenha.getText());
+    }
     String senha = pwdFSenha.getText();
     emailFlag = (CDao.queryAccount(cliente.getCpf()).getemail().equals(email)) ? true : false;
-    if(emailFlag){
+    if (emailFlag) {
       senhaFlag = (CDao.queryAccount(cliente.getCpf()).getSenha().equals(senha)) ? true : false;
     }
     login = (emailFlag & senhaFlag);
@@ -257,6 +299,8 @@ public class ScreenController implements Initializable {
 
   @FXML
   void clickHomeButton(MouseEvent event) {
+    groupCliente.setVisible(false);
+    groupCliente.setDisable(true);
     groupInicialScreen.setVisible(true);
     groupInicialScreen.setDisable(false);
     groupESTUDANTE.setVisible(false);
@@ -267,6 +311,9 @@ public class ScreenController implements Initializable {
   }
 
   public void clearText() {
+    pwdFSenha.clear();
+    textSenha.clear();
+    textUsuario.clear();
     textCPFCLT.clear();
     textEmailCLT.clear();
     textCTPSCLT.clear();
@@ -306,7 +353,9 @@ public class ScreenController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    // Verifica o tamanho dos digitos da string e caso seja o tamanho do numero maximo
+
+    // Verifica o tamanho dos digitos da string e caso seja o tamanho do numero
+    // maximo
     // insere a pontuação adequada para a formatacao necessaria e nao permite
     // maiores quantidades que o limite
     imgSeePassword.setImage(openedEye);
@@ -417,6 +466,79 @@ public class ScreenController implements Initializable {
         textCPFIDOSO.setText(oldValue);
       }
     });
+  }
+
+
+  @FXML
+  void consultarDados(MouseEvent event) {
+    saldoIMG.setVisible(false);
+    saldoCliente.setVisible(false);
+
+    botaoRecarregar.setDisable(true);
+    botaoConsultarDados.setDisable(true);
+    botaoConsultarRotas.setDisable(true);
+
+    botaoRecarregar.setVisible(false);
+    botaoConsultarDados.setVisible(false);
+    botaoConsultarRotas.setVisible(false);
+    textOperacao.setVisible(false);
+
+    botaoVoltar.setDisable(false);
+    botaoVoltar.setVisible(true);
+  }
+
+  @FXML
+  void consultarRotas(MouseEvent event) {
+    saldoIMG.setVisible(false);
+    saldoCliente.setVisible(false);
+
+    botaoRecarregar.setDisable(true);
+    botaoConsultarDados.setDisable(true);
+    botaoConsultarRotas.setDisable(true);
+
+    botaoRecarregar.setVisible(false);
+    botaoConsultarDados.setVisible(false);
+    botaoConsultarRotas.setVisible(false);
+    textOperacao.setVisible(false);
+
+    botaoVoltar.setDisable(false);
+    botaoVoltar.setVisible(true);
+  }
+
+  @FXML
+  void recarregar(MouseEvent event) {
+    saldoIMG.setVisible(false);
+    saldoCliente.setVisible(false);
+
+    botaoRecarregar.setDisable(true);
+    botaoConsultarDados.setDisable(true);
+    botaoConsultarRotas.setDisable(true);
+
+    botaoRecarregar.setVisible(false);
+    botaoConsultarDados.setVisible(false);
+    botaoConsultarRotas.setVisible(false);
+    textOperacao.setVisible(false);
+
+    botaoVoltar.setDisable(false);
+    botaoVoltar.setVisible(true);
+  }
+
+  @FXML
+  void botaoVoltar(MouseEvent event) {
+    saldoIMG.setVisible(true);
+    saldoCliente.setVisible(true);
+
+    botaoRecarregar.setDisable(false);
+    botaoConsultarDados.setDisable(false);
+    botaoConsultarRotas.setDisable(false);
+
+    botaoRecarregar.setVisible(true);
+    botaoConsultarDados.setVisible(true);
+    botaoConsultarRotas.setVisible(true);
+    textOperacao.setVisible(true);
+
+    botaoVoltar.setDisable(true);
+    botaoVoltar.setVisible(false);
   }
 
 }
