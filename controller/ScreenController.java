@@ -169,6 +169,8 @@ public class ScreenController implements Initializable {
   private Label consultaSenha;
   @FXML
   private Label consultaTelefone;
+  @FXML
+  private Label consultaCartao;
 
   private Cliente estudante;
   private Passe passe;
@@ -369,6 +371,8 @@ public class ScreenController implements Initializable {
     groupConsultaDados.setDisable(true);
     grupoRotas.setVisible(false);
     grupoRotas.setDisable(true);
+    //botaoVoltar.setDisable(true);
+    //botaoVoltar.setVisible(false);
   }
 
   public void clearText() {
