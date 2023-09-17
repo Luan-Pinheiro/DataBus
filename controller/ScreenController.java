@@ -213,7 +213,6 @@ public class ScreenController implements Initializable {
     botaoCadastrar.setVisible(true);
     tipoPasse = 1;
   }
-
   @FXML
   void OnClick(MouseEvent event) {
     if (flag) {
