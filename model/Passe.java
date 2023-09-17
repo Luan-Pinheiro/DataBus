@@ -94,7 +94,7 @@ public class Passe {
 
     public boolean confereNumMatricula(String nMatricula){
         boolean valido = true;
-        if (nMatricula.length() < 3 && nMatricula.length() > 10)   {
+        if (nMatricula.length() < 3 && nMatricula.length() > 10)   { //assd
           valido = false;
         }
         if (!nMatricula.matches("[0-9]*")) {
