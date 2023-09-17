@@ -172,6 +172,13 @@ public class ScreenController implements Initializable {
   @FXML
   private Label consultaCartao;
 
+  @FXML
+  private Group groupRecarga;
+  @FXML
+  private ImageView botaoRecarregou;
+  @FXML
+  private TextField valorRecarga;
+
   private Cliente ClienteAtual;
   private Passe passe;
   private boolean emailFlag = false;
@@ -651,10 +658,10 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
     saldoCliente.setVisible(false);
 
     botaoRecarregar.setDisable(true);
+    botaoRecarregar.setVisible(false);
     botaoConsultarDados.setDisable(true);
     botaoConsultarRotas.setDisable(true);
 
-    botaoRecarregar.setVisible(false);
     botaoConsultarDados.setVisible(false);
     botaoConsultarRotas.setVisible(false);
     textOperacao.setVisible(false);
@@ -662,6 +669,8 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
 
+    groupRecarga.setVisible(true);
+    groupRecarga.setDisable(false);
     homeButton.setVisible(false);
   }
 
@@ -686,8 +695,23 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
     grupoRotas.setDisable(true);
     groupConsultaDados.setVisible(false);
     groupConsultaDados.setDisable(true);
+    groupRecarga.setVisible(false);
+    groupRecarga.setDisable(true);
 
     homeButton.setVisible(true);
+  }
+
+  @FXML
+  void clickRecarregou(MouseEvent event) {
+    String aux = valorRecarga.getText();
+    boolean isNumeric = (aux != null && aux.matches("[0-9]+"));
+    if(isNumeric == true){
+      int Valor = Integer.parseInt(aux);
+      System.out.println("Valor: "+ Valor);
+    }
+    else{
+      System.out.println("Digite Corretamente");
+    }
   }
 
 }

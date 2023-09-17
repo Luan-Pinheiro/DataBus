@@ -22,7 +22,8 @@
   #textNomeCLT,
   #textSenhaCLT,
   #textTelefoneCLT,
-  #textEmailCLT {
+  #textEmailCLT, 
+  #valorRecarga{
     -fx-text-fill: white;
     -fx-background-color: transparent;
   }
