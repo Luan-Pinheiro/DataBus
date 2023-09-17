@@ -189,6 +189,13 @@ public class ScreenController implements Initializable {
   @FXML
   private Label consultaCartao;
 
+  @FXML
+  private Group groupRecarga;
+  @FXML
+  private ImageView botaoRecarregou;
+  @FXML
+  private TextField valorRecarga;
+
   private Cliente ClienteAtual;
   private Passe passe;
   private boolean emailFlag = false;
@@ -349,15 +356,21 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
         break;
 
       case 3:
-        // System.out.println(Cliente.confereNome(textNomeIDOSO.getText()));
-        // System.out.println(Cliente.confereSenha(textSenhaIDOSO.getText()));
-        // System.out.println(Cliente.confereCpf(textCPFIDOSO.getText()));
-        // System.out.println(Cliente.confereEmail(textEmailIDOSO.getText()));
-        // System.out.println(cliente.confereNumero(textTelefoneIDOSO.getText()));
-        // System.out.println(Cliente.confereEndereco(textEnderecoIDOSO.getText()));
-        // System.out.println(cliente.confereData(textNascimentoIDOSO.getText()));
+        if (!verificaCadastro()) {
+          showCaixaAlerta(Cliente.alertas());
+          Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
+        } 
+        else {
+          ClienteAtual = new Cliente(textEmailCLT.getText(), textSenhaCLT.getText(), textNascimentoCLT.getText(),
+textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), textCPFCLT.getText(), tipoPasse);
+          cDao.createCliente(ClienteAtual);
+
+          passe = new Passe(ClienteAtual.getCpf(), 0, "6 meses", textRGCLT.getText() , Integer.parseInt(textCTPSCLT.getText()), ClienteAtual.getNome());
+          pDao.createPasseClt(passe);
+          clickHomeButton(event);
         break;
     }
+  }
   }
 
   @FXML
@@ -394,7 +407,7 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
     consultaTelefone.setText(cliente.getTelefone());
     consultaEmail.setText(cliente.getemail());
     consultaSenha.setText(cliente.getSenha());
-    consultaCartao.setText(passe.geraNumCartao());
+    consultaCartao.setText(passe.getNumCartao());
 
     switch (cliente.getTipoPasse()) {
       case 1:
@@ -689,7 +702,7 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
 
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
-    
+
     grupoRotas.setVisible(true);
     grupoRotas.setDisable(false);
 
@@ -704,10 +717,10 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
     saldoCliente.setVisible(false);
 
     botaoRecarregar.setDisable(true);
+    botaoRecarregar.setVisible(false);
     botaoConsultarDados.setDisable(true);
     botaoConsultarRotas.setDisable(true);
 
-    botaoRecarregar.setVisible(false);
     botaoConsultarDados.setVisible(false);
     botaoConsultarRotas.setVisible(false);
     textOperacao.setVisible(false);
@@ -715,6 +728,8 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
 
+    groupRecarga.setVisible(true);
+    groupRecarga.setDisable(false);
     homeButton.setVisible(false);
   }
 
@@ -739,8 +754,26 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
     grupoRotas.setDisable(true);
     groupConsultaDados.setVisible(false);
     groupConsultaDados.setDisable(true);
+    groupRecarga.setVisible(false);
+    groupRecarga.setDisable(true);
 
     homeButton.setVisible(true);
 
+<<<<<<< HEAD
   }
+=======
+  @FXML
+  void clickRecarregou(MouseEvent event) {
+    String aux = valorRecarga.getText();
+    boolean isNumeric = (aux != null && aux.matches("[0-9]+"));
+    if(isNumeric == true){
+      int Valor = Integer.parseInt(aux);
+      System.out.println("Valor: "+ Valor);
+    }
+    else{
+      System.out.println("Digite Corretamente");
+    }
+  }
+
+>>>>>>> 49fac18134b519eede200e852d1d408f61ccf5ee
 }
