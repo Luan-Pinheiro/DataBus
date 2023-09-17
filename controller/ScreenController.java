@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import data.ClienteDaoJDBC;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -365,6 +367,8 @@ public class ScreenController implements Initializable {
     // maiores quantidades que o limite
     imgSeePassword.setImage(openedEye);
     textSenha.setVisible(false);
+    
+
     // Formatação Texto do Telefone
     textTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue.matches("\\d{11}")) {
