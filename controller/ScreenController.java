@@ -146,7 +146,7 @@ public class ScreenController implements Initializable {
   @FXML
   private TableView<Rota> tbwRotas;
 
-  //Labels consulta dados
+  // Labels consulta dados
   @FXML
   private Label consultaCPF;
   @FXML
@@ -172,7 +172,7 @@ public class ScreenController implements Initializable {
   @FXML
   private Label consultaCartao;
 
-  private Cliente estudante;
+  private Cliente ClienteAtual;
   private Passe passe;
   private boolean emailFlag = false;
   private boolean senhaFlag = false;
@@ -217,7 +217,7 @@ public class ScreenController implements Initializable {
     groupCadastro01.setDisable(true);
     groupCLT.setVisible(true);
     botaoCadastrar.setVisible(true);
-    tipoPasse = 2;
+    tipoPasse = 3;
   }
 
   @FXML
@@ -226,7 +226,7 @@ public class ScreenController implements Initializable {
     groupCadastro01.setDisable(true);
     groupIDOSO.setVisible(true);
     botaoCadastrar.setVisible(true);
-    tipoPasse = 3;
+    tipoPasse = 2;
   }
 
   @FXML
@@ -238,63 +238,95 @@ public class ScreenController implements Initializable {
     homeButton.setVisible(true);
   }
 
+  public boolean verificaCadastro() {
+    boolean verify = true;
+    switch (tipoPasse){
+    case 1: 
+    if (!Cliente.confereNome(textNome.getText()))
+      verify = false;
+    if (!Cliente.confereSenha(textSenha2.getText()))
+      verify = false;
+    if (!Cliente.confereCpf(textCPF.getText()))
+      verify = false;
+    if (!Cliente.confereEmail(textEmail.getText()))
+      verify = false;
+    if (!Cliente.confereNumero(textTelefone.getText()))
+      verify = false;
+    if (!Cliente.confereEndereco(textEndereco.getText()))
+      verify = false;
+    if (!Cliente.confereData(textNascimento.getText()))
+      verify = false;
+    break;
+
+    case 2:
+    if (!Cliente.confereNome(textNomeIDOSO.getText()))
+      verify = false;
+    if (!Cliente.confereSenha(textSenhaIDOSO.getText()))
+      verify = false;
+    if (!Cliente.confereCpf(textCPFIDOSO.getText()))
+      verify = false;
+    if (!Cliente.confereEmail(textEmailIDOSO.getText()))
+      verify = false;
+    if (!Cliente.confereNumero(textTelefoneIDOSO.getText()))
+      verify = false;
+    if (!Cliente.confereEndereco(textEnderecoIDOSO.getText()))
+      verify = false;
+    if (!Cliente.confereData(textNascimentoIDOSO.getText()))
+      verify = false;
+    break;
+
+    case 3:
+    if (!Cliente.confereNome(textNomeCLT.getText()))
+      verify = false;
+    if (!Cliente.confereSenha(textSenhaCLT.getText()))
+      verify = false;
+    if (!Cliente.confereCpf(textCPFCLT.getText()))
+      verify = false;
+    if (!Cliente.confereEmail(textEmailCLT.getText()))
+      verify = false;
+    if (!Cliente.confereNumero(textTelefoneCLT.getText()))
+      verify = false;
+    if (!Cliente.confereEndereco(textEnderecoCLT.getText()))
+      verify = false;
+    if (!Cliente.confereData(textNascimentoCLT.getText()))
+      verify = false;
+    break;
+
+    }
+    return verify;
+  }
+
   @FXML
   void clicouBotaoCadastrar(MouseEvent event) { // Botao Cadastrar
     switch (tipoPasse) {
-      case 1:
-        boolean verify = true;
-        if (!Cliente.confereNome(textNome.getText()))
-          verify = false;
-        if (!Cliente.confereSenha(textSenha2.getText()))
-          verify = false;
-        if (!Cliente.confereCpf(textCPF.getText()))
-          verify = false;
-        if (!Cliente.confereEmail(textEmail.getText()))
-          verify = false;
-        if (!Cliente.confereNumero(textTelefone.getText()))
-          verify = false;
-        if (!Cliente.confereEndereco(textEndereco.getText()))
-          verify = false;
-        if (!Cliente.confereData(textNascimento.getText()))
-          verify = false;
-        if (!verify) {
+      case 1: // Cadastro do Estudante
+        if (!verificaCadastro()) {
           showCaixaAlerta(Cliente.alertas());
           Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
-        } else {
-          estudante = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(),
-          textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText(),tipoPasse);
-          cDao.createCliente(estudante);
-          passe = new Passe(estudante.getCpf(),textMatricula.getText(),textInstituicao.getText(), 0 , "6 meses", estudante.getNome());
+        } 
+        else {
+          ClienteAtual = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(),
+              textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText(), tipoPasse);
+          cDao.createCliente(ClienteAtual);
+          passe = new Passe(ClienteAtual.getCpf(), textMatricula.getText(), textInstituicao.getText(), 0, "6 meses",
+              ClienteAtual.getNome());
           pDao.createPasseAluno(passe);
           clickHomeButton(event);
         }
         break;
 
-      case 2:
-        boolean flag = true;
-        if (!Cliente.confereNome(textNome.getText()))
-          flag = false;
-        if (!Cliente.confereSenha(textSenha2.getText()))
-          flag = false;
-        if (!Cliente.confereCpf(textCPF.getText()))
-          flag = false;
-        if (!Cliente.confereEmail(textEmail.getText()))
-          flag = false;
-        if (!Cliente.confereNumero(textTelefone.getText()))
-          flag = false;
-        if (!Cliente.confereEndereco(textEndereco.getText()))
-          flag = false;
-        if (!Cliente.confereData(textNascimento.getText()))
-          flag = false;
-        if (!flag) {
+      case 2: // Cadastro do Idoso
+        if (!verificaCadastro()) {
           showCaixaAlerta(Cliente.alertas());
           Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
-        } else {
-          estudante = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(),
-          textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText(),tipoPasse);
-          cDao.createCliente(estudante);
-          passe = new Passe(estudante.getCpf(),textMatricula.getText(),textInstituicao.getText(), 0 , "6 meses", estudante.getNome());
-          pDao.createPasseAluno(passe);
+        } 
+        else {
+          ClienteAtual = new Cliente(textEmailIDOSO.getText(), textSenhaIDOSO.getText(), textNascimentoIDOSO.getText(),
+textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(), textCPFIDOSO.getText(), tipoPasse);
+          cDao.createCliente(ClienteAtual);
+
+          passe = new Passe(ClienteAtual.getCpf(), 0, "6 meses", textRGIDOSO.getText() ,ClienteAtual.getNome());
+          pDao.createPasseIdoso(passe);
           clickHomeButton(event);
         }
         break;
@@ -318,7 +350,7 @@ public class ScreenController implements Initializable {
       System.out.println(cliente);
       if (verifyExist(cliente)) {
         Passe passe = pDao.readPasse(cliente.getCpf(), cliente.getTipoPasse());
-        ClienteLogado(cliente,passe);
+        ClienteLogado(cliente, passe);
         break;
       }
     }
@@ -328,7 +360,7 @@ public class ScreenController implements Initializable {
 
   }
 
-  public void ClienteLogado(Cliente cliente, Passe passe){
+  public void ClienteLogado(Cliente cliente, Passe passe) {
     groupInicialScreen.setVisible(false);
     groupInicialScreen.setDisable(true);
     groupCliente.setVisible(true);
@@ -371,7 +403,7 @@ public class ScreenController implements Initializable {
   public boolean verifyExist(Cliente cliente) {
     // VERIFICAR PSWDF E TEXTFILD DA SENHA - cunsultar cpf atraves
     String email = textUsuario.getText();
-    if(pwdFSenha.getLength() < textSenha.getLength()){
+    if (pwdFSenha.getLength() < textSenha.getLength()) {
       pwdFSenha.setText(textSenha.getText());
     }
     String senha = pwdFSenha.getText();
@@ -452,7 +484,6 @@ public class ScreenController implements Initializable {
     // maiores quantidades que o limite
     imgSeePassword.setImage(openedEye);
     textSenha.setVisible(false);
-    
 
     // Formatação Texto do Telefone
     textTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -575,11 +606,14 @@ public class ScreenController implements Initializable {
     botaoConsultarDados.setVisible(false);
     botaoConsultarRotas.setVisible(false);
     textOperacao.setVisible(false);
-    
+
     groupConsultaDados.setVisible(true);
- 
+    groupConsultaDados.setDisable(false);
+
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
+
+    homeButton.setVisible(false);
   }
 
   @FXML
@@ -598,7 +632,11 @@ public class ScreenController implements Initializable {
 
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
+    
     grupoRotas.setVisible(true);
+    grupoRotas.setDisable(false);
+
+    homeButton.setVisible(false);
   }
 
   @FXML
@@ -617,6 +655,8 @@ public class ScreenController implements Initializable {
 
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
+
+    homeButton.setVisible(false);
   }
 
   @FXML
@@ -635,9 +675,13 @@ public class ScreenController implements Initializable {
 
     botaoVoltar.setDisable(true);
     botaoVoltar.setVisible(false);
+
     grupoRotas.setVisible(false);
+    grupoRotas.setDisable(true);
     groupConsultaDados.setVisible(false);
     groupConsultaDados.setDisable(true);
+
+    homeButton.setVisible(true);
   }
 
 }

@@ -25,21 +25,23 @@ public class Passe {
         this.nomeCliente = nome;
     }
 
-    public Passe(String clienteCPF, float saldo, String validade, String rg) {
+    public Passe(String clienteCPF, float saldo, String validade, String rg, String nome) {
         cpfCliente = clienteCPF;
         this.saldo = saldo;
         NumCartao = geraNumCartao();
         this.validade = validade;
         Rg = rg;
+        this.nomeCliente = nome;
     }
 
-    public Passe(String clienteCPF, float saldo, String validade, String rg, int carteiraTrabalho) {
+    public Passe(String clienteCPF, float saldo, String validade, String rg, int carteiraTrabalho, String nome) {
         cpfCliente = clienteCPF;
         this.saldo = saldo;
         NumCartao = geraNumCartao();
         this.validade = validade;
         Rg = rg;
         this.carteiraTrabalho = carteiraTrabalho;
+        this.nomeCliente = nome;
     }
 
     public String geraNumCartao(){
