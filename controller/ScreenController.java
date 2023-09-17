@@ -49,6 +49,8 @@ public class ScreenController implements Initializable {
   private Group groupESTUDANTE;
   @FXML
   private Group groupInicialScreen;
+  @FXML
+  private Group groupConsultaDados;
 
   // ITENS CLT
   @FXML
@@ -143,6 +145,29 @@ public class ScreenController implements Initializable {
   @FXML
   private TableView<Rota> tbwRotas;
 
+  //Labels consulta dados
+  @FXML
+  private Label consultaCPF;
+  @FXML
+  private Label consultaCTPS;
+  @FXML
+  private Label consultaEmail;
+  @FXML
+  private Label consultaIndereco;
+  @FXML
+  private Label consultaInstituicao;
+  @FXML
+  private Label consultaMatricula;
+  @FXML
+  private Label consultaNascimento;
+  @FXML
+  private Label consultaNome;
+  @FXML
+  private Label consultaRG;
+  @FXML
+  private Label consultaSenha;
+  @FXML
+  private Label consultaTelefone;
 
   private Cliente estudante;
   private boolean emailFlag = false;
@@ -285,6 +310,28 @@ public class ScreenController implements Initializable {
     homeButton.setVisible(true);
 
     nomeUsuario.setText("Olá, " + cliente.getNome());
+
+    consultaNome.setText(cliente.getNome());
+    consultaCPF.setText(cliente.getCpf());
+    consultaNascimento.setText(cliente.getDataNascimento());
+    consultaIndereco.setText(cliente.getEndereco());
+    consultaTelefone.setText(cliente.getTelefone());
+    consultaEmail.setText(cliente.getemail());
+    consultaSenha.setText(cliente.getSenha());
+
+    switch (tipoPasse) {
+      case 1:
+        consultaMatricula.setText("202101801");
+        consultaInstituicao.setText("uesc fainor");
+        break;
+      case 2:
+        consultaRG.setText("1639439102");
+        break;
+      case 3:
+        consultaRG.setText("1639439102");
+        consultaCTPS.setText("2022323144");
+        break;
+    }
   }
 
   public boolean verifyExist(Cliente cliente) {
@@ -315,6 +362,10 @@ public class ScreenController implements Initializable {
     groupCLT.setVisible(false);
     clearText();
     homeButton.setVisible(false);
+    groupConsultaDados.setVisible(false);
+    groupConsultaDados.setDisable(true);
+    grupoRotas.setVisible(false);
+    grupoRotas.setDisable(true);
   }
 
   public void clearText() {
@@ -477,7 +528,6 @@ public class ScreenController implements Initializable {
     });
   }
 
-
   @FXML
   void consultarDados(MouseEvent event) {
     saldoIMG.setVisible(false);
@@ -491,7 +541,9 @@ public class ScreenController implements Initializable {
     botaoConsultarDados.setVisible(false);
     botaoConsultarRotas.setVisible(false);
     textOperacao.setVisible(false);
-
+    
+    groupConsultaDados.setVisible(true);
+ 
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
   }
@@ -550,6 +602,8 @@ public class ScreenController implements Initializable {
     botaoVoltar.setDisable(true);
     botaoVoltar.setVisible(false);
     grupoRotas.setVisible(false);
+    groupConsultaDados.setVisible(false);
+    groupConsultaDados.setDisable(true);
   }
 
 }
