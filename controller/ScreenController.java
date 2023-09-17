@@ -158,9 +158,13 @@ public class ScreenController implements Initializable {
   @FXML
   private Group groupFuncionario;
   @FXML
+  private Group groupBuscarCliente;
+  @FXML
   private Label saldoCliente;
   @FXML
   private ImageView saldoIMG;
+  @FXML
+  private ImageView textOperacaoFuncionario;
   // Tabela de rotas
   @FXML
   private TableView<Rota> tbwRotas;
@@ -206,6 +210,8 @@ public class ScreenController implements Initializable {
   private ImageView botaoRecarregou;
   @FXML
   private TextField valorRecarga;
+  @FXML
+  private TextField funcionarioBuscarCliente;
 
   private Cliente ClienteAtual;
   private Passe passe;
@@ -446,7 +452,13 @@ public class ScreenController implements Initializable {
 
   @FXML
   void buscarCliente(MouseEvent event) {
+    groupFuncionario.setVisible(false);
+    groupFuncionario.setDisable(true);
 
+    groupBuscarCliente.setVisible(true);
+
+    botaoVoltar.setVisible(true);
+    botaoVoltar.setDisable(false);
   }
 
   @FXML
@@ -466,7 +478,20 @@ public class ScreenController implements Initializable {
 
   @FXML
   void listarClientes(MouseEvent event) {
-    
+    botaoListarClientes.setVisible(false);
+    botaoListarClientes.setDisable(true);
+    botaoBuscarCliente.setVisible(false);
+    botaoBuscarCliente.setDisable(true);
+    botaoGerenciarCliente.setVisible(false);
+    botaoGerenciarCliente.setDisable(true);
+    botaoGerenciarRotas.setVisible(false);
+    botaoGerenciarRotas.setDisable(true);
+    botaoBuscarRota.setVisible(false);
+    botaoBuscarRota.setDisable(true);
+    textOperacaoFuncionario.setVisible(false);
+
+    botaoVoltar.setVisible(true);
+    botaoVoltar.setDisable(false);
   }
 
   @FXML
@@ -865,7 +890,6 @@ public class ScreenController implements Initializable {
     groupRecarga.setDisable(false);
     homeButton.setVisible(false);
     valorRecarga.clear(); 
-    
   }
 
   @FXML
@@ -893,7 +917,6 @@ public class ScreenController implements Initializable {
     groupRecarga.setDisable(true);
     valorRecarga.clear(); 
     homeButton.setVisible(true);
-
   }
 
   @FXML

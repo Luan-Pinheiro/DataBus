@@ -573,6 +573,21 @@
             </ImageView>
          </children>
       </Group>
+      <Group fx:id="groupBuscarCliente" visible="false">
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/backgroundBuscarCliente.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="funcionarIoBuscarCliente" layoutX="97.0" layoutY="287.0" prefHeight="37.0" prefWidth="281.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+         </children>
+      </Group>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="botaoVoltar" fitHeight="36.0" fitWidth="50.0" layoutX="217.0" layoutY="582.0" onMouseClicked="#botaoVoltar" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../assets/botaoVoltar.png" />
