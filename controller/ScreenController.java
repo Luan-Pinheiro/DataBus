@@ -292,8 +292,8 @@ public class ScreenController implements Initializable {
       senhaFlag = (CDao.queryAccount(cliente.getCpf()).getSenha().equals(senha)) ? true : false;
     }
     login = (emailFlag & senhaFlag);
-
     System.out.println("FLAG:" + login);
+    
     return login;
   }
 
