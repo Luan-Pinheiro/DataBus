@@ -250,8 +250,25 @@ public class ScreenController implements Initializable {
   private TextField editarTelefone;
   @FXML
   private TextField editarCliente;
-   @FXML
+  @FXML
   private ImageView IMGmodofuncionario;
+
+  @FXML
+  private Group groupBuscarRotas;
+  @FXML
+  private TextField textFuncionarioROTAS;
+  @FXML
+  private ImageView botaoBuscarRotaLUPA;
+  @FXML
+  private TableView<Cliente> tbwROTAS;
+  @FXML
+  private TableColumn<Cliente, String> Partida;
+  @FXML
+  private TableColumn<Cliente, String> Chegada;
+  @FXML
+  private TableColumn<Cliente, String> horaSaida;
+  @FXML
+  private TableColumn<Cliente, String> horaChegada;
 
   private Cliente ClienteAtual;
   private Passe passe;
@@ -505,6 +522,7 @@ public class ScreenController implements Initializable {
 
     botaoVoltar.setVisible(true);
     botaoVoltar.setDisable(false);
+    homeButton.setVisible(false);
   }
 
   
@@ -535,12 +553,27 @@ public class ScreenController implements Initializable {
     groupGerenciarCliente.setVisible(true);
     groupGerenciarCliente.setDisable(false);
     
+    botaoVoltar.setVisible(true);
+    botaoVoltar.setDisable(false);
+    homeButton.setVisible(false);
   }
   
   @FXML
-  void buscarRota(MouseEvent event) {
+  void buscarRota(MouseEvent event) { 
+    groupFuncionario.setVisible(false);
+    groupFuncionario.setDisable(true);
 
+    groupBuscarRotas.setVisible(true);
+    groupBuscarRotas.setDisable(false);
+
+    botaoBuscar.setVisible(true);
+    botaoBuscar.setDisable(false);
+
+    botaoVoltar.setVisible(true);
+    botaoVoltar.setDisable(false);
+    homeButton.setVisible(false);
   }
+
   @FXML
   void gerenciarRotas(MouseEvent event) {
 
@@ -621,7 +654,6 @@ public class ScreenController implements Initializable {
     homeButton.setVisible(true);
     groupFuncionario.setVisible(true);
     groupFuncionario.setDisable(false);
-    groupInicialScreen.setDisable(false);
   }
 
   public void showClientsTable() {
@@ -727,8 +759,7 @@ public class ScreenController implements Initializable {
     grupoRotas.setDisable(true);
     groupFuncionario.setVisible(false);
     groupFuncionario.setDisable(true);
-    groupBuscarCliente.setVisible(false);
-    groupBuscarCliente.setDisable(true);
+
     botaoFuncionario.setVisible(true);
   }
 
@@ -1007,6 +1038,9 @@ public class ScreenController implements Initializable {
       groupGerenciarCliente.setDisable(true);
       groupBuscarCliente.setVisible(false);
       groupBuscarCliente.setDisable(true);
+      groupBuscarRotas.setVisible(false);
+      groupBuscarRotas.setDisable(true);
+
       groupFuncionario.setVisible(true);
       groupFuncionario.setDisable(false);
       
