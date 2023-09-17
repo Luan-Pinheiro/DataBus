@@ -44,6 +44,18 @@ public class ScreenController implements Initializable {
   @FXML
   private ImageView passeIdoso;
   @FXML
+  private ImageView botaoListarClientes;
+  @FXML
+  private ImageView botaoBuscarCliente;
+  @FXML
+  private ImageView botaoGerenciarCliente;
+  @FXML
+  private ImageView botaoBuscarRota;
+  @FXML
+  private ImageView botaoGerenciarRotas;
+  @FXML
+  private ImageView botaoFuncionario;
+  @FXML
   private Group groupCLT;
   @FXML
   private Group groupIDOSO;
@@ -142,6 +154,8 @@ public class ScreenController implements Initializable {
   private Group groupCliente;
   @FXML
   private Group grupoRotas;
+  @FXML
+  private Group groupFuncionario;
   @FXML
   private Label saldoCliente;
   @FXML
@@ -815,6 +829,36 @@ public class ScreenController implements Initializable {
     } else {
       System.out.println("Digite Corretamente");
     }
+  }
+
+  @FXML
+  void buscarCliente(MouseEvent event) {
+
+  }
+
+  @FXML
+  void buscarRota(MouseEvent event) {
+
+  }
+
+  @FXML
+  void gerenciarCliente(MouseEvent event) {
+
+  }
+
+  @FXML
+  void gerenciarRotas(MouseEvent event) {
+
+  }
+
+  @FXML
+  void listarClientes(MouseEvent event) {
+
+  }
+
+  @FXML
+  void funcionarioMode(MouseEvent event) {
+
   }
 
 }
