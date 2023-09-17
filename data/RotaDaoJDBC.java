@@ -116,7 +116,6 @@ public class RotaDaoJDBC implements iRotaDao{
       ex.printStackTrace();
     }
   }
-
   @Override
   public void deleteRota(Rota rota) {
     String sqlQuery = "delete from databus.cliente where codigoRota=?";
