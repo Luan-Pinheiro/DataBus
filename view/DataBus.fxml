@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScreenController">
    <children>
       <Group fx:id="groupESTUDANTE" visible="false">
          <children>
@@ -416,17 +416,81 @@
             </TableView>
          </children>
       </Group>
-      <ImageView fx:id="homeButton" fitHeight="36.0" fitWidth="36.0" layoutX="36.0" layoutY="33.0" onMouseClicked="#clickHomeButton" pickOnBounds="true" preserveRatio="true" visible="false">
+      <Group fx:id="groupConsultaDados" visible="false">
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="495.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/backgroundConsultarDados.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="consultaNome" layoutX="177.0" layoutY="158.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="consultaNascimento" layoutX="177.0" layoutY="195.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="consultaCPF" layoutX="177.0" layoutY="231.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="consultaIndereco" layoutX="177.0" layoutY="268.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="consultaTelefone" layoutX="177.0" layoutY="306.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="consultaEmail" layoutX="177.0" layoutY="345.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="consultaSenha" layoutX="177.0" layoutY="382.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="consultaMatricula" layoutX="177.0" layoutY="421.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="consultaInstituicao" layoutX="177.0" layoutY="458.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="consultaRG" layoutX="177.0" layoutY="498.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="consultaCTPS" layoutX="177.0" layoutY="538.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <ImageView fx:id="botaoVoltar" fitHeight="36.0" fitWidth="50.0" layoutX="217.0" layoutY="582.0" onMouseClicked="#botaoVoltar" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../assets/homeButton.png" />
+            <Image url="@../assets/botaoVoltar.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="botaoVoltar" fitHeight="36.0" fitWidth="50.0" layoutX="217.0" layoutY="582.0" onMouseClicked="#botaoVoltar" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="homeButton" fitHeight="36.0" fitWidth="36.0" layoutX="36.0" layoutY="33.0" onMouseClicked="#clickHomeButton" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../assets/botaoVoltar.png" />
+            <Image url="@../assets/homeButton.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
