@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScreenController">
    <children>
       <Group fx:id="groupESTUDANTE" visible="false">
          <children>
@@ -346,6 +346,11 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+            </ImageView>
+            <ImageView fx:id="IMGmodofuncionario" fitHeight="27.0" fitWidth="141.0" layoutX="159.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../assets/modofuncionario.png" />
+               </image>
             </ImageView>
          </children>
       </Group>

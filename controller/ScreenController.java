@@ -3,6 +3,9 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javax.swing.plaf.basic.BasicComboBoxUI.ItemHandler;
+
 import data.ClienteDaoJDBC;
 import data.FuncionarioDaoJDBC;
 import data.PasseDaoJDBC;
@@ -247,6 +250,8 @@ public class ScreenController implements Initializable {
   private TextField editarTelefone;
   @FXML
   private TextField editarCliente;
+   @FXML
+  private ImageView IMGmodofuncionario;
 
   private Cliente ClienteAtual;
   private Passe passe;
@@ -553,6 +558,7 @@ public class ScreenController implements Initializable {
   @FXML
   void funcionarioMode(MouseEvent event) {
     funcionarioFlag = !funcionarioFlag;
+    IMGmodofuncionario.setVisible(!IMGmodofuncionario.isVisible());
   }
 
   public void ClienteLogado(Cliente cliente, Passe passe) {
