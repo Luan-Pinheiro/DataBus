@@ -473,8 +473,9 @@ public class ScreenController implements Initializable {
       ArrayList<Cliente> clientes = cDao.getAllClientes();
       for (Cliente cliente : clientes) {
         if (verifyExist(cliente)) {
-          Passe passe = pDao.readPasse(cliente.getCpf(), cliente.getTipoPasse());
-          ClienteLogado(cliente, passe);
+          Passe passeAUX = pDao.readPasse(cliente.getCpf(), cliente.getTipoPasse());
+          passe = passeAUX;
+          ClienteLogado(cliente, passeAUX);
           break;
         }
       }
@@ -1012,7 +1013,7 @@ public class ScreenController implements Initializable {
   }
 
   @FXML
-  void clickRecarregou(MouseEvent event) {
+  void clickRecarregou(MouseEvent event) { 
     String aux = valorRecarga.getText();
     boolean isNumeric = (aux != null && aux.matches("[0-9]+"));
     if (isNumeric == true) {
@@ -1020,7 +1021,7 @@ public class ScreenController implements Initializable {
       System.out.println("Valor: " + Valor);
       valorRecarga.clear(); 
     } else {
-      System.out.println("Digite Corretamente");
+      showCaixaAlerta("Digite o Valor Corretamente, USE EXCLUSIVAMENTE OS NUMEROS");
     }
   }
 }
