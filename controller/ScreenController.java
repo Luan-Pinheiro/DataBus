@@ -234,7 +234,7 @@ public class ScreenController implements Initializable {
   @FXML
   private TextField valorRecarga;
   @FXML
-  private TextField funcionarioBuscarCliente;
+  private TextField funcionarIoBuscarCliente;
   @FXML
   private TextField editarEmail;
   @FXML
@@ -487,10 +487,12 @@ public class ScreenController implements Initializable {
 
   @FXML
   void buscarCliente(MouseEvent event) {
+    //ATIVIDADE 
     groupFuncionario.setVisible(false);
     groupFuncionario.setDisable(true);
 
     groupBuscarCliente.setVisible(true);
+    groupBuscarCliente.setDisable(false);
 
     botaoBuscar.setVisible(true);
     botaoBuscar.setDisable(false);
@@ -499,38 +501,44 @@ public class ScreenController implements Initializable {
     botaoVoltar.setDisable(false);
   }
 
+  
   @FXML
-  void buscarRota(MouseEvent event) {
-
+  void buscarCpfCliente(MouseEvent event) {
+    FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
+    String cpf = funcionarIoBuscarCliente.getText();
+    boolean localFlag = Cliente.confereCpf(cpf);
+    System.out.println(funcionarIoBuscarCliente.getText());
+    Cliente clienteSolicitado = fDaoJDBC.readCliente(funcionarIoBuscarCliente.getText());
+    showClient(clienteSolicitado.getCpf());
+    /*if(localFlag){
+    }else{
+      Cliente.setTextAlerta("ERRO");
+    }*/
   }
 
+  @FXML
+  void salvarDadosEditados(MouseEvent event) {
+    //FAZER O UPDATE CLIENTE
+  }
   @FXML
   void gerenciarCliente(MouseEvent event) {
     groupFuncionario.setVisible(false);
     groupFuncionario.setDisable(true);
-
+    
     groupGerenciarCliente.setVisible(true);
     groupGerenciarCliente.setDisable(false);
+    
+  }
+  
+  @FXML
+  void buscarRota(MouseEvent event) {
 
   }
-
   @FXML
   void gerenciarRotas(MouseEvent event) {
 
   }
 
-  @FXML
-  void buscarCpfCliente(MouseEvent event) {
-    //if(!funcionarioBuscarCliente.getText().isEmpty()){
-      System.out.println("BUSCOU A PICA");
-      //showClient(funcionarioBuscarCliente.getText());
-    //}
-  }
-
-  @FXML
-  void salvarDadosEditados(MouseEvent event) {
-
-  }
 
   @FXML
   void listarClientes(MouseEvent event) {
@@ -601,10 +609,10 @@ public class ScreenController implements Initializable {
     botaoFuncionario.setVisible(false);
     groupInicialScreen.setVisible(false);
     groupInicialScreen.setDisable(true);
-    groupCliente.setVisible(true);
-    groupCliente.setDisable(false);
     homeButton.setVisible(true);
     groupFuncionario.setVisible(true);
+    groupFuncionario.setDisable(false);
+    groupInicialScreen.setDisable(false);
   }
 
   public void showClientsTable() {
@@ -612,13 +620,7 @@ public class ScreenController implements Initializable {
     ArrayList<Cliente> clientes = fDaoJDBC.getAllClientes();
     // criando lista observável para ser exibida no table view
     ObservableList<Cliente> auxList = FXCollections.observableArrayList(clientes);
-    tCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-    tEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-    tEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
-    tNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-    tPasse.setCellValueFactory(new PropertyValueFactory<>("tipoPasse"));
-    tSenha.setCellValueFactory(new PropertyValueFactory<>("senha"));
-    tTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+    clientInfoAddress();
     for (Cliente cliente : clientes) {
       Cliente clienteAux = fDaoJDBC.readCliente(cliente.getCpf());
       auxList.add(clienteAux);
@@ -627,11 +629,7 @@ public class ScreenController implements Initializable {
     tbwClientes2.setItems(auxList);
   }
 
-  public void showClient(String cpf) {
-    FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
-    Cliente cliente = fDaoJDBC.readCliente(cpf);
-    // criando lista observável para ser exibida no table view
-    ObservableList<Cliente> auxList = FXCollections.observableArrayList();
+  public void   clientInfoAddress(){
     tCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
     tEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
     tEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
@@ -639,6 +637,14 @@ public class ScreenController implements Initializable {
     tPasse.setCellValueFactory(new PropertyValueFactory<>("tipoPasse"));
     tSenha.setCellValueFactory(new PropertyValueFactory<>("senha"));
     tTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+  };
+
+  public void showClient(String cpf) {
+    FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
+    Cliente cliente = fDaoJDBC.readCliente(cpf);
+    // criando lista observável para ser exibida no table view
+    ObservableList<Cliente> auxList = FXCollections.observableArrayList();
+    clientInfoAddress();
     auxList.add(cliente);
     tbwClientes1.setItems(auxList);
     tbwClientes2.setItems(auxList);
@@ -713,6 +719,8 @@ public class ScreenController implements Initializable {
     grupoRotas.setDisable(true);
     groupFuncionario.setVisible(false);
     groupFuncionario.setDisable(true);
+    groupBuscarCliente.setVisible(false);
+    groupBuscarCliente.setDisable(true);
     botaoFuncionario.setVisible(true);
   }
 
@@ -986,30 +994,43 @@ public class ScreenController implements Initializable {
 
   @FXML
   void botaoVoltar(MouseEvent event) {
-    saldoIMG.setVisible(true);
-    saldoCliente.setVisible(true);
+    if (funcionarioFlag) {
+      groupGerenciarCliente.setVisible(false);
+      groupGerenciarCliente.setDisable(true);
+      groupBuscarCliente.setVisible(false);
+      groupBuscarCliente.setDisable(true);
+      groupFuncionario.setVisible(true);
+      groupFuncionario.setDisable(false);
+      
+    } else {
+      saldoIMG.setVisible(true);
+      saldoCliente.setVisible(true);
 
-    botaoRecarregar.setDisable(false);
-    botaoConsultarDados.setDisable(false);
-    botaoConsultarRotas.setDisable(false);
+      botaoRecarregar.setDisable(false);
+      botaoConsultarDados.setDisable(false);
+      botaoConsultarRotas.setDisable(false);
 
-    botaoRecarregar.setVisible(true);
-    botaoConsultarDados.setVisible(true);
-    botaoConsultarRotas.setVisible(true);
-    textOperacao.setVisible(true);
+      botaoRecarregar.setVisible(true);
+      botaoConsultarDados.setVisible(true);
+      botaoConsultarRotas.setVisible(true);
+      textOperacao.setVisible(true);
 
+      grupoRotas.setVisible(false);
+      grupoRotas.setDisable(true);
+
+      groupConsultaDados.setVisible(false);
+      groupConsultaDados.setDisable(true);
+
+      groupRecarga.setVisible(false);
+      groupRecarga.setDisable(true);
+
+      valorRecarga.clear();
+    }
     botaoVoltar.setDisable(true);
     botaoVoltar.setVisible(false);
 
-    grupoRotas.setVisible(false);
-    grupoRotas.setDisable(true);
-    groupConsultaDados.setVisible(false);
-    groupConsultaDados.setDisable(true);
-    groupRecarga.setVisible(false);
-    groupRecarga.setDisable(true);
-    valorRecarga.clear(); 
-    groupBuscarCliente.setVisible(false);
     homeButton.setVisible(true);
+
   }
 
   @FXML
