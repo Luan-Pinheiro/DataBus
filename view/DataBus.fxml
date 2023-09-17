@@ -416,34 +416,34 @@
             </TableView>
          </children>
       </Group>
-      <Group fx:id="groupConsultaDados">
+      <Group fx:id="groupConsultaDados" visible="false">
          <children>
             <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/backgroundConsultarDados.png" />
                </image>
             </ImageView>
-            <Label fx:id="consultaNome" layoutX="177.0" layoutY="158.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+            <Label fx:id="consultaNome" layoutX="177.0" layoutY="160.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="consultaNascimento" layoutX="177.0" layoutY="195.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+            <Label fx:id="consultaNascimento" layoutX="177.0" layoutY="197.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="consultaCPF" layoutX="177.0" layoutY="231.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+            <Label fx:id="consultaCPF" layoutX="177.0" layoutY="234.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="consultaIndereco" layoutX="177.0" layoutY="268.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+            <Label fx:id="consultaIndereco" layoutX="177.0" layoutY="271.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="consultaTelefone" layoutX="177.0" layoutY="306.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+            <Label fx:id="consultaTelefone" layoutX="177.0" layoutY="308.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
@@ -453,27 +453,27 @@
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="consultaSenha" layoutX="177.0" layoutY="382.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+            <Label fx:id="consultaSenha" layoutX="177.0" layoutY="384.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="consultaMatricula" layoutX="177.0" layoutY="421.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+            <Label fx:id="consultaMatricula" layoutX="177.0" layoutY="422.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="consultaInstituicao" layoutX="177.0" layoutY="458.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+            <Label fx:id="consultaInstituicao" layoutX="177.0" layoutY="460.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="consultaRG" layoutX="177.0" layoutY="498.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+            <Label fx:id="consultaRG" layoutX="177.0" layoutY="499.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="consultaCTPS" layoutX="177.0" layoutY="538.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
+            <Label fx:id="consultaCTPS" layoutX="177.0" layoutY="540.0" prefHeight="17.0" prefWidth="190.0" textFill="WHITE">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>

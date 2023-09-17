@@ -308,6 +308,28 @@ public class ScreenController implements Initializable {
     homeButton.setVisible(true);
 
     nomeUsuario.setText("Olá, " + cliente.getNome());
+
+    consultaNome.setText(cliente.getNome());
+    consultaCPF.setText(cliente.getCpf());
+    consultaNascimento.setText(cliente.getDataNascimento());
+    consultaIndereco.setText(cliente.getEndereco());
+    consultaTelefone.setText(cliente.getTelefone());
+    consultaEmail.setText(cliente.getemail());
+    consultaSenha.setText(cliente.getSenha());
+
+    switch (tipoPasse) {
+      case 1:
+        consultaMatricula.setText("202101801");
+        consultaInstituicao.setText("uesc fainor");
+        break;
+      case 2:
+        consultaRG.setText("1639439102");
+        break;
+      case 3:
+        consultaRG.setText("1639439102");
+        consultaCTPS.setText("2022323144");
+        break;
+    }
   }
 
   public boolean verifyExist(Cliente cliente) {
