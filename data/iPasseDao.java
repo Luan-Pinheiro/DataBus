@@ -5,7 +5,10 @@ import model.*;
 public interface iPasseDao {
     ArrayList<Passe> getAllPasses();
     void createPasse (Passe passe);
-    Cliente readPasse (String numCartao);
+    void createPasseAluno (Passe passe);
+    void createPasseIdoso (Passe passe);
+    void createPasseClt (Passe passe);
+    Passe readPasse (String numCartao);
     void updatePasse (Passe passe);
     void deletePasse (Passe passe);
 }

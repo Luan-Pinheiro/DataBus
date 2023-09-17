@@ -2,10 +2,11 @@ package model;
 
 import java.util.Random;
 
-import model.*;
+import data.ClienteDaoJDBC;
 
 public class Passe {
-    private Cliente Cliente;
+    private String cpfCliente;
+    private String nomeCliente;
     private float saldo;
     private String NumCartao;
     private String validade;
@@ -13,9 +14,11 @@ public class Passe {
     private String Instituicao;
     private String numMatricula;
     private int carteiraTrabalho;
+
+    public Passe(){};
     
-    public Passe(Cliente cliente, float saldo, String validade, String instituicao, String numMatricula) {
-        Cliente = cliente;
+    public Passe(String clienteCPF, float saldo, String validade, String instituicao, String numMatricula) {
+        cpfCliente = clienteCPF;
         this.saldo = saldo;
         NumCartao = geraNumCartao();
         this.validade = validade;
@@ -23,16 +26,16 @@ public class Passe {
         this.numMatricula = numMatricula;
     }
 
-    public Passe(Cliente cliente, float saldo, String validade, String rg) {
-        Cliente = cliente;
+    public Passe(String clienteCPF, float saldo, String validade, String rg) {
+        cpfCliente = clienteCPF;
         this.saldo = saldo;
         NumCartao = geraNumCartao();
         this.validade = validade;
         Rg = rg;
     }
 
-    public Passe(Cliente cliente, float saldo, String validade, String rg, int carteiraTrabalho) {
-        Cliente = cliente;
+    public Passe(String clienteCPF, float saldo, String validade, String rg, int carteiraTrabalho) {
+        cpfCliente = clienteCPF;
         this.saldo = saldo;
         NumCartao = geraNumCartao();
         this.validade = validade;
@@ -48,8 +51,8 @@ public class Passe {
         return numero;
     }
 
-    public Cliente getCliente() {
-        return Cliente;
+    public String getCpfCliente() {
+        return cpfCliente;
     }
 
     public float getSaldo() {
@@ -79,11 +82,16 @@ public class Passe {
     public int getCarteiraTrabalho() {
         return carteiraTrabalho;
     }
-
-    public void setCliente(Cliente cliente) {
-        Cliente = cliente;
+    public String getNomeCliente() {
+        return nomeCliente;
     }
-
+    public void setNomeCliente(String clienteCPF) {
+        ClienteDaoJDBC cDao = new ClienteDaoJDBC();
+        this.nomeCliente = cDao.queryName(nomeCliente).getNome();
+    }
+    public void setCpfCliente(String clienteCPF) {
+        cpfCliente = clienteCPF;
+    }
     public void setSaldo(float saldo) {
         this.saldo = saldo;
     }

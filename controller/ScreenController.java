@@ -148,7 +148,7 @@ public class ScreenController implements Initializable {
   private boolean emailFlag = false;
   private boolean senhaFlag = false;
   private boolean login = false;
-  ClienteDaoJDBC CDao = new ClienteDaoJDBC();
+  ClienteDaoJDBC cDao = new ClienteDaoJDBC();
 
   private boolean flag = true;
   Image openedEye = new Image("./assets/eye.png");
@@ -233,7 +233,7 @@ public class ScreenController implements Initializable {
         } else {
           estudante = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(),
               textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText());
-          CDao.createCliente(estudante);
+          cDao.createCliente(estudante);
           clickHomeButton(event);
           System.out.println("ENTROU AQ NO CADASTRO CARAIU");
         }
@@ -263,7 +263,7 @@ public class ScreenController implements Initializable {
 
   @FXML
   void clickLogin(MouseEvent event) {
-    ArrayList<Cliente> clientes = CDao.getAllClientes();
+    ArrayList<Cliente> clientes = cDao.getAllClientes();
     for (Cliente cliente : clientes) {
       System.out.println(cliente);
       if (verifyExist(cliente)) {
@@ -294,9 +294,9 @@ public class ScreenController implements Initializable {
       pwdFSenha.setText(textSenha.getText());
     }
     String senha = pwdFSenha.getText();
-    emailFlag = (CDao.queryAccount(cliente.getCpf()).getemail().equals(email)) ? true : false;
+    emailFlag = (cDao.queryAccount(cliente.getCpf()).getemail().equals(email)) ? true : false;
     if (emailFlag) {
-      senhaFlag = (CDao.queryAccount(cliente.getCpf()).getSenha().equals(senha)) ? true : false;
+      senhaFlag = (cDao.queryAccount(cliente.getCpf()).getSenha().equals(senha)) ? true : false;
     }
     login = (emailFlag & senhaFlag);
     System.out.println("FLAG:" + login);

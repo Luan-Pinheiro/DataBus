@@ -1,4 +1,3 @@
---Executar o script
 CREATE SCHEMA databus
 
 CREATE TABLE if not exists databus.cliente( 
@@ -11,21 +10,26 @@ CREATE TABLE if not exists databus.cliente(
                        cpf varchar(14) NOT NULL PRIMARY KEY);
 	
 CREATE TABLE if not exists databus.passe(
-                       numCartao varchar(20) NOT NULL PRIMARY KEY,  
+                       numCartao varchar(7) NOT NULL PRIMARY KEY,  
                        saldo float,  
                        validade varchar(10),  
-                       idCliente varchar(14)); 
+                       idCliente varchar(14),
+                       nome varchar(50)); 
 
 CREATE TABLE if not exists databus.passeAluno( 
                        cpf varchar(14) NOT NULL PRIMARY KEY,  
-                       matricula varchar(15),  
-                       nome varchar(50),  
+                       matricula varchar(15),    
                        instituicao varchar(70),  
-                       numPasse varchar(20));
+                       numPasse varchar(7));
 
 CREATE TABLE if not exists databus.passeIdoso(
-                       rg varchar(13) NOT NULL,  
-                       numPasse varchar(20)); 
+                       rg varchar(13) NOT NULL PRIMARY KEY,  
+                       numPasse varchar(7));
+					   
+CREATE TABLE if not exists databus.passeClt(
+					   cpf varchar(14) NOT NULL PRIMARY KEY, 
+                       ctps integer NOT NULL,  
+                       numPasse varchar(7)); 
 
 CREATE TABLE if not exists databus.dadosPeriodicos(
                        instituicao varchar(70),  
@@ -39,22 +43,35 @@ CREATE TABLE if not exists databus.funcionario(
                        codigoFuncionário integer NOT NULL PRIMARY KEY); 
 
 CREATE TABLE if not exists databus.rotas(
-                       codigoRota  varchar(3) NOT NULL PRIMARY KEY,  
-                       nome  varchar(50)); 
+                       codigoRota  varchar(3) NOT NULL PRIMARY KEY,
+					   ponto_partida varchar(50),
+                       ponto_chegada varchar(50),
+					   horario_saida varchar(5),
+                       horario_chegada varchar(5)); 
 
-CREATE TABLE if not exists databus.horarios ( 
-                      codigoRota  varchar(3) NOT NULL,
-                      horario_saida varchar(5),
-                      horario_chegada varchar(5)); 
-
-CREATE TABLE if not exists databus.pontos (
-                       codigoRota  varchar(3) NOT NULL,
-                       ponto_partida varchar(50),
-                       ponto_chegada varchar(50)
-); 
 					   
 ALTER TABLE databus.passe ADD FOREIGN KEY(idCliente) REFERENCES databus.cliente(cpf);
 ALTER TABLE databus.passeAluno ADD FOREIGN KEY(numPasse) REFERENCES databus.passe(numCartao);
 ALTER TABLE databus.passeIdoso ADD FOREIGN KEY(numPasse) REFERENCES databus.passe(numCartao);
-ALTER TABLE databus.horarios ADD FOREIGN KEY(codigoRota) REFERENCES databus.rotas(codigoRota);
-ALTER TABLE databus.pontos ADD FOREIGN KEY(codigoRota) REFERENCES databus.rotas(codigoRota);
+ALTER TABLE databus.passeClt ADD FOREIGN KEY(numPasse) REFERENCES databus.passe(numCartao);
+
+insert into databus.rotas
+values ('D39','Candeias','Boa Vista','11:00','12:00');
+
+insert into databus.rotas
+values ('D32','Centro','UESB','06:00','7:00');
+
+insert into databus.rotas
+values ('D30','Recreio', 'Alto Maron','08:00','11:00');
+
+insert into databus.rotas
+values ('D36','Alto Maron','Centro','14:00','15:00');
+
+insert into databus.rotas
+values ('R20','Patagônia','URBIS 1','06:30','7:30');
+
+insert into databus.rotas
+values ('R09','URBIS 2','UESB','09:30','10:30');
+
+insert into databus.rotas
+values ('P51','UESB','Patagônia','17:00','18:30');
