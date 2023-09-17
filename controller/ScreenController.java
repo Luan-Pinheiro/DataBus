@@ -430,7 +430,6 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
         break;
     }
   }
-  
   public void showRoutesTable(){
     RotaDaoJDBC RDao = new RotaDaoJDBC();
     ArrayList<Rota> rotas = RDao.getAllRotas();
@@ -450,7 +449,6 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
     //Inserindo na tabela
     tbwRotas.setItems(auxList);
   }
-
   public boolean verifyExist(Cliente cliente) {
     // VERIFICAR PSWDF E TEXTFILD DA SENHA - cunsultar cpf atraves
     String email = textUsuario.getText();
@@ -470,7 +468,6 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
 
     return login;
   }
-
   @FXML
   void clickHomeButton(MouseEvent event) {
     groupCliente.setVisible(false);
