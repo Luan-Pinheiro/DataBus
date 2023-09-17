@@ -542,6 +542,7 @@ public class ScreenController implements Initializable {
     textNome.clear();
     textSenha2.clear();
     textTelefone.clear();
+    valorRecarga.clear(); 
   }
 
   public static void showCaixaAlerta(String texto) { // metodo da caixa de alerta
@@ -775,6 +776,8 @@ public class ScreenController implements Initializable {
     groupRecarga.setVisible(true);
     groupRecarga.setDisable(false);
     homeButton.setVisible(false);
+    valorRecarga.clear(); 
+    
   }
 
   @FXML
@@ -800,7 +803,7 @@ public class ScreenController implements Initializable {
     groupConsultaDados.setDisable(true);
     groupRecarga.setVisible(false);
     groupRecarga.setDisable(true);
-
+    valorRecarga.clear(); 
     homeButton.setVisible(true);
 
   }
@@ -812,6 +815,7 @@ public class ScreenController implements Initializable {
     if (isNumeric == true) {
       int Valor = Integer.parseInt(aux);
       System.out.println("Valor: " + Valor);
+      valorRecarga.clear(); 
     } else {
       System.out.println("Digite Corretamente");
     }
