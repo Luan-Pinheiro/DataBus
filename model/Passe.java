@@ -12,10 +12,13 @@ public class Passe {
     private String Instituicao;
     private String numMatricula;
     private int carteiraTrabalho;
+    static String textAlerta = "Voce digitou incorretamente os campos: ";
 
-    public Passe(){};
-    
-    public Passe(String clienteCPF,String numMatricula,String instituicao, float saldo, String validade, String nome) {
+    public Passe() {
+    };
+
+    public Passe(String clienteCPF, String numMatricula, String instituicao, float saldo, String validade,
+            String nome) {
         cpfCliente = clienteCPF;
         this.saldo = saldo;
         NumCartao = geraNumCartao();
@@ -44,12 +47,68 @@ public class Passe {
         this.nomeCliente = nome;
     }
 
-    public String geraNumCartao(){
+    public String geraNumCartao() {
         // Gere um número aleatório de 7 dígitos
         Random random = new Random();
         int numeroAleatorio = random.nextInt(9000000) + 1000000;
         String numero = Integer.toString(numeroAleatorio);
         return numero;
+    }
+
+    public static String alertas() {
+        return textAlerta;
+    }
+
+    public static void setTextAlerta(String textAlerta) {
+        Passe.textAlerta = textAlerta;
+    }
+
+    public static Boolean confereRg(String rg) {
+        rg = rg.replaceAll("[.-]", "");
+        boolean valido = true;
+        if (rg.length() != 10) {
+            valido = false;
+        }
+        if (!rg.matches("[0-9]*")) {
+            valido = false;
+        }
+        if (valido == false) {
+            textAlerta += "RG, ";
+        }
+        return valido;
+    }
+
+    public static boolean confereCtps(String ctps) {
+        ctps = ctps.replaceAll("[/]", "");
+        boolean valido = true;
+        if (ctps.length() != 10) {
+            valido = false;
+        }
+        if (!ctps.matches("[0-9]*")) {
+            valido = false;
+        }
+        if (valido == false) {
+            textAlerta += "CTPS, ";
+        }
+        return valido;
+    }
+        public static String ctpsSemBarra(String ctps) {
+        ctps = ctps.replaceAll("[/]", "");
+        return ctps;
+    }
+
+    public static boolean confereNumMatricula(String nMatricula) {
+        boolean valido = true;
+        if (nMatricula.length() < 3 || nMatricula.length() > 10) { // assd
+            valido = false;
+        }
+        if (!nMatricula.matches("[0-9]*")) {
+            valido = false;
+        }
+        if (valido == false) {
+            textAlerta += "Numero Matricula, ";
+        }
+        return valido;
     }
 
     public String getCpfCliente() {
@@ -83,15 +142,19 @@ public class Passe {
     public int getCarteiraTrabalho() {
         return carteiraTrabalho;
     }
+
     public String getNomeCliente() {
         return nomeCliente;
     }
+
     public void setNomeCliente(String nome) {
         this.nomeCliente = nome;
     }
+
     public void setCpfCliente(String clienteCPF) {
         cpfCliente = clienteCPF;
     }
+
     public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
@@ -119,5 +182,5 @@ public class Passe {
     public void setCarteiraTrabalho(int carteiraTrabalho) {
         this.carteiraTrabalho = carteiraTrabalho;
     }
-    
+
 }

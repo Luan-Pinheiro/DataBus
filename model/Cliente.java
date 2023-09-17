@@ -87,6 +87,8 @@ public class Cliente {
     return valido;
   }
 
+  
+
   public static boolean confereEmail(String email) {
     boolean valido = false;
     if (email != null && email.length() > 0) {
