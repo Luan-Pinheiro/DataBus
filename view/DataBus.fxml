@@ -339,7 +339,7 @@
             <ImageView fx:id="imgSeePassword" fitHeight="24.0" fitWidth="24.0" layoutX="336.0" layoutY="391.0" onMouseClicked="#OnClick" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Group>
-      <Group fx:id="groupCliente">
+      <Group fx:id="groupCliente" visible="false">
          <children>
             <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
                <image>

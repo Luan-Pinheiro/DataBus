@@ -1,27 +1,43 @@
 package model;
 
-import controller.ScreenController;
+import model.*;
 
 public class Passe {
-  private String email;
-  private String senha;
-  private String dataNascimento;
-  private String telefone;
-  private String nome;
-  private String endereco;
-  private String cpf;
-  static String textAlerta = "Voce digitou incorretamente os campos: ";
+    private Cliente Cliente;
+    private float saldo;
+    private String NumCartao;
+    private String validade;
+    private String Rg;
+    private String Instituicao;
+    private String numMatricula;
+    private int carteiraTrabalho;
+    
+    public Passe(Cliente cliente, float saldo, String numCartao, String validade, String instituicao, String numMatricula) {
+        Cliente = cliente;
+        this.saldo = saldo;
+        NumCartao = numCartao;
+        this.validade = validade;
+        Instituicao = instituicao;
+        this.numMatricula = numMatricula;
+    }
 
-  ScreenController sc;
+    public Passe(Cliente cliente, float saldo, String numCartao, String validade, String rg) {
+        Cliente = cliente;
+        this.saldo = saldo;
+        NumCartao = numCartao;
+        this.validade = validade;
+        Rg = rg;
+    }
+
+    public Passe(Cliente cliente, float saldo, String numCartao, String validade, String rg, int carteiraTrabalho) {
+        Cliente = cliente;
+        this.saldo = saldo;
+        NumCartao = numCartao;
+        this.validade = validade;
+        Rg = rg;
+        this.carteiraTrabalho = carteiraTrabalho;
+    }
 
 
-  public Cliente(String email, String senha, String dataNascimento, String numeroTel, String nome, String endereco,String cpf) {
-    this.email = email;
-    this.senha = senha;
-    this.dataNascimento = dataNascimento;
-    this.telefone = numeroTel;
-    this.nome = nome;
-    this.endereco = endereco;
-    this.cpf = cpf;
-  }
+    
 }
