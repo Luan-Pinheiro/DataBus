@@ -391,8 +391,7 @@ public class ScreenController implements Initializable {
                 tipoPasse);
             cDao.createCliente(ClienteAtual);
 
-            passe = new Passe(ClienteAtual.getCpf(), 0, "6 meses", textRGCLT.getText(),
-                Integer.parseInt(textCTPSCLT.getText()), ClienteAtual.getNome());
+            passe = new Passe(ClienteAtual.getCpf(), 0, "6 meses", textRGCLT.getText(), Integer.parseInt(Passe.ctpsSemBarra(textCTPSCLT.getText())), ClienteAtual.getNome());
             pDao.createPasseClt(passe);
             clickHomeButton(event);
           } else {
@@ -703,12 +702,12 @@ public class ScreenController implements Initializable {
     });
     // Formatacao do CTPS
     textCTPSCLT.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{10}")) {
-        String formattedNumber = newValue.substring(0, 7) + "/" +
-            newValue.substring(7);
+      if (newValue.matches("\\d{9}")) {
+        String formattedNumber = newValue.substring(0, 6) + "/" +
+            newValue.substring(6);
         textCTPSCLT.setText(formattedNumber);
       }
-      if (textCTPSCLT.getLength() > 11) {
+      if (textCTPSCLT.getLength() > 10) {
         textCTPSCLT.setText(oldValue);
       }
     });

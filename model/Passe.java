@@ -81,7 +81,7 @@ public class Passe {
     public static boolean confereCtps(String ctps) {
         ctps = ctps.replaceAll("[/]", "");
         boolean valido = true;
-        if (ctps.length() != 10) {
+        if (ctps.length() != 9) {
             valido = false;
         }
         if (!ctps.matches("[0-9]*")) {
