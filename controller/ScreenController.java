@@ -255,7 +255,7 @@ public class ScreenController implements Initializable {
     if (!Cliente.confereEndereco(textEndereco.getText()))
       verify = false;
     if (!Cliente.confereData(textNascimento.getText()))
-      verify = false;
+      verify = false;  
     break;
 
     case 2:
@@ -273,7 +273,7 @@ public class ScreenController implements Initializable {
       verify = false;
     if (!Cliente.confereData(textNascimentoIDOSO.getText()))
       verify = false;
-    break;
+     
 
     case 3:
     if (!Cliente.confereNome(textNomeCLT.getText()))
@@ -290,11 +290,34 @@ public class ScreenController implements Initializable {
       verify = false;
     if (!Cliente.confereData(textNascimentoCLT.getText()))
       verify = false;
-    break;
+     
 
     }
     return verify;
   }
+
+  public boolean verificaCadastroPasse(){
+    boolean verify = true;
+    switch (tipoPasse){
+      case 1: 
+      if (!passe.confereNumMatricula(textMatricula.getText()))
+      verify = false;
+      break; 
+      case 2: 
+       if (!passe.confereRg(textRGIDOSO.getText()))
+    verify = false;  
+    break;
+
+      case 3: 
+       if (!passe.confereRg(textRGCLT.getText()))
+    verify = false;  
+       if (!passe.confereCtps(textCTPSCLT.getText()))
+       verify = false;  
+    break;
+    }
+    return  verify; 
+  }
+
 
   @FXML
   void clicouBotaoCadastrar(MouseEvent event) { // Botao Cadastrar
@@ -305,13 +328,19 @@ public class ScreenController implements Initializable {
           Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
         } 
         else {
-          ClienteAtual = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(),
+          if (verificaCadastroPasse()){
+                ClienteAtual = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(),
               textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText(), tipoPasse);
           cDao.createCliente(ClienteAtual);
           passe = new Passe(ClienteAtual.getCpf(), textMatricula.getText(), textInstituicao.getText(), 0, "6 meses",
               ClienteAtual.getNome());
           pDao.createPasseAluno(passe);
           clickHomeButton(event);
+          }
+          else{
+            showCaixaAlerta(passe.alertas());
+          Passe.setTextAlerta("Voce digitou incorretamente os campos: ");
+          }
         }
         break;
 
@@ -321,13 +350,19 @@ public class ScreenController implements Initializable {
           Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
         } 
         else {
-          ClienteAtual = new Cliente(textEmailIDOSO.getText(), textSenhaIDOSO.getText(), textNascimentoIDOSO.getText(),
+             if (verificaCadastroPasse()){
+                  ClienteAtual = new Cliente(textEmailIDOSO.getText(), textSenhaIDOSO.getText(), textNascimentoIDOSO.getText(),
 textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(), textCPFIDOSO.getText(), tipoPasse);
           cDao.createCliente(ClienteAtual);
 
           passe = new Passe(ClienteAtual.getCpf(), 0, "6 meses", textRGIDOSO.getText() ,ClienteAtual.getNome());
           pDao.createPasseIdoso(passe);
           clickHomeButton(event);
+          }
+          else{
+            showCaixaAlerta(passe.alertas());
+          Passe.setTextAlerta("Voce digitou incorretamente os campos: ");
+          }
         }
         break;
 
@@ -337,17 +372,26 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
           Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
         } 
         else {
-          ClienteAtual = new Cliente(textEmailCLT.getText(), textSenhaCLT.getText(), textNascimentoCLT.getText(),
+               if (verificaCadastroPasse()){
+                 ClienteAtual = new Cliente(textEmailCLT.getText(), textSenhaCLT.getText(), textNascimentoCLT.getText(),
 textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), textCPFCLT.getText(), tipoPasse);
           cDao.createCliente(ClienteAtual);
 
           passe = new Passe(ClienteAtual.getCpf(), 0, "6 meses", textRGCLT.getText() , Integer.parseInt(textCTPSCLT.getText()), ClienteAtual.getNome());
           pDao.createPasseClt(passe);
           clickHomeButton(event);
+          }
+          else{
+            showCaixaAlerta(passe.alertas());
+          Passe.setTextAlerta("Voce digitou incorretamente os campos: ");
+          }
+        }
+          
+          
         break;
     }
   }
-  }
+  
 
   @FXML
   void clickLogin(MouseEvent event) {
@@ -597,6 +641,43 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
         textCPFIDOSO.setText(oldValue);
       }
     });
+        // Formatacao dos RGs
+    textRGCLT.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{10}")) {
+        String formattedNumber = newValue.substring(0, 2) + "." +
+            newValue.substring(2, 5) + "." +
+            newValue.substring(5, 8) + "-" +
+            newValue.substring(8);
+        textRGCLT.setText(formattedNumber);
+      }
+      if (textRGCLT.getLength() > 13) {
+        textRGCLT.setText(oldValue);
+      }
+    });
+    textRGIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{10}")) {
+        String formattedNumber = newValue.substring(0, 2) + "." +
+            newValue.substring(2, 5) + "." +
+            newValue.substring(5, 8) + "-" +
+            newValue.substring(8);
+        textRGIDOSO.setText(formattedNumber);
+      }
+      if (textRGIDOSO.getLength() > 13) {
+        textRGIDOSO.setText(oldValue);
+      }
+    });
+    // Formatacao do CTPS
+    textCTPSCLT.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{10}")) {
+        String formattedNumber = newValue.substring(0, 7) + "/" +
+            newValue.substring(7);
+        textCTPSCLT.setText(formattedNumber);
+      }
+      if (textCTPSCLT.getLength() > 11) {
+        textCTPSCLT.setText(oldValue);
+      }
+    });
+
   }
 
   @FXML
