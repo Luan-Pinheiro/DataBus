@@ -3,6 +3,9 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javax.swing.plaf.basic.BasicComboBoxUI.ItemHandler;
+
 import data.ClienteDaoJDBC;
 import data.FuncionarioDaoJDBC;
 import data.PasseDaoJDBC;
@@ -247,6 +250,8 @@ public class ScreenController implements Initializable {
   private TextField editarTelefone;
   @FXML
   private TextField editarCliente;
+   @FXML
+  private ImageView IMGmodofuncionario;
 
   private Cliente ClienteAtual;
   private Passe passe;
@@ -475,6 +480,7 @@ public class ScreenController implements Initializable {
         if (verifyExist(cliente)) {
           Passe passeAUX = pDao.readPasse(cliente.getCpf(), cliente.getTipoPasse());
           passe = passeAUX;
+          ClienteAtual = cliente;
           ClienteLogado(cliente, passeAUX);
           break;
         }
@@ -561,6 +567,7 @@ public class ScreenController implements Initializable {
   @FXML
   void funcionarioMode(MouseEvent event) {
     funcionarioFlag = !funcionarioFlag;
+    IMGmodofuncionario.setVisible(!IMGmodofuncionario.isVisible());
   }
 
   public void ClienteLogado(Cliente cliente, Passe passe) {
@@ -573,6 +580,7 @@ public class ScreenController implements Initializable {
     homeButton.setVisible(true);
 
     nomeUsuario.setText("Olá, " + cliente.getNome());
+    saldoCliente.setText("R$ "+ passe.getSaldo());
 
     consultaNome.setText(cliente.getNome());
     consultaCPF.setText(cliente.getCpf());
@@ -1039,8 +1047,11 @@ public class ScreenController implements Initializable {
     boolean isNumeric = (aux != null && aux.matches("[0-9]+"));
     if (isNumeric == true) {
       int Valor = Integer.parseInt(aux);
-      System.out.println("Valor: " + Valor);
-      valorRecarga.clear(); 
+      passe.setSaldo(Valor);
+      pDao.updatePasse(passe, ClienteAtual.getTipoPasse());
+      valorRecarga.clear();
+      saldoCliente.setText("R$ "+ passe.getSaldo());
+      botaoVoltar(event);
     } else {
       showCaixaAlerta("Digite o Valor Corretamente, USE EXCLUSIVAMENTE OS NUMEROS");
     }
