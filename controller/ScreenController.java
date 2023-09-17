@@ -1,12 +1,10 @@
 package controller;
 
 import java.net.URL;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import data.ClienteDaoJDBC;
 import data.PasseDaoJDBC;
-import javafx.application.Platform;
 //import javafx.collections.FXCollections;
 //import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -273,13 +271,32 @@ public class ScreenController implements Initializable {
         break;
 
       case 2:
-        // System.out.println(Cliente.confereNome(textNomeCLT.getText()));
-        // System.out.println(Cliente.confereSenha(textSenhaCLT.getText()));
-        // System.out.println(Cliente.confereCpf(textCPFCLT.getText()));
-        // System.out.println(Cliente.confereEmail(textEmailCLT.getText()));
-        // System.out.println(cliente.confereNumero(textTelefoneCLT.getText()));
-        // System.out.println(Cliente.confereEndereco(textEnderecoCLT.getText()));
-        // System.out.println(cliente.confereData(textNascimentoCLT.getText()));
+        boolean flag = true;
+        if (!Cliente.confereNome(textNome.getText()))
+          flag = false;
+        if (!Cliente.confereSenha(textSenha2.getText()))
+          flag = false;
+        if (!Cliente.confereCpf(textCPF.getText()))
+          flag = false;
+        if (!Cliente.confereEmail(textEmail.getText()))
+          flag = false;
+        if (!Cliente.confereNumero(textTelefone.getText()))
+          flag = false;
+        if (!Cliente.confereEndereco(textEndereco.getText()))
+          flag = false;
+        if (!Cliente.confereData(textNascimento.getText()))
+          flag = false;
+        if (!flag) {
+          showCaixaAlerta(Cliente.alertas());
+          Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
+        } else {
+          estudante = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(),
+          textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText(),tipoPasse);
+          cDao.createCliente(estudante);
+          passe = new Passe(estudante.getCpf(),textMatricula.getText(),textInstituicao.getText(), 0 , "6 meses", estudante.getNome());
+          pDao.createPasseAluno(passe);
+          clickHomeButton(event);
+        }
         break;
 
       case 3:
@@ -372,7 +389,6 @@ public class ScreenController implements Initializable {
   void clickHomeButton(MouseEvent event) {
     groupCliente.setVisible(false);
     groupCliente.setDisable(true);
-
     groupInicialScreen.setVisible(true);
     groupInicialScreen.setDisable(false);
     groupESTUDANTE.setVisible(false);
@@ -380,7 +396,6 @@ public class ScreenController implements Initializable {
     groupCLT.setVisible(false);
     clearText();
     homeButton.setVisible(false);
-
     groupConsultaDados.setVisible(false);
     groupConsultaDados.setDisable(true);
     grupoRotas.setVisible(false);
@@ -553,28 +568,22 @@ public class ScreenController implements Initializable {
     saldoCliente.setVisible(false);
 
     botaoRecarregar.setDisable(true);
-    botaoRecarregar.setVisible(false);
-
-    botaoConsultarDados.setVisible(false);
     botaoConsultarDados.setDisable(true);
-
     botaoConsultarRotas.setDisable(true);
-    botaoConsultarRotas.setVisible(false);
 
+    botaoRecarregar.setVisible(false);
+    botaoConsultarDados.setVisible(false);
+    botaoConsultarRotas.setVisible(false);
     textOperacao.setVisible(false);
     
     groupConsultaDados.setVisible(true);
-    groupConsultaDados.setDisable(false);
  
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
-
-    homeButton.setVisible(false);
   }
 
   @FXML
   void consultarRotas(MouseEvent event) {
-
     saldoIMG.setVisible(false);
     saldoCliente.setVisible(false);
 
@@ -589,11 +598,7 @@ public class ScreenController implements Initializable {
 
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
-
     grupoRotas.setVisible(true);
-    grupoRotas.setDisable(false);
-
-    homeButton.setVisible(false);
   }
 
   @FXML
@@ -602,20 +607,16 @@ public class ScreenController implements Initializable {
     saldoCliente.setVisible(false);
 
     botaoRecarregar.setDisable(true);
-    botaoRecarregar.setVisible(false);
-
     botaoConsultarDados.setDisable(true);
     botaoConsultarRotas.setDisable(true);
 
+    botaoRecarregar.setVisible(false);
     botaoConsultarDados.setVisible(false);
     botaoConsultarRotas.setVisible(false);
-
     textOperacao.setVisible(false);
 
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
-
-    homeButton.setVisible(false);
   }
 
   @FXML
@@ -634,13 +635,9 @@ public class ScreenController implements Initializable {
 
     botaoVoltar.setDisable(true);
     botaoVoltar.setVisible(false);
-    
     grupoRotas.setVisible(false);
-    grupoRotas.setDisable(true);
     groupConsultaDados.setVisible(false);
     groupConsultaDados.setDisable(true);
-
-    homeButton.setVisible(true);
   }
 
 }

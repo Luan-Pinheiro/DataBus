@@ -34,6 +34,7 @@ public class Cliente {
     this.cpf = cpf;
     this.tipoPasse = tipoPasse;
   }
+  
 
   public static String alertas() {
     return textAlerta;
