@@ -332,15 +332,21 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
         break;
 
       case 3:
-        // System.out.println(Cliente.confereNome(textNomeIDOSO.getText()));
-        // System.out.println(Cliente.confereSenha(textSenhaIDOSO.getText()));
-        // System.out.println(Cliente.confereCpf(textCPFIDOSO.getText()));
-        // System.out.println(Cliente.confereEmail(textEmailIDOSO.getText()));
-        // System.out.println(cliente.confereNumero(textTelefoneIDOSO.getText()));
-        // System.out.println(Cliente.confereEndereco(textEnderecoIDOSO.getText()));
-        // System.out.println(cliente.confereData(textNascimentoIDOSO.getText()));
+        if (!verificaCadastro()) {
+          showCaixaAlerta(Cliente.alertas());
+          Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
+        } 
+        else {
+          ClienteAtual = new Cliente(textEmailCLT.getText(), textSenhaCLT.getText(), textNascimentoCLT.getText(),
+textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), textCPFCLT.getText(), tipoPasse);
+          cDao.createCliente(ClienteAtual);
+
+          passe = new Passe(ClienteAtual.getCpf(), 0, "6 meses", textRGCLT.getText() , Integer.parseInt(textCTPSCLT.getText()), ClienteAtual.getNome());
+          pDao.createPasseClt(passe);
+          clickHomeButton(event);
         break;
     }
+  }
   }
 
   @FXML
@@ -376,7 +382,7 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
     consultaTelefone.setText(cliente.getTelefone());
     consultaEmail.setText(cliente.getemail());
     consultaSenha.setText(cliente.getSenha());
-    consultaCartao.setText(passe.geraNumCartao());
+    consultaCartao.setText(passe.getNumCartao());
 
     switch (cliente.getTipoPasse()) {
       case 1:
@@ -632,7 +638,7 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
 
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
-    
+
     grupoRotas.setVisible(true);
     grupoRotas.setDisable(false);
 
