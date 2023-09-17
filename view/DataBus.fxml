@@ -406,13 +406,17 @@
                   <Image url="@../assets/backgroundCliente.png" />
                </image>
             </ImageView>
-            <TableView fx:id="tbwRotas" layoutX="51.0" layoutY="164.0" prefHeight="404.0" prefWidth="364.0" stylesheets="@styles.css">
+            <TableView fx:id="tbwRotas" layoutX="39.0" layoutY="174.0" prefHeight="384.0" prefWidth="393.0" stylesheets="@styles.css">
               <columns>
-                <TableColumn editable="false" prefWidth="75.0" sortable="false" text="ID Rota" />
-                <TableColumn editable="false" prefWidth="90.0" sortable="false" text="Ponto Saída" />
-                  <TableColumn editable="false" prefWidth="99.0" sortable="false" text="Ponto Chegada" />
-                  <TableColumn editable="false" prefWidth="99.0" text="Hoŕario" />
+                <TableColumn fx:id="codRota" editable="false" prefWidth="51.0" resizable="false" sortable="false" text="ID Rota" />
+                <TableColumn fx:id="pSaida" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="Ponto Saída" />
+                  <TableColumn fx:id="pChegada" editable="false" prefWidth="110.0" resizable="false" sortable="false" text="Ponto Chegada" />
+                  <TableColumn fx:id="hour" editable="false" prefWidth="60.0" resizable="false" text="Partida" />
+                  <TableColumn fx:id="hour1" editable="false" prefWidth="60.0" resizable="false" text="Chegada" />
               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
          </children>
       </Group>
@@ -483,6 +487,28 @@
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
             </Label>
+         </children>
+      </Group>
+      <Group fx:id="groupRecarga" visible="false">
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/backgroundRecarga.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="botaoRecarregou" fitHeight="37.0" fitWidth="171.0" layoutX="147.0" layoutY="398.0" onMouseClicked="#clickRecarregou" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/botaoRecarregarValor.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <TextField fx:id="valorRecarga" layoutX="138.0" layoutY="343.0" prefHeight="32.0" prefWidth="197.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
          </children>
       </Group>
       <ImageView fx:id="botaoVoltar" fitHeight="36.0" fitWidth="50.0" layoutX="217.0" layoutY="582.0" onMouseClicked="#botaoVoltar" pickOnBounds="true" preserveRatio="true" visible="false">
