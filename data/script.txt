@@ -6,7 +6,8 @@ CREATE TABLE if not exists databus.cliente(
                        dtNasc varchar(10),  
                        telefone varchar(14),  
                        nome varchar(50),
-                       endereco varchar(70),  
+                       endereco varchar(70),
+					   tipoPasse int,
                        cpf varchar(14) NOT NULL PRIMARY KEY);
 
 CREATE TABLE if not exists databus.passeAluno( 
@@ -14,26 +15,26 @@ CREATE TABLE if not exists databus.passeAluno(
                        matricula varchar(15),    
                        instituicao varchar(70),  
                        numPasse varchar(7) NOT NULL PRIMARY KEY,
-					              saldo float,
-					              validade varchar(10),
-					              nome varchar(50));
+					   saldo float,
+					   validade varchar(10),
+					   nome varchar(50));
 
 CREATE TABLE if not exists databus.passeIdoso(
-					              cpf varchar(14) NOT NULL,
+					   cpf varchar(14) NOT NULL,
                        rg varchar(13) NOT NULL,
                        numPasse varchar(7) NOT NULL PRIMARY KEY,
-					              saldo float,
-					              validade varchar(10),
-					              nome varchar(50));
+					   saldo float,
+					   validade varchar(10),
+					   nome varchar(50));
 					   
 CREATE TABLE if not exists databus.passeClt(
-					              cpf varchar(14) NOT NULL ,
-					              rg varchar(13) NOT NULL, 
+					   cpf varchar(14) NOT NULL ,
+					   rg varchar(13) NOT NULL, 
                        ctps integer NOT NULL,  
                        numPasse varchar(7) NOT NULL PRIMARY KEY,
-					              saldo float,
-					              validade varchar(10),
-					              nome varchar(50)); 
+					   saldo float,
+					   validade varchar(10),
+					   nome varchar(50)); 
 
 CREATE TABLE if not exists databus.dadosPeriodicos(
                        instituicao varchar(70),  
@@ -48,9 +49,9 @@ CREATE TABLE if not exists databus.funcionario(
 
 CREATE TABLE if not exists databus.rotas(
                        codigoRota  varchar(3) NOT NULL PRIMARY KEY,
-					             ponto_partida varchar(50),
+					   ponto_partida varchar(50),
                        ponto_chegada varchar(50),
-					             horario_saida varchar(5),
+					   horario_saida varchar(5),
                        horario_chegada varchar(5)); 
 
 ALTER TABLE databus.passeAluno ADD FOREIGN KEY(cpf) REFERENCES databus.cliente(cpf);

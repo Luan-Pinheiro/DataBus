@@ -3,10 +3,14 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javax.naming.ldap.Rdn;
+
 import data.ClienteDaoJDBC;
 import data.PasseDaoJDBC;
-//import javafx.collections.FXCollections;
-//import javafx.collections.ObservableList;
+import data.RotaDaoJDBC;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -14,8 +18,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -143,10 +149,21 @@ public class ScreenController implements Initializable {
   private Label saldoCliente;
   @FXML
   private ImageView saldoIMG;
+  //Tabela de rotas
   @FXML
   private TableView<Rota> tbwRotas;
-
+  @FXML
+  private TableColumn<Rota, String> codRota;
+  @FXML
+  private TableColumn<Rota, String> pSaida;
+  @FXML
+  private TableColumn<Rota, String> pChegada;
+  @FXML
+  private TableColumn<Rota, String> hour;
+  @FXML
+  private TableColumn<Rota, String> hour1;
   // Labels consulta dados
+
   @FXML
   private Label consultaCPF;
   @FXML
@@ -361,6 +378,7 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
   }
 
   public void ClienteLogado(Cliente cliente, Passe passe) {
+    showRoutesTable();
     groupInicialScreen.setVisible(false);
     groupInicialScreen.setDisable(true);
     groupCliente.setVisible(true);
@@ -399,12 +417,51 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
         break;
     }
   }
+  /*
+  columnServico.setCellValueFactory(new PropertyValueFactory<>("servico")); // Setando o tipo de valor da coluna do TableView
+  columnData.setCellValueFactory(new PropertyValueFactory<>("data")); // Setando o tipo de valor da coluna do TableView
+  columnNome.setCellValueFactory(new PropertyValueFactory<>("nome")); // Setando o tipo de valor da coluna do TableView
+  columnHorario.setCellValueFactory(new PropertyValueFactory<>("Hora")); // Setando o tipo de valor da coluna do TableView
+
+  trocaTelas.addOnChangeScreenListener(new trocaTelas.onChangeScreen() { // Adiciona um listener na Main
+    @Override
+    public void onScreenChanged(String newScreen, Object userData, ArrayList<Agenda> array) { // Cadastra o evento de troca de tela e carrega os parâmetros necessarios
+      if (newScreen.equals("agendado")) { // Verificacao se esta na tela correta
+        ObservableList<Agenda> Agendados = FXCollections.observableList(array); // Passando o Array para um ObservableList
+        tableView.setItems(Agendados); // Setando no tableView
+      } // Fim do If equals
+    } // Fim do onScreenChanged
+  }); // addOnChange
+} // Fim Initialize
+   */
+  public void showRoutesTable(){
+    RotaDaoJDBC RDao = new RotaDaoJDBC();
+    ArrayList<Rota> rotas = RDao.getAllRotas();
+    System.out.println("TAMNHO DO ARRAY DE ROTAS: " + rotas.size());
+    //criando lista observável para ser exibida no table view
+    ObservableList<Rota> auxList = FXCollections.observableArrayList(rotas);
+    codRota.setCellValueFactory(new PropertyValueFactory<>("codigoRota")); 
+    pSaida.setCellValueFactory(new PropertyValueFactory<>("pontoPartida"));
+    pChegada.setCellValueFactory(new PropertyValueFactory<>("pontoChegada"));
+    hour.setCellValueFactory(new PropertyValueFactory<>("horarioSaida"));
+    hour1.setCellValueFactory(new PropertyValueFactory<>("horarioChegada")); 
+    for (Rota rota : rotas) {
+      Rota rotaAux = RDao.readRota(rota.getCodigoRota());
+      //Inserindo na lista
+      auxList.add(rotaAux);
+    }
+    //Inserindo na tabela
+    tbwRotas.setItems(auxList);
+  }
 
   public boolean verifyExist(Cliente cliente) {
     // VERIFICAR PSWDF E TEXTFILD DA SENHA - cunsultar cpf atraves
     String email = textUsuario.getText();
     if (pwdFSenha.getLength() < textSenha.getLength()) {
       pwdFSenha.setText(textSenha.getText());
+    }
+    else if (textSenha.getLength() < pwdFSenha.getLength()) {
+      textSenha.setText(pwdFSenha.getText());
     }
     String senha = pwdFSenha.getText();
     emailFlag = (cDao.queryAccount(cliente.getCpf()).getemail().equals(email)) ? true : false;
@@ -637,6 +694,8 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
     grupoRotas.setDisable(false);
 
     homeButton.setVisible(false);
+
+    
   }
 
   @FXML
@@ -682,6 +741,6 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
     groupConsultaDados.setDisable(true);
 
     homeButton.setVisible(true);
-  }
 
+  }
 }

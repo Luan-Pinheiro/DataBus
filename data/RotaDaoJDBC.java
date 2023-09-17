@@ -5,9 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import model.Cliente;
-import model.Passe;
 import model.Rota;
 
 public class RotaDaoJDBC implements iRotaDao{
@@ -67,7 +64,7 @@ public class RotaDaoJDBC implements iRotaDao{
 
   @Override
   public Rota readRota(String codRota) {
-    String sqlQuery = "select * from databus.cliente where codigoRota=?";
+    String sqlQuery = "select * from databus.rotas where codigoRota=?";
     PreparedStatement pst;
     Connection connection;
     ResultSet resultSet;
@@ -98,7 +95,7 @@ public class RotaDaoJDBC implements iRotaDao{
 
   @Override
   public void updateRota(Rota rota) {
-    String sqlQuery = "update databus.cliente set codigoRota=?, ponto_partida=?, ponto_chegada=?, horario_saida=?, horario_chegada=? where codigoRota=?";
+    String sqlQuery = "update databus.rotas set codigoRota=?, ponto_partida=?, ponto_chegada=?, horario_saida=?, horario_chegada=? where codigoRota=?";
     PreparedStatement pst;
     Connection connection;
     try {
@@ -118,7 +115,7 @@ public class RotaDaoJDBC implements iRotaDao{
   }
   @Override
   public void deleteRota(Rota rota) {
-    String sqlQuery = "delete from databus.cliente where codigoRota=?";
+    String sqlQuery = "delete from databus.rotas where codigoRota=?";
     PreparedStatement pst;
     Connection connection;
     try {
