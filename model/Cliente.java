@@ -16,7 +16,6 @@ public class Cliente {
   private String endereco;
   private String cpf;
   private int tipoPasse;
-
   static String textAlerta = "Voce digitou incorretamente os campos: ";
 
   ScreenController sc;

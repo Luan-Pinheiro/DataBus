@@ -551,10 +551,10 @@ public class ScreenController implements Initializable {
     textCPFIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue.matches("\\d{11}")) {
         String formattedNumber = newValue.substring(0, 3) + "." +
-            newValue.substring(3, 6) + "." +
-            newValue.substring(6, 9) + "-" +
-            newValue.substring(9);
-        textCPFIDOSO.setText(formattedNumber);
+          newValue.substring(3, 6) + "." +
+          newValue.substring(6, 9) + "-" +
+          newValue.substring(9);
+          textCPFIDOSO.setText(formattedNumber);
       }
       if (textCPFIDOSO.getLength() > 14) {
         textCPFIDOSO.setText(oldValue);
