@@ -1,10 +1,12 @@
 package controller;
 
 import java.net.URL;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import data.ClienteDaoJDBC;
 import data.PasseDaoJDBC;
+import javafx.application.Platform;
 //import javafx.collections.FXCollections;
 //import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -370,6 +372,7 @@ public class ScreenController implements Initializable {
   void clickHomeButton(MouseEvent event) {
     groupCliente.setVisible(false);
     groupCliente.setDisable(true);
+
     groupInicialScreen.setVisible(true);
     groupInicialScreen.setDisable(false);
     groupESTUDANTE.setVisible(false);
@@ -377,6 +380,7 @@ public class ScreenController implements Initializable {
     groupCLT.setVisible(false);
     clearText();
     homeButton.setVisible(false);
+
     groupConsultaDados.setVisible(false);
     groupConsultaDados.setDisable(true);
     grupoRotas.setVisible(false);
@@ -549,22 +553,28 @@ public class ScreenController implements Initializable {
     saldoCliente.setVisible(false);
 
     botaoRecarregar.setDisable(true);
-    botaoConsultarDados.setDisable(true);
-    botaoConsultarRotas.setDisable(true);
-
     botaoRecarregar.setVisible(false);
+
     botaoConsultarDados.setVisible(false);
+    botaoConsultarDados.setDisable(true);
+
+    botaoConsultarRotas.setDisable(true);
     botaoConsultarRotas.setVisible(false);
+
     textOperacao.setVisible(false);
     
     groupConsultaDados.setVisible(true);
+    groupConsultaDados.setDisable(false);
  
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
+
+    homeButton.setVisible(false);
   }
 
   @FXML
   void consultarRotas(MouseEvent event) {
+
     saldoIMG.setVisible(false);
     saldoCliente.setVisible(false);
 
@@ -579,7 +589,11 @@ public class ScreenController implements Initializable {
 
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
+
     grupoRotas.setVisible(true);
+    grupoRotas.setDisable(false);
+
+    homeButton.setVisible(false);
   }
 
   @FXML
@@ -588,16 +602,20 @@ public class ScreenController implements Initializable {
     saldoCliente.setVisible(false);
 
     botaoRecarregar.setDisable(true);
+    botaoRecarregar.setVisible(false);
+
     botaoConsultarDados.setDisable(true);
     botaoConsultarRotas.setDisable(true);
 
-    botaoRecarregar.setVisible(false);
     botaoConsultarDados.setVisible(false);
     botaoConsultarRotas.setVisible(false);
+
     textOperacao.setVisible(false);
 
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
+
+    homeButton.setVisible(false);
   }
 
   @FXML
@@ -616,9 +634,13 @@ public class ScreenController implements Initializable {
 
     botaoVoltar.setDisable(true);
     botaoVoltar.setVisible(false);
+    
     grupoRotas.setVisible(false);
+    grupoRotas.setDisable(true);
     groupConsultaDados.setVisible(false);
     groupConsultaDados.setDisable(true);
+
+    homeButton.setVisible(true);
   }
 
 }
