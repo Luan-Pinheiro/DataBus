@@ -41,6 +41,8 @@ public class ScreenController implements Initializable {
   @FXML
   private ImageView botaoLogin;
   @FXML
+  private ImageView botaoSalvar;
+  @FXML
   private ImageView passeCLT;
   @FXML
   private ImageView passeIdoso;
@@ -56,6 +58,8 @@ public class ScreenController implements Initializable {
   private ImageView botaoGerenciarRotas;
   @FXML
   private ImageView botaoFuncionario;
+  @FXML
+  private ImageView botaoBuscar;
   @FXML
   private Group groupCLT;
   @FXML
@@ -160,6 +164,8 @@ public class ScreenController implements Initializable {
   @FXML
   private Group groupBuscarCliente;
   @FXML
+  private Group groupGerenciarCliente;
+  @FXML
   private Label saldoCliente;
   @FXML
   private ImageView saldoIMG;
@@ -229,6 +235,18 @@ public class ScreenController implements Initializable {
   private TextField valorRecarga;
   @FXML
   private TextField funcionarioBuscarCliente;
+  @FXML
+  private TextField editarEmail;
+  @FXML
+  private TextField editarEndereco;
+  @FXML
+  private TextField editarNome;
+  @FXML
+  private TextField editarSenha;
+  @FXML
+  private TextField editarTelefone;
+  @FXML
+  private TextField editarCliente;
 
   private Cliente ClienteAtual;
   private Passe passe;
@@ -465,7 +483,6 @@ public class ScreenController implements Initializable {
       }
     }
   }
-  
 
   @FXML
   void buscarCliente(MouseEvent event) {
@@ -474,11 +491,11 @@ public class ScreenController implements Initializable {
 
     groupBuscarCliente.setVisible(true);
 
+    botaoBuscar.setVisible(true);
+    botaoBuscar.setDisable(false);
+
     botaoVoltar.setVisible(true);
     botaoVoltar.setDisable(false);
-    if(!funcionarioBuscarCliente.getText().isEmpty()){
-      showClient(funcionarioBuscarCliente.getText());
-    }
   }
 
   @FXML
@@ -488,11 +505,29 @@ public class ScreenController implements Initializable {
 
   @FXML
   void gerenciarCliente(MouseEvent event) {
+    groupFuncionario.setVisible(false);
+    groupFuncionario.setDisable(true);
+
+    groupGerenciarCliente.setVisible(true);
+    groupGerenciarCliente.setDisable(false);
 
   }
 
   @FXML
   void gerenciarRotas(MouseEvent event) {
+
+  }
+
+  @FXML
+  void buscarCpfCliente(MouseEvent event) {
+    //if(!funcionarioBuscarCliente.getText().isEmpty()){
+      System.out.println("BUSCOU A PICA");
+      //showClient(funcionarioBuscarCliente.getText());
+    //}
+  }
+
+  @FXML
+  void salvarDadosEditados(MouseEvent event) {
 
   }
 

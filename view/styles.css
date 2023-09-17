@@ -24,7 +24,15 @@
   #textTelefoneCLT,
   #textEmailCLT, 
   #valorRecarga,
-  #funcionarIoBuscarCliente{
+  #funcionarIoBuscarCliente
+  {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+  }
+
+  #editarEmail, #editarEndereco, #editarNome, 
+  #editarSenha, #editarTelefone,
+  #funcionarIoEditarCliente {
     -fx-text-fill: white;
     -fx-background-color: transparent;
   }
