@@ -399,7 +399,7 @@
             </Label>
          </children>
       </Group>
-      <Group>
+      <Group fx:id="grupoRotas" visible="false">
          <children>
             <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -424,7 +424,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="botaoVoltar" fitHeight="36.0" fitWidth="50.0" onMouseClicked="#botaoVoltar" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="botaoVoltar" fitHeight="36.0" fitWidth="50.0" layoutX="217.0" layoutY="582.0" onMouseClicked="#botaoVoltar" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../assets/botaoVoltar.png" />
          </image>

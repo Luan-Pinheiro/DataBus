@@ -133,6 +133,8 @@ public class ScreenController implements Initializable {
   @FXML
   private Group groupCliente;
   @FXML
+  private Group grupoRotas;
+  @FXML
   private Label saldoCliente;
   @FXML
   private ImageView saldoIMG;
@@ -506,6 +508,7 @@ public class ScreenController implements Initializable {
 
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
+    grupoRotas.setVisible(true);
   }
 
   @FXML
@@ -542,6 +545,7 @@ public class ScreenController implements Initializable {
 
     botaoVoltar.setDisable(true);
     botaoVoltar.setVisible(false);
+    grupoRotas.setVisible(false);
   }
 
 }
