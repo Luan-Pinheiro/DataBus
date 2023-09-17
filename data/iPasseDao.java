@@ -4,7 +4,6 @@ import model.*;
 
 public interface iPasseDao {
     ArrayList<Passe> getAllPasses();
-    void createPasse (Passe passe);
     void createPasseAluno (Passe passe);
     void createPasseIdoso (Passe passe);
     void createPasseClt (Passe passe);

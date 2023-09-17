@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import data.ClienteDaoJDBC;
+import data.PasseDaoJDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -170,10 +171,12 @@ public class ScreenController implements Initializable {
   private Label consultaTelefone;
 
   private Cliente estudante;
+  private Passe passe;
   private boolean emailFlag = false;
   private boolean senhaFlag = false;
   private boolean login = false;
   ClienteDaoJDBC cDao = new ClienteDaoJDBC();
+  PasseDaoJDBC pDao = new PasseDaoJDBC();
 
   private boolean flag = true;
   Image openedEye = new Image("./assets/eye.png");
@@ -257,10 +260,11 @@ public class ScreenController implements Initializable {
           Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
         } else {
           estudante = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(),
-              textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText());
+          textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText());
           cDao.createCliente(estudante);
+          passe = new Passe(estudante.getCpf(),textMatricula.getText(),textInstituicao.getText(), 0 , "6 meses");
+          pDao.createPasseAluno(passe);
           clickHomeButton(event);
-          System.out.println("ENTROU AQ NO CADASTRO CARAIU");
         }
         break;
 
@@ -321,8 +325,7 @@ public class ScreenController implements Initializable {
 
     switch (tipoPasse) {
       case 1:
-        consultaMatricula.setText("202101801");
-        consultaInstituicao.setText("uesc fainor");
+        
         break;
       case 2:
         consultaRG.setText("1639439102");

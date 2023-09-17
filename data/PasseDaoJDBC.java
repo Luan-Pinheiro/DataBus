@@ -41,29 +41,8 @@ public class PasseDaoJDBC implements iPasseDao {
   }
 
   @Override
-  public void createPasse(Passe passe) {
-    String sqlQuery = "insert into databus.passe (numCartao,saldo,validade,cpf,nome) values (?,?,?,?,?);";
-    PreparedStatement pst;
-    Connection connection;
-    try {
-      connection = new ConnectionFactory().getConnection();
-      pst = connection.prepareStatement(sqlQuery);
-      pst.setString(1, passe.getNumCartao());
-      pst.setFloat(2, passe.getSaldo());
-      pst.setString(3, passe.getValidade());
-      pst.setString(4, passe.getCpfCliente());
-      pst.setString(5, passe.getNomeCliente());
-      pst.execute();
-      pst.close();
-      connection.close();
-    } catch (SQLException ex) {
-      ex.printStackTrace();
-    }
-  }
-
-  @Override
   public void createPasseAluno(Passe passe) {
-    String sqlQuery = "insert into databus.passeAluno (cpf,matricula,instituicao,numPasse) values (?,?,?,?);";
+    String sqlQuery = "insert into databus.passeAluno (cpf,matricula,instituicao,numPasse,saldo,validade,nome) values (?,?,?,?,?,?,?);";
     PreparedStatement pst;
     Connection connection;
     try {
@@ -73,6 +52,9 @@ public class PasseDaoJDBC implements iPasseDao {
       pst.setString(2, passe.getNumMatricula());
       pst.setString(3, passe.getInstituicao());
       pst.setString(4, passe.getNumCartao());
+      pst.setFloat(5, passe.getSaldo());
+      pst.setString(6, passe.getValidade());
+      pst.setString(7, passe.getNomeCliente());
       pst.execute();
       pst.close();
       connection.close();
@@ -83,14 +65,18 @@ public class PasseDaoJDBC implements iPasseDao {
 
   @Override
   public void createPasseIdoso(Passe passe) {
-    String sqlQuery = "insert into databus.passeIdoso (rg,numPasse) values (?,?);";
+    String sqlQuery = "insert into databus.passeIdoso (cpf,rg,numPasse,saldo,validade,nome) values (?,?,?,?,?,?);";
     PreparedStatement pst;
     Connection connection;
     try {
       connection = new ConnectionFactory().getConnection();
       pst = connection.prepareStatement(sqlQuery);
-      pst.setString(1, passe.getRg());
-      pst.setString(2, passe.getNumCartao());
+      pst.setString(1, passe.getCpfCliente());
+      pst.setString(2, passe.getRg());
+      pst.setString(3, passe.getNumCartao());
+      pst.setFloat(4, passe.getSaldo());
+      pst.setString(5, passe.getValidade());
+      pst.setString(6, passe.getNomeCliente());
       pst.execute();
       pst.close();
       connection.close();
@@ -101,15 +87,19 @@ public class PasseDaoJDBC implements iPasseDao {
 
   @Override
   public void createPasseClt(Passe passe) {
-    String sqlQuery = "insert into databus.passeClt (cpf,ctps,numPasse) values (?,?,?);";
+    String sqlQuery = "insert into databus.passeClt (cpf,rg,ctps,numPasse,saldo,validade,nome) values (?,?,?,?,?,?,?);";
     PreparedStatement pst;
     Connection connection;
     try {
       connection = new ConnectionFactory().getConnection();
       pst = connection.prepareStatement(sqlQuery);
       pst.setString(1, passe.getCpfCliente());
-      pst.setInt(2, passe.getCarteiraTrabalho());
-      pst.setString(3, passe.getNumCartao());
+      pst.setString(2, passe.getRg());
+      pst.setInt(3, passe.getCarteiraTrabalho());
+      pst.setString(4, passe.getNumCartao());
+      pst.setFloat(5, passe.getSaldo());
+      pst.setString(6, passe.getValidade());
+      pst.setString(7, passe.getNomeCliente());
       pst.execute();
       pst.close();
       connection.close();

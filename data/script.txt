@@ -8,28 +8,32 @@ CREATE TABLE if not exists databus.cliente(
                        nome varchar(50),
                        endereco varchar(70),  
                        cpf varchar(14) NOT NULL PRIMARY KEY);
-	
-CREATE TABLE if not exists databus.passe(
-                       numCartao varchar(7) NOT NULL PRIMARY KEY,  
-                       saldo float,  
-                       validade varchar(10),  
-                       idCliente varchar(14),
-                       nome varchar(50)); 
 
 CREATE TABLE if not exists databus.passeAluno( 
-                       cpf varchar(14) NOT NULL PRIMARY KEY,  
+                       cpf varchar(14) NOT NULL, 
                        matricula varchar(15),    
                        instituicao varchar(70),  
-                       numPasse varchar(7));
+                       numPasse varchar(7) NOT NULL PRIMARY KEY,
+					   saldo float,
+					   validade varchar(10),
+					   nome varchar(50));
 
 CREATE TABLE if not exists databus.passeIdoso(
-                       rg varchar(13) NOT NULL PRIMARY KEY,  
-                       numPasse varchar(7));
+					   cpf varchar(14) NOT NULL,
+                       rg varchar(13) NOT NULL,
+                       numPasse varchar(7) NOT NULL PRIMARY KEY,
+					   saldo float,
+					   validade varchar(10),
+					   nome varchar(50));
 					   
 CREATE TABLE if not exists databus.passeClt(
-					   cpf varchar(14) NOT NULL PRIMARY KEY, 
+					   cpf varchar(14) NOT NULL ,
+					   rg varchar(13) NOT NULL, 
                        ctps integer NOT NULL,  
-                       numPasse varchar(7)); 
+                       numPasse varchar(7) NOT NULL PRIMARY KEY,
+					   saldo float,
+					   validade varchar(10),
+					   nome varchar(50)); 
 
 CREATE TABLE if not exists databus.dadosPeriodicos(
                        instituicao varchar(70),  
@@ -49,11 +53,9 @@ CREATE TABLE if not exists databus.rotas(
 					   horario_saida varchar(5),
                        horario_chegada varchar(5)); 
 
-					   
-ALTER TABLE databus.passe ADD FOREIGN KEY(idCliente) REFERENCES databus.cliente(cpf);
-ALTER TABLE databus.passeAluno ADD FOREIGN KEY(numPasse) REFERENCES databus.passe(numCartao);
-ALTER TABLE databus.passeIdoso ADD FOREIGN KEY(numPasse) REFERENCES databus.passe(numCartao);
-ALTER TABLE databus.passeClt ADD FOREIGN KEY(numPasse) REFERENCES databus.passe(numCartao);
+ALTER TABLE databus.passeAluno ADD FOREIGN KEY(cpf) REFERENCES databus.cliente(cpf);
+ALTER TABLE databus.passeIdoso ADD FOREIGN KEY(cpf) REFERENCES databus.cliente(cpf);
+ALTER TABLE databus.passeClt ADD FOREIGN KEY(cpf) REFERENCES databus.cliente(cpf);
 
 insert into databus.rotas
 values ('D39','Candeias','Boa Vista','11:00','12:00');

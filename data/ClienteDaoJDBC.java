@@ -32,6 +32,7 @@ public class ClienteDaoJDBC implements iClienteDao {
           cliente.setEmail(resultSet.getString("email"));
           cliente.setNome(resultSet.getString("nome"));
           cliente.setSenha(resultSet.getString("senha"));
+          cliente.setTipoPasse(resultSet.getInt("tipoPasse"));
           clientes.add(cliente);
         }
         resultSet.close();
@@ -46,7 +47,7 @@ public class ClienteDaoJDBC implements iClienteDao {
 
   @Override
   public void createCliente(Cliente cliente){
-    String sqlQuery = "insert into databus.cliente (senha,email,dtNasc,telefone,nome,endereco,cpf) values (?,?,?,?,?,?,?);";
+    String sqlQuery = "insert into databus.cliente (senha,email,dtNasc,telefone,nome,endereco,cpf,tipoPasse) values (?,?,?,?,?,?,?,?);";
     PreparedStatement pst;
     Connection connection;
     try {
@@ -59,6 +60,7 @@ public class ClienteDaoJDBC implements iClienteDao {
       pst.setString(5, cliente.getNome());
       pst.setString(6, cliente.getEndereco());
       pst.setString(7, cliente.getCpf());
+      pst.setInt(8, cliente.getTipoPasse());
       pst.execute();
       pst.close();
       connection.close();
@@ -88,6 +90,7 @@ public class ClienteDaoJDBC implements iClienteDao {
           cliente.setSenha(resultSet.getString("senha"));
           cliente.setTelefone(resultSet.getString("telefone"));
           cliente.setEndereco(resultSet.getString("endereco"));
+          cliente.setTipoPasse(resultSet.getInt("tipoPasse"));
         }
         resultSet.close();
         pst.close();

@@ -17,10 +17,11 @@ public class Passe {
 
     public Passe(){};
     
-    public Passe(String clienteCPF, float saldo, String validade, String instituicao, String numMatricula) {
+    public Passe(String clienteCPF,String numMatricula,String instituicao, float saldo, String validade) {
         cpfCliente = clienteCPF;
         this.saldo = saldo;
         NumCartao = geraNumCartao();
+        setNomeCliente(clienteCPF);
         this.validade = validade;
         Instituicao = instituicao;
         this.numMatricula = numMatricula;
@@ -87,7 +88,7 @@ public class Passe {
     }
     public void setNomeCliente(String clienteCPF) {
         ClienteDaoJDBC cDao = new ClienteDaoJDBC();
-        this.nomeCliente = cDao.queryName(nomeCliente).getNome();
+        this.nomeCliente = cDao.queryName(clienteCPF).getNome();
     }
     public void setCpfCliente(String clienteCPF) {
         cpfCliente = clienteCPF;

@@ -15,6 +15,8 @@ public class Cliente {
   private String nome;
   private String endereco;
   private String cpf;
+  private int tipoPasse;
+
   static String textAlerta = "Voce digitou incorretamente os campos: ";
 
   ScreenController sc;
@@ -22,7 +24,7 @@ public class Cliente {
   public Cliente() {
   };
 
-  public Cliente(String email, String senha, String dataNascimento, String numeroTel, String nome, String endereco,String cpf) {
+  public Cliente(String email, String senha, String dataNascimento, String numeroTel, String nome, String endereco,String cpf, int tipoPasse) {
     this.email = email;
     this.senha = senha;
     this.dataNascimento = dataNascimento;
@@ -30,6 +32,7 @@ public class Cliente {
     this.nome = nome;
     this.endereco = endereco;
     this.cpf = cpf;
+    this.tipoPasse = tipoPasse;
   }
 
   public static String alertas() {
@@ -144,6 +147,12 @@ public class Cliente {
   }
 
   // Getters e Setters
+  public int getTipoPasse() {
+    return tipoPasse;
+  }
+  public void setTipoPasse(int tipoPasse) {
+    this.tipoPasse = tipoPasse;
+  }
   public void setEndereco(String endereco) {
     this.endereco = endereco;
   }
