@@ -170,7 +170,7 @@ boolean valido = true;
     }
 
     public void setSaldo(float saldo) {
-        this.saldo = saldo;
+        this.saldo += saldo;
     }
 
     public void setNumCartao(String numCartao) {

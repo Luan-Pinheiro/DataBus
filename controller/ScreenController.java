@@ -565,6 +565,7 @@ public class ScreenController implements Initializable {
     homeButton.setVisible(true);
 
     nomeUsuario.setText("Olá, " + cliente.getNome());
+    saldoCliente.setText("R$ "+ passe.getSaldo());
 
     consultaNome.setText(cliente.getNome());
     consultaCPF.setText(cliente.getCpf());
@@ -1018,8 +1019,10 @@ public class ScreenController implements Initializable {
     boolean isNumeric = (aux != null && aux.matches("[0-9]+"));
     if (isNumeric == true) {
       int Valor = Integer.parseInt(aux);
-      System.out.println("Valor: " + Valor);
-      valorRecarga.clear(); 
+      passe.setSaldo(Valor);
+      pDao.updatePasse(passe);
+      valorRecarga.clear();
+      saldoCliente.setText("R$ "+ passe.getSaldo());
     } else {
       showCaixaAlerta("Digite o Valor Corretamente, USE EXCLUSIVAMENTE OS NUMEROS");
     }

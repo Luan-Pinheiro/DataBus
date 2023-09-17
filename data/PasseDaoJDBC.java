@@ -164,14 +164,14 @@ public class PasseDaoJDBC implements iPasseDao {
 
   @Override
   public void updatePasse(Passe passe) {
-    String sqlQuery = "update databus.passe set validade=? numCartao=?";
+    String sqlQuery = "update databus.passeClt set saldo=? WHERE cpf=?";
     PreparedStatement pst;
     Connection connection;
     try {
       connection = new ConnectionFactory().getConnection();
       pst = connection.prepareStatement(sqlQuery);
-      pst.setFloat(2, passe.getSaldo());
-      pst.setString(3, passe.getValidade());
+      pst.setFloat(1, passe.getSaldo());
+      pst.setString(2, passe.getCpfCliente());
       pst.execute();
       pst.close();
       connection.close();
@@ -179,6 +179,7 @@ public class PasseDaoJDBC implements iPasseDao {
       ex.printStackTrace();
     }
   }
+  
 
   @Override
   public void deletePasse(Passe passe) {
