@@ -480,6 +480,7 @@ public class ScreenController implements Initializable {
         if (verifyExist(cliente)) {
           Passe passeAUX = pDao.readPasse(cliente.getCpf(), cliente.getTipoPasse());
           passe = passeAUX;
+          ClienteAtual = cliente;
           ClienteLogado(cliente, passeAUX);
           break;
         }
@@ -1026,9 +1027,10 @@ public class ScreenController implements Initializable {
     if (isNumeric == true) {
       int Valor = Integer.parseInt(aux);
       passe.setSaldo(Valor);
-      pDao.updatePasse(passe);
+      pDao.updatePasse(passe, ClienteAtual.getTipoPasse());
       valorRecarga.clear();
       saldoCliente.setText("R$ "+ passe.getSaldo());
+      botaoVoltar(event);
     } else {
       showCaixaAlerta("Digite o Valor Corretamente, USE EXCLUSIVAMENTE OS NUMEROS");
     }

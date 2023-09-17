@@ -163,8 +163,19 @@ public class PasseDaoJDBC implements iPasseDao {
   }
 
   @Override
-  public void updatePasse(Passe passe) {
-    String sqlQuery = "update databus.passeClt set saldo=? WHERE cpf=?";
+  public void updatePasse(Passe passe, int tipoPasse) {
+    String sqlQuery = "";
+    switch(tipoPasse){
+      case 1:
+      sqlQuery = "update databus.passeAluno set saldo=? WHERE cpf=?";
+      break;
+      case 2:
+      sqlQuery = "update databus.passeIdoso set saldo=? WHERE cpf=?";
+      break;
+      case 3:
+      sqlQuery = "update databus.passeClt set saldo=? WHERE cpf=?";
+      break;
+    }
     PreparedStatement pst;
     Connection connection;
     try {

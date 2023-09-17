@@ -8,6 +8,6 @@ public interface iPasseDao{
     void createPasseIdoso (Passe passe);
     void createPasseClt (Passe passe);
     Passe readPasse (String numCartao, int tipoPasse);
-    void updatePasse (Passe passe);
+    void updatePasse (Passe passe, int tipoPasse);
     void deletePasse (Passe passe);
 }
