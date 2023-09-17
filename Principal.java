@@ -20,7 +20,6 @@ public class Principal extends Application {
 
   @Override
   public void start(Stage stagePrimary) throws Exception {
-
     stagePrimary.getIcons().add(new Image("./assets/icon.png"));//Definindo icone do programa
 
     stagePrimary.setTitle("Camada Fisica"); // Setando Nome na barra de pesquisa
@@ -33,6 +32,7 @@ public class Principal extends Application {
   }
 
   public static void main(String[] args) {
+    new ScreenController();
     launch(args);
   }
 }

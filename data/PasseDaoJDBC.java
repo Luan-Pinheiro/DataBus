@@ -109,8 +109,19 @@ public class PasseDaoJDBC implements iPasseDao {
   }
 
   @Override
-  public Passe readPasse(String numCartao) {
-    String sqlQuery = "select * from databus.passe where numCartao=?";
+  public Passe readPasse(String cpf, int tipoPasse) {
+    String sqlQuery = "";
+    switch (tipoPasse) {
+      case 1:
+        sqlQuery = "select * from databus.passeAluno where cpf=?";
+        break;
+      case 2:
+        sqlQuery = "select * from databus.passeIdoso where cpf=?";
+        break;
+      case 3:
+        sqlQuery = "select * from databus.passeClt where cpf=?";
+        break;
+    }
     PreparedStatement pst;
     Connection connection;
     ResultSet resultSet;
@@ -118,16 +129,29 @@ public class PasseDaoJDBC implements iPasseDao {
     try {
       connection = new ConnectionFactory().getConnection();
       pst = connection.prepareStatement(sqlQuery);
-      pst.setString(1, numCartao);
+      pst.setString(1, cpf);
       resultSet = pst.executeQuery();
       if (resultSet != null) {
         while (resultSet.next()) {
           passe = new Passe();
-          passe.setNumCartao(resultSet.getString("numCartao"));
+          passe.setNumCartao(resultSet.getString("numPasse"));
           passe.setSaldo(resultSet.getFloat("saldo"));
           passe.setValidade(resultSet.getString("validade"));
-          passe.setCpfCliente(resultSet.getString("idCliente"));
+          passe.setCpfCliente(resultSet.getString("cpf"));
           passe.setNomeCliente(resultSet.getString("nome"));
+          switch(tipoPasse){
+            case 1:
+              passe.setNumMatricula(resultSet.getString("matricula"));
+              passe.setInstituicao(resultSet.getString("instituicao"));
+              break;
+            case 2:
+              passe.setRg(resultSet.getString("rg"));
+              break;
+            case 3:
+              passe.setRg(resultSet.getString("rg"));
+              passe.setCarteiraTrabalho(resultSet.getInt("ctps"));
+              break;
+          }
         }
         resultSet.close();
         pst.close();

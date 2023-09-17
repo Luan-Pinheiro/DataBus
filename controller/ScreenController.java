@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import data.ClienteDaoJDBC;
 import data.PasseDaoJDBC;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+//import javafx.collections.FXCollections;
+//import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -262,9 +262,9 @@ public class ScreenController implements Initializable {
           Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
         } else {
           estudante = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(),
-          textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText());
+          textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText(),tipoPasse);
           cDao.createCliente(estudante);
-          passe = new Passe(estudante.getCpf(),textMatricula.getText(),textInstituicao.getText(), 0 , "6 meses");
+          passe = new Passe(estudante.getCpf(),textMatricula.getText(),textInstituicao.getText(), 0 , "6 meses", estudante.getNome());
           pDao.createPasseAluno(passe);
           clickHomeButton(event);
         }
@@ -298,7 +298,8 @@ public class ScreenController implements Initializable {
     for (Cliente cliente : clientes) {
       System.out.println(cliente);
       if (verifyExist(cliente)) {
-        ClienteLogado(cliente);
+        Passe passe = pDao.readPasse(cliente.getCpf(), cliente.getTipoPasse());
+        ClienteLogado(cliente,passe);
         break;
       }
     }
@@ -308,7 +309,7 @@ public class ScreenController implements Initializable {
 
   }
 
-  public void ClienteLogado(Cliente cliente){
+  public void ClienteLogado(Cliente cliente, Passe passe){
     groupInicialScreen.setVisible(false);
     groupInicialScreen.setDisable(true);
     groupCliente.setVisible(true);
@@ -324,17 +325,26 @@ public class ScreenController implements Initializable {
     consultaTelefone.setText(cliente.getTelefone());
     consultaEmail.setText(cliente.getemail());
     consultaSenha.setText(cliente.getSenha());
+    consultaCartao.setText(passe.geraNumCartao());
 
-    switch (tipoPasse) {
+    switch (cliente.getTipoPasse()) {
       case 1:
-        
+        consultaMatricula.setText(passe.getNumMatricula());
+        consultaInstituicao.setText(passe.getInstituicao());
+        consultaRG.setText("--------------");
+        consultaCTPS.setText("--------------");
         break;
       case 2:
-        consultaRG.setText("1639439102");
+        consultaMatricula.setText("--------------");
+        consultaInstituicao.setText("--------------");
+        consultaRG.setText(passe.getRg());
+        consultaCTPS.setText("--------------");
         break;
       case 3:
-        consultaRG.setText("1639439102");
-        consultaCTPS.setText("2022323144");
+        consultaMatricula.setText("--------------");
+        consultaInstituicao.setText("--------------");
+        consultaRG.setText(passe.getRg());
+        consultaCTPS.setText(String.valueOf(passe.getCarteiraTrabalho()));
         break;
     }
   }
@@ -371,8 +381,6 @@ public class ScreenController implements Initializable {
     groupConsultaDados.setDisable(true);
     grupoRotas.setVisible(false);
     grupoRotas.setDisable(true);
-    //botaoVoltar.setDisable(true);
-    //botaoVoltar.setVisible(false);
   }
 
   public void clearText() {

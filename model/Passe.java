@@ -2,8 +2,6 @@ package model;
 
 import java.util.Random;
 
-import data.ClienteDaoJDBC;
-
 public class Passe {
     private String cpfCliente;
     private String nomeCliente;
@@ -17,14 +15,14 @@ public class Passe {
 
     public Passe(){};
     
-    public Passe(String clienteCPF,String numMatricula,String instituicao, float saldo, String validade) {
+    public Passe(String clienteCPF,String numMatricula,String instituicao, float saldo, String validade, String nome) {
         cpfCliente = clienteCPF;
         this.saldo = saldo;
         NumCartao = geraNumCartao();
-        setNomeCliente(clienteCPF);
         this.validade = validade;
         Instituicao = instituicao;
         this.numMatricula = numMatricula;
+        this.nomeCliente = nome;
     }
 
     public Passe(String clienteCPF, float saldo, String validade, String rg) {
@@ -86,9 +84,8 @@ public class Passe {
     public String getNomeCliente() {
         return nomeCliente;
     }
-    public void setNomeCliente(String clienteCPF) {
-        ClienteDaoJDBC cDao = new ClienteDaoJDBC();
-        this.nomeCliente = cDao.queryName(clienteCPF).getNome();
+    public void setNomeCliente(String nome) {
+        this.nomeCliente = nome;
     }
     public void setCpfCliente(String clienteCPF) {
         cpfCliente = clienteCPF;

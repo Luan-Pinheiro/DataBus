@@ -7,7 +7,7 @@ public interface iPasseDao {
     void createPasseAluno (Passe passe);
     void createPasseIdoso (Passe passe);
     void createPasseClt (Passe passe);
-    Passe readPasse (String numCartao);
+    Passe readPasse (String numCartao, int tipoPasse);
     void updatePasse (Passe passe);
     void deletePasse (Passe passe);
 }
