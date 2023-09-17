@@ -516,8 +516,14 @@ public class ScreenController implements Initializable {
     }
   }
   public void funcionarioLogado(Funcionario funcionario) {
-    botaoFuncionario.setVisible(false);
     showRoutesTable();
+    botaoFuncionario.setVisible(false);
+    groupInicialScreen.setVisible(false);
+    groupInicialScreen.setDisable(true);
+    groupCliente.setVisible(true);
+    groupCliente.setDisable(false);
+    homeButton.setVisible(true);
+    groupFuncionario.setVisible(true);
   }
 
 
@@ -588,6 +594,8 @@ public class ScreenController implements Initializable {
     groupConsultaDados.setDisable(true);
     grupoRotas.setVisible(false);
     grupoRotas.setDisable(true);
+    groupFuncionario.setVisible(false);
+    groupFuncionario.setDisable(true);
     botaoFuncionario.setVisible(true);
   }
 
