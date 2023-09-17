@@ -430,23 +430,7 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
         break;
     }
   }
-  /*
-  columnServico.setCellValueFactory(new PropertyValueFactory<>("servico")); // Setando o tipo de valor da coluna do TableView
-  columnData.setCellValueFactory(new PropertyValueFactory<>("data")); // Setando o tipo de valor da coluna do TableView
-  columnNome.setCellValueFactory(new PropertyValueFactory<>("nome")); // Setando o tipo de valor da coluna do TableView
-  columnHorario.setCellValueFactory(new PropertyValueFactory<>("Hora")); // Setando o tipo de valor da coluna do TableView
-
-  trocaTelas.addOnChangeScreenListener(new trocaTelas.onChangeScreen() { // Adiciona um listener na Main
-    @Override
-    public void onScreenChanged(String newScreen, Object userData, ArrayList<Agenda> array) { // Cadastra o evento de troca de tela e carrega os parâmetros necessarios
-      if (newScreen.equals("agendado")) { // Verificacao se esta na tela correta
-        ObservableList<Agenda> Agendados = FXCollections.observableList(array); // Passando o Array para um ObservableList
-        tableView.setItems(Agendados); // Setando no tableView
-      } // Fim do If equals
-    } // Fim do onScreenChanged
-  }); // addOnChange
-} // Fim Initialize
-   */
+  
   public void showRoutesTable(){
     RotaDaoJDBC RDao = new RotaDaoJDBC();
     ArrayList<Rota> rotas = RDao.getAllRotas();
@@ -759,9 +743,8 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
 
     homeButton.setVisible(true);
 
-<<<<<<< HEAD
   }
-=======
+
   @FXML
   void clickRecarregou(MouseEvent event) {
     String aux = valorRecarga.getText();
@@ -775,5 +758,4 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
     }
   }
 
->>>>>>> 49fac18134b519eede200e852d1d408f61ccf5ee
 }
