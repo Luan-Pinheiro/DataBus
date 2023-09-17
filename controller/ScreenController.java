@@ -465,7 +465,7 @@ public class ScreenController implements Initializable {
     if(funcionarioFlag){
     ArrayList<Funcionario> funcionarios = fDao.getAllFuncionarios();
     for (Funcionario funcionario : funcionarios) {
-      if (isInDatabase(funcionario)) {
+      if (confirmLogin(funcionario)) {
         funcionarioLogado(funcionario);
         System.out.println("foi");
         break;
@@ -516,10 +516,11 @@ public class ScreenController implements Initializable {
     System.out.println(funcionarIoBuscarCliente.getText());
     Cliente clienteSolicitado = fDaoJDBC.readCliente(funcionarIoBuscarCliente.getText());
     showClient(clienteSolicitado.getCpf());
-    /*if(localFlag){
+    //if(verif)
+    if(localFlag){
     }else{
       Cliente.setTextAlerta("ERRO");
-    }*/
+    }
   }
 
   @FXML
@@ -678,7 +679,7 @@ public class ScreenController implements Initializable {
     tbwRotas.setItems(auxList);
   }
 
-  public boolean isInDatabase(Funcionario funcionario) {
+  public boolean confirmLogin(Funcionario funcionario) {
     String email = textUsuario.getText();
     if (pwdFSenha.getLength() < textSenha.getLength()) {
       pwdFSenha.setText(textSenha.getText());
@@ -693,7 +694,6 @@ public class ScreenController implements Initializable {
     login = (emailFlag & senhaFlag);
     return login;
   }
-
   public boolean verifyExist(Cliente cliente) {
     String email = textUsuario.getText();
     if (pwdFSenha.getLength() < textSenha.getLength()) {
