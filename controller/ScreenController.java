@@ -319,6 +319,8 @@ public class ScreenController implements Initializable {
       case 1:
         if (!Passe.confereNumMatricula(textMatricula.getText()))
           verify = false;
+        if(!Passe.confereInstitucao(textInstituicao.getText()))
+        verify = false;
         break;
       case 2:
         if (!Passe.confereRg(textRGIDOSO.getText()))

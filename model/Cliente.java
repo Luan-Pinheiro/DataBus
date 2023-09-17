@@ -45,7 +45,6 @@ public class Cliente {
 
   public static boolean confereNome(String nome) {
     nome.toUpperCase();
-    System.out.println(nome);
     boolean valido = true;
     if (nome.length() < 3) {
       valido = false;

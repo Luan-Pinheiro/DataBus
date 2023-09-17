@@ -111,6 +111,20 @@ public class Passe {
         return valido;
     }
 
+    public static boolean confereInstitucao(String instituicao){
+boolean valido = true;
+    if (instituicao.length() <= 3) {
+      valido = false;
+    }
+    if (!instituicao.matches("[a-zA-Z\\s]*")) {
+      valido = false;
+    }
+    if (valido == false) {
+      textAlerta += "Instituicao, ";
+    }
+
+    return valido;
+    }
     public String getCpfCliente() {
         return cpfCliente;
     }
