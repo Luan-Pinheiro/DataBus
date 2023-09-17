@@ -23,7 +23,8 @@
   #textSenhaCLT,
   #textTelefoneCLT,
   #textEmailCLT, 
-  #valorRecarga{
+  #valorRecarga,
+  #funcionarIoBuscarCliente{
     -fx-text-fill: white;
     -fx-background-color: transparent;
   }

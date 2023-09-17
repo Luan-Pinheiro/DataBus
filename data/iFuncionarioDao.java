@@ -3,10 +3,13 @@ package data;
 import java.util.ArrayList;
 
 import model.Cliente;
+import model.Funcionario;
 import model.Passe;
 import model.Rota;
 
 public interface iFuncionarioDao {
+  ArrayList<Funcionario> getAllFuncionarios();
+  Funcionario readFuncionario(String codigoFuncionario);
   ArrayList<Cliente> getAllClientes();
   void createCliente (Cliente cliente);
   Cliente readCliente (String cpf);

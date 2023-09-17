@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScreenController">
    <children>
       <Group fx:id="groupESTUDANTE" visible="false">
          <children>
@@ -339,6 +339,14 @@
                </tooltip>
             </TextField>
             <ImageView fx:id="imgSeePassword" fitHeight="24.0" fitWidth="24.0" layoutX="336.0" layoutY="391.0" onMouseClicked="#OnClick" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="botaoFuncionario" fitHeight="36.0" fitWidth="36.0" layoutX="387.0" layoutY="42.0" onMouseClicked="#funcionarioMode" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../assets/botaoFuncionario.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
          </children>
       </Group>
       <Group fx:id="groupCliente" visible="false">
@@ -511,6 +519,75 @@
             </TextField>
          </children>
       </Group>
+      <Group fx:id="groupFuncionario" visible="false">
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/backgroundFuncionario.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="textOperacaoFuncionario" fitHeight="25.0" fitWidth="279.0" layoutX="96.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/escolhaOperacao.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="botaoBuscarCliente" fitHeight="38.0" fitWidth="244.0" layoutX="130.0" layoutY="324.0" onMouseClicked="#buscarCliente" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/botaoBuscarCliente.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="botaoListarClientes" fitHeight="38.0" fitWidth="244.0" layoutX="130.0" layoutY="368.0" onMouseClicked="#listarClientes" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/botaoListarClientes.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="botaoGerenciarCliente" fitHeight="38.0" fitWidth="244.0" layoutX="130.0" layoutY="413.0" onMouseClicked="#gerenciarCliente" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/botaoGerenciarCliente.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="botaoBuscarRota" fitHeight="38.0" fitWidth="244.0" layoutX="130.0" layoutY="457.0" onMouseClicked="#buscarRota" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/botaoBuscarRota.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="botaoGerenciarRotas" fitHeight="38.0" fitWidth="244.0" layoutX="130.0" layoutY="503.0" onMouseClicked="#gerenciarRotas" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/botaoGerenciarRotas.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="groupBuscarCliente" visible="false">
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/backgroundBuscarCliente.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="funcionarIoBuscarCliente" layoutX="97.0" layoutY="287.0" prefHeight="37.0" prefWidth="281.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font>
+            </TextField>
+         </children>
+      </Group>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="botaoVoltar" fitHeight="36.0" fitWidth="50.0" layoutX="217.0" layoutY="582.0" onMouseClicked="#botaoVoltar" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../assets/botaoVoltar.png" />

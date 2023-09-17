@@ -7,15 +7,73 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Cliente;
+import model.Funcionario;
 import model.Passe;
 import model.Rota;
 
 public class FuncionarioDaoJDBC implements iFuncionarioDao{
 
+  //---------------------------------- FUNCIONARIO ----------------------------------//
+  @Override
+  public ArrayList<Funcionario> getAllFuncionarios() {
+    String sqlQuery = "select * from databus.funcionario";
+    PreparedStatement pst;
+    Connection connection;
+    ResultSet resultSet;
+    ArrayList<Funcionario> funcionarios = null;
+    try {
+      connection = new ConnectionFactory().getConnection();
+      pst = connection.prepareStatement(sqlQuery);
+      resultSet = pst.executeQuery();
+      if (resultSet != null) {
+        funcionarios = new ArrayList<Funcionario>();
+        while (resultSet.next()) {
+          Funcionario funcionario = new Funcionario();
+          funcionario.setCodigoFuncionario(resultSet.getString("codigoFuncionario"));
+          funcionario.setEmail(resultSet.getString("email"));
+          funcionario.setSenha(resultSet.getString("senha"));
+          funcionarios.add(funcionario);
+        }
+        resultSet.close();
+        pst.close();
+        connection.close();
+      }
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+    return funcionarios;
+  }
+
+  @Override
+  public Funcionario readFuncionario(String codigoFuncionario) {
+    String sqlQuery = "select * from databus.funcionario where codigoFuncionario=?";
+    PreparedStatement pst;
+    Connection connection;
+    ResultSet resultSet;
+    Funcionario funcionario = null;
+    try {
+      connection = new ConnectionFactory().getConnection();
+      pst = connection.prepareStatement(sqlQuery);
+      pst.setString(1, codigoFuncionario);
+      resultSet = pst.executeQuery();
+      if (resultSet != null) {
+        while (resultSet.next()) {
+          funcionario = new Funcionario();
+          funcionario.setEmail(resultSet.getString("email"));
+          funcionario.setSenha(resultSet.getString("senha"));
+        }
+        resultSet.close();
+        pst.close();
+        connection.close();
+      }
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+    return funcionario;
+  }
   //---------------------------------- CLIENTE ----------------------------------//
   @Override
   public ArrayList<Cliente> getAllClientes() {
-    // Linkar valores com a interface
     String sqlQuery = "select * from databus.cliente";
     PreparedStatement pst;
     Connection connection;
@@ -351,5 +409,4 @@ public class FuncionarioDaoJDBC implements iFuncionarioDao{
       ex.printStackTrace();
     }
   }
-  
 }

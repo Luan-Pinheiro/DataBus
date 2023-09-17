@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import data.ClienteDaoJDBC;
+import data.FuncionarioDaoJDBC;
 import data.PasseDaoJDBC;
 import data.RotaDaoJDBC;
 import javafx.collections.FXCollections;
@@ -43,6 +44,18 @@ public class ScreenController implements Initializable {
   private ImageView passeCLT;
   @FXML
   private ImageView passeIdoso;
+  @FXML
+  private ImageView botaoListarClientes;
+  @FXML
+  private ImageView botaoBuscarCliente;
+  @FXML
+  private ImageView botaoGerenciarCliente;
+  @FXML
+  private ImageView botaoBuscarRota;
+  @FXML
+  private ImageView botaoGerenciarRotas;
+  @FXML
+  private ImageView botaoFuncionario;
   @FXML
   private Group groupCLT;
   @FXML
@@ -143,9 +156,15 @@ public class ScreenController implements Initializable {
   @FXML
   private Group grupoRotas;
   @FXML
+  private Group groupFuncionario;
+  @FXML
+  private Group groupBuscarCliente;
+  @FXML
   private Label saldoCliente;
   @FXML
   private ImageView saldoIMG;
+  @FXML
+  private ImageView textOperacaoFuncionario;
   // Tabela de rotas
   @FXML
   private TableView<Rota> tbwRotas;
@@ -185,21 +204,24 @@ public class ScreenController implements Initializable {
   private Label consultaTelefone;
   @FXML
   private Label consultaCartao;
-
   @FXML
   private Group groupRecarga;
   @FXML
   private ImageView botaoRecarregou;
   @FXML
   private TextField valorRecarga;
+  @FXML
+  private TextField funcionarioBuscarCliente;
 
   private Cliente ClienteAtual;
   private Passe passe;
   private boolean emailFlag = false;
   private boolean senhaFlag = false;
   private boolean login = false;
+  FuncionarioDaoJDBC fDao = new FuncionarioDaoJDBC();
   ClienteDaoJDBC cDao = new ClienteDaoJDBC();
   PasseDaoJDBC pDao = new PasseDaoJDBC();
+  private boolean funcionarioFlag = false;
   private boolean flag = true;
   Image openedEye = new Image("./assets/eye.png");
   Image closedEye = new Image("./assets/closed_eye.png");
@@ -402,23 +424,86 @@ public class ScreenController implements Initializable {
 
   @FXML
   void clickLogin(MouseEvent event) {
-    ArrayList<Cliente> clientes = cDao.getAllClientes();
-    for (Cliente cliente : clientes) {
-      System.out.println(cliente);
-      if (verifyExist(cliente)) {
-        Passe passe = pDao.readPasse(cliente.getCpf(), cliente.getTipoPasse());
-        ClienteLogado(cliente, passe);
+    if(funcionarioFlag){
+    ArrayList<Funcionario> funcionarios = fDao.getAllFuncionarios();
+    for (Funcionario funcionario : funcionarios) {
+      if (isInDatabase(funcionario)) {
+        funcionarioLogado(funcionario);
+        System.out.println("foi");
         break;
       }
     }
     if (!login) {
       showCaixaAlerta("Login e/ou Senha Digitados Incorretamente");
     }
+    }else{
+      ArrayList<Cliente> clientes = cDao.getAllClientes();
+      for (Cliente cliente : clientes) {
+        if (verifyExist(cliente)) {
+          Passe passe = pDao.readPasse(cliente.getCpf(), cliente.getTipoPasse());
+          ClienteLogado(cliente, passe);
+          break;
+        }
+      }
+      if (!login) {
+        showCaixaAlerta("Login e/ou Senha Digitados Incorretamente");
+      }
+    }
+  }
+  
 
+  @FXML
+  void buscarCliente(MouseEvent event) {
+    groupFuncionario.setVisible(false);
+    groupFuncionario.setDisable(true);
+
+    groupBuscarCliente.setVisible(true);
+
+    botaoVoltar.setVisible(true);
+    botaoVoltar.setDisable(false);
+  }
+
+  @FXML
+  void buscarRota(MouseEvent event) {
+
+  }
+
+  @FXML
+  void gerenciarCliente(MouseEvent event) {
+
+  }
+
+  @FXML
+  void gerenciarRotas(MouseEvent event) {
+
+  }
+
+  @FXML
+  void listarClientes(MouseEvent event) {
+    botaoListarClientes.setVisible(false);
+    botaoListarClientes.setDisable(true);
+    botaoBuscarCliente.setVisible(false);
+    botaoBuscarCliente.setDisable(true);
+    botaoGerenciarCliente.setVisible(false);
+    botaoGerenciarCliente.setDisable(true);
+    botaoGerenciarRotas.setVisible(false);
+    botaoGerenciarRotas.setDisable(true);
+    botaoBuscarRota.setVisible(false);
+    botaoBuscarRota.setDisable(true);
+    textOperacaoFuncionario.setVisible(false);
+
+    botaoVoltar.setVisible(true);
+    botaoVoltar.setDisable(false);
+  }
+
+  @FXML
+  void funcionarioMode(MouseEvent event) {
+    funcionarioFlag = !funcionarioFlag;
   }
 
   public void ClienteLogado(Cliente cliente, Passe passe) {
     showRoutesTable();
+    botaoFuncionario.setVisible(false);
     groupInicialScreen.setVisible(false);
     groupInicialScreen.setDisable(true);
     groupCliente.setVisible(true);
@@ -457,6 +542,17 @@ public class ScreenController implements Initializable {
         break;
     }
   }
+  public void funcionarioLogado(Funcionario funcionario) {
+    showRoutesTable();
+    botaoFuncionario.setVisible(false);
+    groupInicialScreen.setVisible(false);
+    groupInicialScreen.setDisable(true);
+    groupCliente.setVisible(true);
+    groupCliente.setDisable(false);
+    homeButton.setVisible(true);
+    groupFuncionario.setVisible(true);
+  }
+
 
   public void showRoutesTable() {
     RotaDaoJDBC RDao = new RotaDaoJDBC();
@@ -478,8 +574,23 @@ public class ScreenController implements Initializable {
     tbwRotas.setItems(auxList);
   }
 
+  public boolean isInDatabase(Funcionario funcionario) {
+    String email = textUsuario.getText();
+    if (pwdFSenha.getLength() < textSenha.getLength()) {
+      pwdFSenha.setText(textSenha.getText());
+    } else if (textSenha.getLength() < pwdFSenha.getLength()) {
+      textSenha.setText(pwdFSenha.getText());
+    }
+    String senha = pwdFSenha.getText();
+    emailFlag = (fDao.readFuncionario(funcionario.getCodigoFuncionario()).getEmail().equals(email)) ? true : false;
+    if (emailFlag) {
+      senhaFlag = (fDao.readFuncionario(funcionario.getCodigoFuncionario()).getSenha().equals(senha)) ? true : false;
+    }
+    login = (emailFlag & senhaFlag);
+    return login;
+  }
+
   public boolean verifyExist(Cliente cliente) {
-    // VERIFICAR PSWDF E TEXTFILD DA SENHA - cunsultar cpf atraves
     String email = textUsuario.getText();
     if (pwdFSenha.getLength() < textSenha.getLength()) {
       pwdFSenha.setText(textSenha.getText());
@@ -492,8 +603,6 @@ public class ScreenController implements Initializable {
       senhaFlag = (cDao.queryAccount(cliente.getCpf()).getSenha().equals(senha)) ? true : false;
     }
     login = (emailFlag & senhaFlag);
-    System.out.println("FLAG:" + login);
-
     return login;
   }
 
@@ -512,6 +621,9 @@ public class ScreenController implements Initializable {
     groupConsultaDados.setDisable(true);
     grupoRotas.setVisible(false);
     grupoRotas.setDisable(true);
+    groupFuncionario.setVisible(false);
+    groupFuncionario.setDisable(true);
+    botaoFuncionario.setVisible(true);
   }
 
   public void clearText() {
@@ -565,6 +677,7 @@ public class ScreenController implements Initializable {
     // maiores quantidades que o limite
     imgSeePassword.setImage(openedEye);
     textSenha.setVisible(false);
+    botaoFuncionario.setVisible(true);
 
     // Formatação Texto do Telefone
     textTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -779,7 +892,6 @@ public class ScreenController implements Initializable {
     groupRecarga.setDisable(false);
     homeButton.setVisible(false);
     valorRecarga.clear(); 
-    
   }
 
   @FXML
@@ -807,7 +919,6 @@ public class ScreenController implements Initializable {
     groupRecarga.setDisable(true);
     valorRecarga.clear(); 
     homeButton.setVisible(true);
-
   }
 
   @FXML
@@ -822,5 +933,4 @@ public class ScreenController implements Initializable {
       System.out.println("Digite Corretamente");
     }
   }
-
 }
