@@ -3,9 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import javax.naming.ldap.Rdn;
-
 import data.ClienteDaoJDBC;
 import data.PasseDaoJDBC;
 import data.RotaDaoJDBC;
