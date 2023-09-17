@@ -416,9 +416,9 @@
             </TableView>
          </children>
       </Group>
-      <Group fx:id="groupConsultaDados" visible="false">
+      <Group fx:id="groupConsultaDados">
          <children>
-            <ImageView fitHeight="650.0" fitWidth="495.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/backgroundConsultarDados.png" />
                </image>
