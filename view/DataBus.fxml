@@ -4,6 +4,8 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
@@ -339,9 +341,14 @@
             <ImageView fx:id="imgSeePassword" fitHeight="24.0" fitWidth="24.0" layoutX="336.0" layoutY="391.0" onMouseClicked="#OnClick" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Group>
-      <Group fx:id="groupCliente">
+      <Group fx:id="groupCliente" visible="false">
          <children>
             <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/backgroundCliente.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../assets/backgroundCliente.png" />
                </image>
@@ -380,14 +387,6 @@
                   <Image url="@../assets/escolhaOperacao.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="botaoVoltar" fitHeight="36.0" fitWidth="50.0" layoutX="217.0" layoutY="568.0" onMouseClicked="#botaoVoltar" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../assets/botaoVoltar.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
             <ImageView fx:id="saldoIMG" fitHeight="36.0" fitWidth="114.0" layoutX="104.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/saldo.png" />
@@ -400,9 +399,34 @@
             </Label>
          </children>
       </Group>
+      <Group>
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/backgroundCliente.png" />
+               </image>
+            </ImageView>
+            <TableView fx:id="tbwRotas" layoutX="51.0" layoutY="164.0" prefHeight="404.0" prefWidth="364.0" stylesheets="@styles.css">
+              <columns>
+                <TableColumn editable="false" prefWidth="75.0" sortable="false" text="ID Rota" />
+                <TableColumn editable="false" prefWidth="90.0" sortable="false" text="Ponto Saída" />
+                  <TableColumn editable="false" prefWidth="99.0" sortable="false" text="Ponto Chegada" />
+                  <TableColumn editable="false" prefWidth="99.0" text="Hoŕario" />
+              </columns>
+            </TableView>
+         </children>
+      </Group>
       <ImageView fx:id="homeButton" fitHeight="36.0" fitWidth="36.0" layoutX="36.0" layoutY="33.0" onMouseClicked="#clickHomeButton" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../assets/homeButton.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="botaoVoltar" fitHeight="36.0" fitWidth="50.0" onMouseClicked="#botaoVoltar" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../assets/botaoVoltar.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />

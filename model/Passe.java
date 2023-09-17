@@ -15,6 +15,7 @@ public class Passe {
   ScreenController sc;
 
 
+  /*
   public Cliente(String email, String senha, String dataNascimento, String numeroTel, String nome, String endereco,String cpf) {
     this.email = email;
     this.senha = senha;
@@ -24,4 +25,5 @@ public class Passe {
     this.endereco = endereco;
     this.cpf = cpf;
   }
+   */
 }

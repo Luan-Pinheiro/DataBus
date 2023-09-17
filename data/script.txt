@@ -40,14 +40,18 @@ CREATE TABLE if not exists databus.funcionario(
 
 CREATE TABLE if not exists databus.rotas(
                        codigoRota  varchar(3) NOT NULL PRIMARY KEY,  
-                       partida_destino varchar(70),
                        nome  varchar(50)); 
 
 CREATE TABLE if not exists databus.horarios ( 
-                       codigoRota  varchar(3) NOT NULL); 
+                      codigoRota  varchar(3) NOT NULL,
+                      horario_saida varchar(5),
+                      horario_chegada varchar(5)); 
 
 CREATE TABLE if not exists databus.pontos (
-                       codigoRota  varchar(3) NOT NULL); 
+                       codigoRota  varchar(3) NOT NULL,
+                       ponto_partida varchar(50),
+                       ponto_chegada varchar(50)
+); 
 					   
 ALTER TABLE databus.passe ADD FOREIGN KEY(idCliente) REFERENCES databus.cliente(cpf);
 ALTER TABLE databus.passeAluno ADD FOREIGN KEY(numPasse) REFERENCES databus.passe(numCartao);
