@@ -14,26 +14,26 @@ CREATE TABLE if not exists databus.passeAluno(
                        matricula varchar(15),    
                        instituicao varchar(70),  
                        numPasse varchar(7) NOT NULL PRIMARY KEY,
-					   saldo float,
-					   validade varchar(10),
-					   nome varchar(50));
+					              saldo float,
+					              validade varchar(10),
+					              nome varchar(50));
 
 CREATE TABLE if not exists databus.passeIdoso(
-					   cpf varchar(14) NOT NULL,
+					              cpf varchar(14) NOT NULL,
                        rg varchar(13) NOT NULL,
                        numPasse varchar(7) NOT NULL PRIMARY KEY,
-					   saldo float,
-					   validade varchar(10),
-					   nome varchar(50));
+					              saldo float,
+					              validade varchar(10),
+					              nome varchar(50));
 					   
 CREATE TABLE if not exists databus.passeClt(
-					   cpf varchar(14) NOT NULL ,
-					   rg varchar(13) NOT NULL, 
+					              cpf varchar(14) NOT NULL ,
+					              rg varchar(13) NOT NULL, 
                        ctps integer NOT NULL,  
                        numPasse varchar(7) NOT NULL PRIMARY KEY,
-					   saldo float,
-					   validade varchar(10),
-					   nome varchar(50)); 
+					              saldo float,
+					              validade varchar(10),
+					              nome varchar(50)); 
 
 CREATE TABLE if not exists databus.dadosPeriodicos(
                        instituicao varchar(70),  
