@@ -4,8 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.naming.ldap.Rdn;
-
 import data.ClienteDaoJDBC;
 import data.PasseDaoJDBC;
 import data.RotaDaoJDBC;
@@ -149,7 +147,7 @@ public class ScreenController implements Initializable {
   private Label saldoCliente;
   @FXML
   private ImageView saldoIMG;
-  //Tabela de rotas
+  // Tabela de rotas
   @FXML
   private TableView<Rota> tbwRotas;
   @FXML
@@ -264,84 +262,81 @@ public class ScreenController implements Initializable {
 
   public boolean verificaCadastro() {
     boolean verify = true;
-    switch (tipoPasse){
-    case 1: 
-    if (!Cliente.confereNome(textNome.getText()))
-      verify = false;
-    if (!Cliente.confereSenha(textSenha2.getText()))
-      verify = false;
-    if (!Cliente.confereCpf(textCPF.getText()))
-      verify = false;
-    if (!Cliente.confereEmail(textEmail.getText()))
-      verify = false;
-    if (!Cliente.confereNumero(textTelefone.getText()))
-      verify = false;
-    if (!Cliente.confereEndereco(textEndereco.getText()))
-      verify = false;
-    if (!Cliente.confereData(textNascimento.getText()))
-      verify = false;  
-    break;
+    switch (tipoPasse) {
+      case 1:
+        if (!Cliente.confereNome(textNome.getText()))
+          verify = false;
+        if (!Cliente.confereSenha(textSenha2.getText()))
+          verify = false;
+        if (!Cliente.confereCpf(textCPF.getText()))
+          verify = false;
+        if (!Cliente.confereEmail(textEmail.getText()))
+          verify = false;
+        if (!Cliente.confereNumero(textTelefone.getText()))
+          verify = false;
+        if (!Cliente.confereEndereco(textEndereco.getText()))
+          verify = false;
+        if (!Cliente.confereData(textNascimento.getText()))
+          verify = false;
+        break;
 
-    case 2:
-    if (!Cliente.confereNome(textNomeIDOSO.getText()))
-      verify = false;
-    if (!Cliente.confereSenha(textSenhaIDOSO.getText()))
-      verify = false;
-    if (!Cliente.confereCpf(textCPFIDOSO.getText()))
-      verify = false;
-    if (!Cliente.confereEmail(textEmailIDOSO.getText()))
-      verify = false;
-    if (!Cliente.confereNumero(textTelefoneIDOSO.getText()))
-      verify = false;
-    if (!Cliente.confereEndereco(textEnderecoIDOSO.getText()))
-      verify = false;
-    if (!Cliente.confereData(textNascimentoIDOSO.getText()))
-      verify = false;
-     
+      case 2:
+        if (!Cliente.confereNome(textNomeIDOSO.getText()))
+          verify = false;
+        if (!Cliente.confereSenha(textSenhaIDOSO.getText()))
+          verify = false;
+        if (!Cliente.confereCpf(textCPFIDOSO.getText()))
+          verify = false;
+        if (!Cliente.confereEmail(textEmailIDOSO.getText()))
+          verify = false;
+        if (!Cliente.confereNumero(textTelefoneIDOSO.getText()))
+          verify = false;
+        if (!Cliente.confereEndereco(textEnderecoIDOSO.getText()))
+          verify = false;
+        if (!Cliente.confereData(textNascimentoIDOSO.getText()))
+          verify = false;
 
-    case 3:
-    if (!Cliente.confereNome(textNomeCLT.getText()))
-      verify = false;
-    if (!Cliente.confereSenha(textSenhaCLT.getText()))
-      verify = false;
-    if (!Cliente.confereCpf(textCPFCLT.getText()))
-      verify = false;
-    if (!Cliente.confereEmail(textEmailCLT.getText()))
-      verify = false;
-    if (!Cliente.confereNumero(textTelefoneCLT.getText()))
-      verify = false;
-    if (!Cliente.confereEndereco(textEnderecoCLT.getText()))
-      verify = false;
-    if (!Cliente.confereData(textNascimentoCLT.getText()))
-      verify = false;
-     
+      case 3:
+        if (!Cliente.confereNome(textNomeCLT.getText()))
+          verify = false;
+        if (!Cliente.confereSenha(textSenhaCLT.getText()))
+          verify = false;
+        if (!Cliente.confereCpf(textCPFCLT.getText()))
+          verify = false;
+        if (!Cliente.confereEmail(textEmailCLT.getText()))
+          verify = false;
+        if (!Cliente.confereNumero(textTelefoneCLT.getText()))
+          verify = false;
+        if (!Cliente.confereEndereco(textEnderecoCLT.getText()))
+          verify = false;
+        if (!Cliente.confereData(textNascimentoCLT.getText()))
+          verify = false;
 
     }
     return verify;
   }
 
-  public boolean verificaCadastroPasse(){
+  public boolean verificaCadastroPasse() {
     boolean verify = true;
-    switch (tipoPasse){
-      case 1: 
-      if (!passe.confereNumMatricula(textMatricula.getText()))
-      verify = false;
-      break; 
-      case 2: 
-       if (!passe.confereRg(textRGIDOSO.getText()))
-    verify = false;  
-    break;
+    switch (tipoPasse) {
+      case 1:
+        if (!Passe.confereNumMatricula(textMatricula.getText()))
+          verify = false;
+        break;
+      case 2:
+        if (!Passe.confereRg(textRGIDOSO.getText()))
+          verify = false;
+        break;
 
-      case 3: 
-       if (!passe.confereRg(textRGCLT.getText()))
-    verify = false;  
-       if (!passe.confereCtps(textCTPSCLT.getText()))
-       verify = false;  
-    break;
+      case 3:
+        if (!Passe.confereRg(textRGCLT.getText()))
+          verify = false;
+        if (!Passe.confereCtps(textCTPSCLT.getText()))
+          verify = false;
+        break;
     }
-    return  verify; 
+    return verify;
   }
-
 
   @FXML
   void clicouBotaoCadastrar(MouseEvent event) { // Botao Cadastrar
@@ -350,20 +345,16 @@ public class ScreenController implements Initializable {
         if (!verificaCadastro()) {
           showCaixaAlerta(Cliente.alertas());
           Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
-        } 
-        else {
-          if (verificaCadastroPasse()){
-                ClienteAtual = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(),
-              textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText(), tipoPasse);
-          cDao.createCliente(ClienteAtual);
-          passe = new Passe(ClienteAtual.getCpf(), textMatricula.getText(), textInstituicao.getText(), 0, "6 meses",
-              ClienteAtual.getNome());
-          pDao.createPasseAluno(passe);
-          clickHomeButton(event);
-          }
-          else{
-            showCaixaAlerta(passe.alertas());
-          Passe.setTextAlerta("Voce digitou incorretamente os campos: ");
+        } else {
+          if (verificaCadastroPasse()) {
+            ClienteAtual = new Cliente(textEmail.getText(), textSenha2.getText(), textNascimento.getText(), textTelefone.getText(), textNome.getText(), textEndereco.getText(), textCPF.getText(), tipoPasse);
+            cDao.createCliente(ClienteAtual);
+            passe = new Passe(ClienteAtual.getCpf(), textMatricula.getText(), textInstituicao.getText(), 0, "6 meses", ClienteAtual.getNome());
+            pDao.createPasseAluno(passe);
+            clickHomeButton(event);
+          } else {
+            showCaixaAlerta(Passe.alertas());
+            Passe.setTextAlerta("Voce digitou incorretamente os campos: ");
           }
         }
         break;
@@ -372,20 +363,20 @@ public class ScreenController implements Initializable {
         if (!verificaCadastro()) {
           showCaixaAlerta(Cliente.alertas());
           Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
-        } 
-        else {
-             if (verificaCadastroPasse()){
-                  ClienteAtual = new Cliente(textEmailIDOSO.getText(), textSenhaIDOSO.getText(), textNascimentoIDOSO.getText(),
-textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(), textCPFIDOSO.getText(), tipoPasse);
-          cDao.createCliente(ClienteAtual);
+        } else {
+          if (verificaCadastroPasse()) {
+            ClienteAtual = new Cliente(textEmailIDOSO.getText(), textSenhaIDOSO.getText(),
+                textNascimentoIDOSO.getText(),
+                textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(),
+                textCPFIDOSO.getText(), tipoPasse);
+            cDao.createCliente(ClienteAtual);
 
-          passe = new Passe(ClienteAtual.getCpf(), 0, "6 meses", textRGIDOSO.getText() ,ClienteAtual.getNome());
-          pDao.createPasseIdoso(passe);
-          clickHomeButton(event);
-          }
-          else{
-            showCaixaAlerta(passe.alertas());
-          Passe.setTextAlerta("Voce digitou incorretamente os campos: ");
+            passe = new Passe(ClienteAtual.getCpf(), 0, "6 meses", textRGIDOSO.getText(), ClienteAtual.getNome());
+            pDao.createPasseIdoso(passe);
+            clickHomeButton(event);
+          } else {
+            showCaixaAlerta(Passe.alertas());
+            Passe.setTextAlerta("Voce digitou incorretamente os campos: ");
           }
         }
         break;
@@ -394,28 +385,26 @@ textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(
         if (!verificaCadastro()) {
           showCaixaAlerta(Cliente.alertas());
           Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
-        } 
-        else {
-               if (verificaCadastroPasse()){
-                 ClienteAtual = new Cliente(textEmailCLT.getText(), textSenhaCLT.getText(), textNascimentoCLT.getText(),
-textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), textCPFCLT.getText(), tipoPasse);
-          cDao.createCliente(ClienteAtual);
+        } else {
+          if (verificaCadastroPasse()) {
+            ClienteAtual = new Cliente(textEmailCLT.getText(), textSenhaCLT.getText(), textNascimentoCLT.getText(),
+                textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), textCPFCLT.getText(),
+                tipoPasse);
+            cDao.createCliente(ClienteAtual);
 
-          passe = new Passe(ClienteAtual.getCpf(), 0, "6 meses", textRGCLT.getText() , Integer.parseInt(textCTPSCLT.getText()), ClienteAtual.getNome());
-          pDao.createPasseClt(passe);
-          clickHomeButton(event);
-          }
-          else{
-            showCaixaAlerta(passe.alertas());
-          Passe.setTextAlerta("Voce digitou incorretamente os campos: ");
+            passe = new Passe(ClienteAtual.getCpf(), 0, "6 meses", textRGCLT.getText(),
+                Integer.parseInt(textCTPSCLT.getText()), ClienteAtual.getNome());
+            pDao.createPasseClt(passe);
+            clickHomeButton(event);
+          } else {
+            showCaixaAlerta(Passe.alertas());
+            Passe.setTextAlerta("Voce digitou incorretamente os campos: ");
           }
         }
-          
-          
+
         break;
     }
   }
-  
 
   @FXML
   void clickLogin(MouseEvent event) {
@@ -474,32 +463,33 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
         break;
     }
   }
-  public void showRoutesTable(){
+
+  public void showRoutesTable() {
     RotaDaoJDBC RDao = new RotaDaoJDBC();
     ArrayList<Rota> rotas = RDao.getAllRotas();
     System.out.println("TAMNHO DO ARRAY DE ROTAS: " + rotas.size());
-    //criando lista observável para ser exibida no table view
+    // criando lista observável para ser exibida no table view
     ObservableList<Rota> auxList = FXCollections.observableArrayList(rotas);
-    codRota.setCellValueFactory(new PropertyValueFactory<>("codigoRota")); 
+    codRota.setCellValueFactory(new PropertyValueFactory<>("codigoRota"));
     pSaida.setCellValueFactory(new PropertyValueFactory<>("pontoPartida"));
     pChegada.setCellValueFactory(new PropertyValueFactory<>("pontoChegada"));
     hour.setCellValueFactory(new PropertyValueFactory<>("horarioSaida"));
-    hour1.setCellValueFactory(new PropertyValueFactory<>("horarioChegada")); 
+    hour1.setCellValueFactory(new PropertyValueFactory<>("horarioChegada"));
     for (Rota rota : rotas) {
       Rota rotaAux = RDao.readRota(rota.getCodigoRota());
-      //Inserindo na lista
+      // Inserindo na lista
       auxList.add(rotaAux);
     }
-    //Inserindo na tabela
+    // Inserindo na tabela
     tbwRotas.setItems(auxList);
   }
+
   public boolean verifyExist(Cliente cliente) {
     // VERIFICAR PSWDF E TEXTFILD DA SENHA - cunsultar cpf atraves
     String email = textUsuario.getText();
     if (pwdFSenha.getLength() < textSenha.getLength()) {
       pwdFSenha.setText(textSenha.getText());
-    }
-    else if (textSenha.getLength() < pwdFSenha.getLength()) {
+    } else if (textSenha.getLength() < pwdFSenha.getLength()) {
       textSenha.setText(pwdFSenha.getText());
     }
     String senha = pwdFSenha.getText();
@@ -512,6 +502,7 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
 
     return login;
   }
+
   @FXML
   void clickHomeButton(MouseEvent event) {
     groupCliente.setVisible(false);
@@ -677,16 +668,16 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
     textCPFIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue.matches("\\d{11}")) {
         String formattedNumber = newValue.substring(0, 3) + "." +
-          newValue.substring(3, 6) + "." +
-          newValue.substring(6, 9) + "-" +
-          newValue.substring(9);
-          textCPFIDOSO.setText(formattedNumber);
+            newValue.substring(3, 6) + "." +
+            newValue.substring(6, 9) + "-" +
+            newValue.substring(9);
+        textCPFIDOSO.setText(formattedNumber);
       }
       if (textCPFIDOSO.getLength() > 14) {
         textCPFIDOSO.setText(oldValue);
       }
     });
-        // Formatacao dos RGs
+    // Formatacao dos RGs
     textRGCLT.textProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue.matches("\\d{10}")) {
         String formattedNumber = newValue.substring(0, 2) + "." +
@@ -770,7 +761,6 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
 
     homeButton.setVisible(false);
 
-    
   }
 
   @FXML
@@ -827,11 +817,10 @@ textTelefoneCLT.getText(), textNomeCLT.getText(), textEnderecoCLT.getText(), tex
   void clickRecarregou(MouseEvent event) {
     String aux = valorRecarga.getText();
     boolean isNumeric = (aux != null && aux.matches("[0-9]+"));
-    if(isNumeric == true){
+    if (isNumeric == true) {
       int Valor = Integer.parseInt(aux);
-      System.out.println("Valor: "+ Valor);
-    }
-    else{
+      System.out.println("Valor: " + Valor);
+    } else {
       System.out.println("Digite Corretamente");
     }
   }
