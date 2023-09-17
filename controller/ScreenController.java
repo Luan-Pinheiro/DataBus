@@ -178,8 +178,25 @@ public class ScreenController implements Initializable {
   private TableColumn<Rota, String> hour;
   @FXML
   private TableColumn<Rota, String> hour1;
+  @FXML
+  private TableView<Cliente> tbwClientes1;
+  @FXML
+  private TableView<Cliente> tbwClientes2;
+  @FXML
+  private TableColumn<Cliente, String> tCpf;
+  @FXML
+  private TableColumn<Cliente, String> tEmail;
+  @FXML
+  private TableColumn<Cliente, String> tEndereco;
+  @FXML
+  private TableColumn<Cliente, String> tNome;
+  @FXML
+  private TableColumn<Cliente, String> tPasse;
+  @FXML
+  private TableColumn<Cliente, String> tSenha;
+  @FXML
+  private TableColumn<Cliente, String> tTelefone;
   // Labels consulta dados
-
   @FXML
   private Label consultaCPF;
   @FXML
@@ -341,8 +358,6 @@ public class ScreenController implements Initializable {
       case 1:
         if (!Passe.confereNumMatricula(textMatricula.getText()))
           verify = false;
-        if(!Passe.confereInstitucao(textInstituicao.getText()))
-        verify = false;
         break;
       case 2:
         if (!Passe.confereRg(textRGIDOSO.getText()))
@@ -461,6 +476,9 @@ public class ScreenController implements Initializable {
 
     botaoVoltar.setVisible(true);
     botaoVoltar.setDisable(false);
+    if(!funcionarioBuscarCliente.getText().isEmpty()){
+      showClient(funcionarioBuscarCliente.getText());
+    }
   }
 
   @FXML
@@ -553,6 +571,42 @@ public class ScreenController implements Initializable {
     groupFuncionario.setVisible(true);
   }
 
+  public void showClientsTable() {
+    FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
+    ArrayList<Cliente> clientes = fDaoJDBC.getAllClientes();
+    // criando lista observável para ser exibida no table view
+    ObservableList<Cliente> auxList = FXCollections.observableArrayList(clientes);
+    tCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+    tEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+    tEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+    tNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+    tPasse.setCellValueFactory(new PropertyValueFactory<>("tipoPasse"));
+    tSenha.setCellValueFactory(new PropertyValueFactory<>("senha"));
+    tTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+    for (Cliente cliente : clientes) {
+      Cliente clienteAux = fDaoJDBC.readCliente(cliente.getCpf());
+      auxList.add(clienteAux);
+    }
+    tbwClientes1.setItems(auxList);
+    tbwClientes2.setItems(auxList);
+  }
+
+  public void showClient(String cpf) {
+    FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
+    Cliente cliente = fDaoJDBC.readCliente(cpf);
+    // criando lista observável para ser exibida no table view
+    ObservableList<Cliente> auxList = FXCollections.observableArrayList();
+    tCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+    tEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+    tEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+    tNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+    tPasse.setCellValueFactory(new PropertyValueFactory<>("tipoPasse"));
+    tSenha.setCellValueFactory(new PropertyValueFactory<>("senha"));
+    tTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+    auxList.add(cliente);
+    tbwClientes1.setItems(auxList);
+    tbwClientes2.setItems(auxList);
+  }
 
   public void showRoutesTable() {
     RotaDaoJDBC RDao = new RotaDaoJDBC();
@@ -918,6 +972,7 @@ public class ScreenController implements Initializable {
     groupRecarga.setVisible(false);
     groupRecarga.setDisable(true);
     valorRecarga.clear(); 
+    groupBuscarCliente.setVisible(false);
     homeButton.setVisible(true);
   }
 

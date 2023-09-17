@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScreenController">
    <children>
       <Group fx:id="groupESTUDANTE" visible="false">
          <children>
@@ -573,7 +573,7 @@
             </ImageView>
          </children>
       </Group>
-      <Group fx:id="groupBuscarCliente" visible="false">
+      <Group fx:id="groupBuscarCliente">
          <children>
             <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -585,6 +585,27 @@
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
             </TextField>
+            <TableView fx:id="tbwClientes1" layoutX="35.0" layoutY="371.0" prefHeight="97.0" prefWidth="406.0" stylesheets="@styles.css">
+               <columns>
+                  <TableColumn fx:id="tNome" editable="false" prefWidth="99.0" resizable="false" sortable="false" text="Nome" />
+                  <TableColumn fx:id="tCpf" editable="false" prefWidth="79.0" resizable="false" sortable="false" text="CPF" />
+                  <TableColumn fx:id="tEmail" editable="false" prefWidth="133.0" resizable="false" sortable="false" text="E-mail" />
+                  <TableColumn fx:id="tTelefone" editable="false" prefWidth="94.0" resizable="false" text="Telefone" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <TableView fx:id="tbwClientes2" layoutX="35.0" layoutY="494.0" prefHeight="97.0" prefWidth="406.0" stylesheets="@styles.css">
+               <columns>
+                  <TableColumn fx:id="tSenha" editable="false" prefWidth="163.0" resizable="false" sortable="false" text="Senha" />
+                  <TableColumn fx:id="tPasse" editable="false" prefWidth="104.0" resizable="false" sortable="false" text="Tipo de Passe" />
+                  <TableColumn fx:id="tEndereco" editable="false" prefWidth="138.0" resizable="false" text="Endereço" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
          </children>
       </Group>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
