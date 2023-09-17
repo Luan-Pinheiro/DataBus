@@ -295,7 +295,7 @@ public class ScreenController implements Initializable {
           verify = false;
         if (!Cliente.confereData(textNascimentoIDOSO.getText()))
           verify = false;
-
+      break;
       case 3:
         if (!Cliente.confereNome(textNomeCLT.getText()))
           verify = false;
@@ -311,7 +311,7 @@ public class ScreenController implements Initializable {
           verify = false;
         if (!Cliente.confereData(textNascimentoCLT.getText()))
           verify = false;
-
+      break;
     }
     return verify;
   }
@@ -365,10 +365,7 @@ public class ScreenController implements Initializable {
           Cliente.setTextAlerta("Voce digitou incorretamente os campos: ");
         } else {
           if (verificaCadastroPasse()) {
-            ClienteAtual = new Cliente(textEmailIDOSO.getText(), textSenhaIDOSO.getText(),
-                textNascimentoIDOSO.getText(),
-                textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(),
-                textCPFIDOSO.getText(), tipoPasse);
+            ClienteAtual = new Cliente(textEmailIDOSO.getText(), textSenhaIDOSO.getText(),textNascimentoIDOSO.getText(), textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(), textCPFIDOSO.getText(), tipoPasse);
             cDao.createCliente(ClienteAtual);
             passe = new Passe(ClienteAtual.getCpf(), 0, "6 meses", textRGIDOSO.getText(), ClienteAtual.getNome());
             pDao.createPasseIdoso(passe);
