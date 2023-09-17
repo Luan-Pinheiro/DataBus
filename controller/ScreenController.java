@@ -370,6 +370,7 @@ public class ScreenController implements Initializable {
   void clickHomeButton(MouseEvent event) {
     groupCliente.setVisible(false);
     groupCliente.setDisable(true);
+
     groupInicialScreen.setVisible(true);
     groupInicialScreen.setDisable(false);
     groupESTUDANTE.setVisible(false);
@@ -377,6 +378,7 @@ public class ScreenController implements Initializable {
     groupCLT.setVisible(false);
     clearText();
     homeButton.setVisible(false);
+
     groupConsultaDados.setVisible(false);
     groupConsultaDados.setDisable(true);
     grupoRotas.setVisible(false);
@@ -561,6 +563,8 @@ public class ScreenController implements Initializable {
  
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
+
+    homeButton.setVisible(false);
   }
 
   @FXML
@@ -580,6 +584,8 @@ public class ScreenController implements Initializable {
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
     grupoRotas.setVisible(true);
+
+    homeButton.setVisible(false);
   }
 
   @FXML
@@ -598,6 +604,8 @@ public class ScreenController implements Initializable {
 
     botaoVoltar.setDisable(false);
     botaoVoltar.setVisible(true);
+
+    homeButton.setVisible(false);
   }
 
   @FXML
@@ -619,6 +627,8 @@ public class ScreenController implements Initializable {
     grupoRotas.setVisible(false);
     groupConsultaDados.setVisible(false);
     groupConsultaDados.setDisable(true);
+
+    homeButton.setVisible(true);
   }
 
 }
