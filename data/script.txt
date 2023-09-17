@@ -43,9 +43,9 @@ CREATE TABLE if not exists databus.dadosPeriodicos(
                        cpf varchar(14) NOT NULL PRIMARY KEY); 
 
 CREATE TABLE if not exists databus.funcionario(
-                       email  varchar(12),  
-                       senha varchar(12),  
-                       codigoFuncionário integer NOT NULL PRIMARY KEY); 
+                       email  varchar(50),  
+                       senha varchar(20),  
+                       codigoFuncionario varchar(3) NOT NULL PRIMARY KEY); 
 
 CREATE TABLE if not exists databus.rotas(
                        codigoRota  varchar(3) NOT NULL PRIMARY KEY,
@@ -78,3 +78,15 @@ values ('R09','URBIS 2','UESB','09:30','10:30');
 
 insert into databus.rotas
 values ('P51','UESB','Patagônia','17:00','18:30');
+
+insert into databus.rotas
+values ('R07','Alto Maron','URBIS 3','19:30','20:30');
+
+insert into databus.rotas
+values ('P55','Boa Vista','Patagônia','21:00','21:30');
+
+insert into databus.rotas
+values ('R06','UESB','Patagônia','13:00','14:30');
+
+insert into databus.funcionario 
+values ('admin@databus.com', 'admin123', '001');

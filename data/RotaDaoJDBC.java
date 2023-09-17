@@ -40,28 +40,6 @@ public class RotaDaoJDBC implements iRotaDao{
     }
     return rotas;
   }
-
-  @Override
-  public void createRota(Rota rota) {
-    String sqlQuery = "insert into databus.rotas (codigoRota,ponto_partida,ponto_chegada,horario_saida,horario_chegada) values (?,?,?,?,?);";
-    PreparedStatement pst;
-    Connection connection;
-    try {
-      connection = new ConnectionFactory().getConnection();
-      pst = connection.prepareStatement(sqlQuery);
-      pst.setString(1, rota.getCodigoRota());
-      pst.setString(2, rota.getPontoPartida());
-      pst.setString(3, rota.getPontoChegada());
-      pst.setString(4, rota.getHorarioSaida());
-      pst.setString(5, rota.getHorarioChegada());
-      pst.execute();
-      pst.close();
-      connection.close();
-    } catch (SQLException ex) {
-      ex.printStackTrace();
-    }
-  }
-
   @Override
   public Rota readRota(String codRota) {
     String sqlQuery = "select * from databus.rotas where codigoRota=?";
@@ -91,42 +69,5 @@ public class RotaDaoJDBC implements iRotaDao{
       ex.printStackTrace();
     }
     return rota;
-  }
-
-  @Override
-  public void updateRota(Rota rota) {
-    String sqlQuery = "update databus.rotas set codigoRota=?, ponto_partida=?, ponto_chegada=?, horario_saida=?, horario_chegada=? where codigoRota=?";
-    PreparedStatement pst;
-    Connection connection;
-    try {
-      connection = new ConnectionFactory().getConnection();
-      pst = connection.prepareStatement(sqlQuery);
-      pst.setString(1, rota.getCodigoRota());
-      pst.setString(2, rota.getPontoPartida());
-      pst.setString(3, rota.getPontoChegada());
-      pst.setString(4, rota.getHorarioSaida());
-      pst.setString(5, rota.getHorarioChegada());
-      pst.execute();
-      pst.close();
-      connection.close();
-    } catch (SQLException ex) {
-      ex.printStackTrace();
-    }
-  }
-  @Override
-  public void deleteRota(Rota rota) {
-    String sqlQuery = "delete from databus.rotas where codigoRota=?";
-    PreparedStatement pst;
-    Connection connection;
-    try {
-      connection = new ConnectionFactory().getConnection();
-      pst = connection.prepareStatement(sqlQuery);
-      pst.setString(1, rota.getCodigoRota());
-      pst.execute();
-      pst.close();
-      connection.close();
-    } catch (SQLException ex) {
-      ex.printStackTrace();
-    }
   }
 }

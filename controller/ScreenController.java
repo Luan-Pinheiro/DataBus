@@ -3,7 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import data.ClienteDaoJDBC;
 import data.PasseDaoJDBC;
 import data.RotaDaoJDBC;
@@ -201,7 +200,6 @@ public class ScreenController implements Initializable {
   private boolean login = false;
   ClienteDaoJDBC cDao = new ClienteDaoJDBC();
   PasseDaoJDBC pDao = new PasseDaoJDBC();
-
   private boolean flag = true;
   Image openedEye = new Image("./assets/eye.png");
   Image closedEye = new Image("./assets/closed_eye.png");

@@ -24,7 +24,7 @@ public class Rota {
   public static String alertas() {
     return textAlerta;
   }
-  
+
   //Getters e Setters
   public String getCodigoRota() {
     return codigoRota;

@@ -5,10 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import model.Cliente;
+import model.Passe;
+import model.Rota;
 
-public class ClienteDaoJDBC implements iClienteDao {
+public class FuncionarioDaoJDBC implements iFuncionarioDao{
 
+  //---------------------------------- CLIENTE ----------------------------------//
   @Override
   public ArrayList<Cliente> getAllClientes() {
     // Linkar valores com a interface
@@ -192,4 +196,160 @@ public class ClienteDaoJDBC implements iClienteDao {
       ex.printStackTrace();
     }
   }
+  // ---------------------------------- PASSE ---------------------------------- //
+  @Override
+  public void updatePasse(Passe passe) {
+    String sqlQuery = "update databus.passe set validade=? numCartao=?";
+    PreparedStatement pst;
+    Connection connection;
+    try {
+      connection = new ConnectionFactory().getConnection();
+      pst = connection.prepareStatement(sqlQuery);
+      pst.setFloat(2, passe.getSaldo());
+      pst.setString(3, passe.getValidade());
+      pst.execute();
+      pst.close();
+      connection.close();
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+  }
+  @Override
+  public void deletePasse(Passe passe) {
+    String sqlQuery = "delete from databus.passe where numCartao=?";
+    PreparedStatement pst;
+    Connection connection;
+    try {
+      connection = new ConnectionFactory().getConnection();
+      pst = connection.prepareStatement(sqlQuery);
+      pst.setString(1, passe.getNumCartao());
+      pst.execute();
+      pst.close();
+      connection.close();
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+  }
+  //---------------------------------- ROTAS ----------------------------------//
+  @Override
+  public ArrayList<Rota> getAllRotas() {
+    String sqlQuery = "select * from databus.rotas";
+    PreparedStatement pst;
+    Connection connection;
+    ResultSet resultSet;
+    ArrayList<Rota> rotas = null;
+    try {
+      connection = new ConnectionFactory().getConnection();
+      pst = connection.prepareStatement(sqlQuery);
+      resultSet = pst.executeQuery();
+      if (resultSet != null) {
+        rotas = new ArrayList<Rota>();
+        while (resultSet.next()) {
+          Rota rota = new Rota();
+          rota.setCodigoRota(resultSet.getString("codigoRota"));
+          rota.setPontoPartida(resultSet.getString("ponto_partida"));
+          rota.setPontoChegada(resultSet.getString("ponto_chegada"));
+          rota.setHorarioSaida(resultSet.getString("horario_saida"));
+          rota.setHorarioChegada(resultSet.getString("horario_chegada"));
+          rotas.add(rota);
+        }
+        resultSet.close();
+        pst.close();
+        connection.close();
+      }
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+    return rotas;
+  }
+
+  @Override
+  public void createRota(Rota rota) {
+    String sqlQuery = "insert into databus.rotas (codigoRota,ponto_partida,ponto_chegada,horario_saida,horario_chegada) values (?,?,?,?,?);";
+    PreparedStatement pst;
+    Connection connection;
+    try {
+      connection = new ConnectionFactory().getConnection();
+      pst = connection.prepareStatement(sqlQuery);
+      pst.setString(1, rota.getCodigoRota());
+      pst.setString(2, rota.getPontoPartida());
+      pst.setString(3, rota.getPontoChegada());
+      pst.setString(4, rota.getHorarioSaida());
+      pst.setString(5, rota.getHorarioChegada());
+      pst.execute();
+      pst.close();
+      connection.close();
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  @Override
+  public Rota readRota(String codRota) {
+    String sqlQuery = "select * from databus.rotas where codigoRota=?";
+    PreparedStatement pst;
+    Connection connection;
+    ResultSet resultSet;
+    Rota rota = null;
+    try {
+      connection = new ConnectionFactory().getConnection();
+      pst = connection.prepareStatement(sqlQuery);
+      pst.setString(1, codRota);
+      resultSet = pst.executeQuery();
+      if (resultSet != null) {
+        while (resultSet.next()) {
+          rota = new Rota();
+          rota.setCodigoRota(resultSet.getString("codigoRota"));
+          rota.setPontoPartida(resultSet.getString("ponto_partida"));
+          rota.setPontoChegada(resultSet.getString("ponto_chegada"));
+          rota.setHorarioSaida(resultSet.getString("horario_saida"));
+          rota.setHorarioChegada(resultSet.getString("horario_chegada"));
+        }
+        resultSet.close();
+        pst.close();
+        connection.close();
+      }
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+    return rota;
+  }
+
+  @Override
+  public void updateRota(Rota rota) {
+    String sqlQuery = "update databus.rotas set codigoRota=?, ponto_partida=?, ponto_chegada=?, horario_saida=?, horario_chegada=? where codigoRota=?";
+    PreparedStatement pst;
+    Connection connection;
+    try {
+      connection = new ConnectionFactory().getConnection();
+      pst = connection.prepareStatement(sqlQuery);
+      pst.setString(1, rota.getCodigoRota());
+      pst.setString(2, rota.getPontoPartida());
+      pst.setString(3, rota.getPontoChegada());
+      pst.setString(4, rota.getHorarioSaida());
+      pst.setString(5, rota.getHorarioChegada());
+      pst.execute();
+      pst.close();
+      connection.close();
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+  }
+  @Override
+  public void deleteRota(Rota rota) {
+    String sqlQuery = "delete from databus.rotas where codigoRota=?";
+    PreparedStatement pst;
+    Connection connection;
+    try {
+      connection = new ConnectionFactory().getConnection();
+      pst = connection.prepareStatement(sqlQuery);
+      pst.setString(1, rota.getCodigoRota());
+      pst.execute();
+      pst.close();
+      connection.close();
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+  }
+  
 }

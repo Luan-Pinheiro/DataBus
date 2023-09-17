@@ -86,9 +86,6 @@ public class Cliente {
     }
     return valido;
   }
-
-  
-
   public static boolean confereEmail(String email) {
     boolean valido = false;
     if (email != null && email.length() > 0) {
@@ -104,7 +101,6 @@ public class Cliente {
     }
     return valido;
   }
-
   public static Boolean confereNumero(String numero) {
     numero = numero.replaceAll("[()-]", "");
     boolean valido = true;
@@ -125,11 +121,9 @@ public class Cliente {
     if (endereco.length() < 15) {
       valido = false;
     }
-
     if (valido == false) {
       textAlerta += "Endereco, ";
     }
-
     return valido;
   }
 

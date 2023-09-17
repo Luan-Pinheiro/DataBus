@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import model.Passe;
 
 public class PasseDaoJDBC implements iPasseDao {
-
   @Override
   public ArrayList<Passe> getAllPasses() {
     String sqlQuery = "select * from databus.passe";
@@ -165,7 +164,7 @@ public class PasseDaoJDBC implements iPasseDao {
 
   @Override
   public void updatePasse(Passe passe) {
-    String sqlQuery = "update databus.passe set saldo=?, validade=? numCartao=?";
+    String sqlQuery = "update databus.passe set validade=? numCartao=?";
     PreparedStatement pst;
     Connection connection;
     try {
@@ -197,4 +196,5 @@ public class PasseDaoJDBC implements iPasseDao {
       ex.printStackTrace();
     }
   }
+
 }

@@ -1,14 +1,4 @@
-/* ***************************************************************
-* Autor............: Carlos Gil Martins da Silva
-* Matricula........: 202110261
-* Inicio...........: 31/08/2023
-* Ultima alteracao.: 05/09/2023
-* Nome.............: Principal
-* Funcao...........: Importa o que é necessario para iniciar
-Starta as Cenas e carrega o FXML e inicia o programa
-****************************************************************/
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
