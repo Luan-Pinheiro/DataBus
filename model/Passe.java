@@ -60,7 +60,7 @@ public class Passe {
     }
 
     public static void setTextAlerta(String textAlerta) {
-        Cliente.textAlerta = textAlerta;
+        Passe.textAlerta = textAlerta;
     }
 
     public static Boolean confereRg(String rg) {
@@ -79,8 +79,7 @@ public class Passe {
     }
 
     public static boolean confereCtps(String ctps) {
-
-        ctps.replaceAll("[/]", "");
+        ctps = ctps.replaceAll("[/]", "");
         boolean valido = true;
         if (ctps.length() != 10) {
             valido = false;
@@ -92,6 +91,10 @@ public class Passe {
             textAlerta += "CTPS, ";
         }
         return valido;
+    }
+        public static String ctpsSemBarra(String ctps) {
+        ctps = ctps.replaceAll("[/]", "");
+        return ctps;
     }
 
     public static boolean confereNumMatricula(String nMatricula) {

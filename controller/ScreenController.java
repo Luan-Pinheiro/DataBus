@@ -370,7 +370,6 @@ public class ScreenController implements Initializable {
                 textTelefoneIDOSO.getText(), textNomeIDOSO.getText(), textEnderecoIDOSO.getText(),
                 textCPFIDOSO.getText(), tipoPasse);
             cDao.createCliente(ClienteAtual);
-
             passe = new Passe(ClienteAtual.getCpf(), 0, "6 meses", textRGIDOSO.getText(), ClienteAtual.getNome());
             pDao.createPasseIdoso(passe);
             clickHomeButton(event);
