@@ -252,8 +252,37 @@ public class ScreenController implements Initializable {
   private TextField editarCliente;
   @FXML
   private ImageView IMGmodofuncionario;
+
   @FXML
-  private TextField funcionarIoEditarCliente;
+  private Group groupBuscarRotas;
+  @FXML
+  private TableView<Cliente> tbwRotasCadastradas;
+  @FXML
+  private TableColumn<Cliente, String> idRota;
+  @FXML
+  private TableColumn<Cliente, String> pontoSaida;
+  @FXML
+  private TableColumn<Cliente, String> pontoChegada;
+  @FXML
+  private TableColumn<Cliente, String> saida;
+  @FXML
+  private TableColumn<Cliente, String> chegada;
+
+  @FXML
+  private TextField cadRotaID;
+  @FXML
+  private TextField cadRotaPartida;
+  @FXML
+  private TextField cadRotaChegada;
+  @FXML
+  private TextField cadRotahSaida;
+  @FXML
+  private TextField cadRotahChegada;
+  @FXML
+  private ImageView botaoCadastrarRotas;
+  @FXML
+  private Group groupCadastrarRotas;
+
 
   private Cliente ClienteAtual;
   private Passe passe;
@@ -507,6 +536,7 @@ public class ScreenController implements Initializable {
 
     botaoVoltar.setVisible(true);
     botaoVoltar.setDisable(false);
+    homeButton.setVisible(false);
   }
 
   
@@ -544,14 +574,39 @@ public class ScreenController implements Initializable {
     
     groupGerenciarCliente.setVisible(true);
     groupGerenciarCliente.setDisable(false);
+    
+    botaoVoltar.setVisible(true);
+    botaoVoltar.setDisable(false);
+    homeButton.setVisible(false);
   }
   
   @FXML
-  void buscarRota(MouseEvent event) {
+  void buscarRota(MouseEvent event) { 
+    groupFuncionario.setVisible(false);
+    groupFuncionario.setDisable(true);
 
+    groupBuscarRotas.setVisible(true);
+    groupBuscarRotas.setDisable(false);
+
+    botaoBuscar.setVisible(true);
+    botaoBuscar.setDisable(false);
+
+    botaoVoltar.setVisible(true);
+    botaoVoltar.setDisable(false);
+    homeButton.setVisible(false);
   }
+
   @FXML
   void gerenciarRotas(MouseEvent event) {
+    groupFuncionario.setVisible(false);
+    groupFuncionario.setDisable(true);
+
+    groupCadastrarRotas.setVisible(true);
+    groupCadastrarRotas.setDisable(false);
+
+    botaoVoltar.setVisible(true);
+    botaoVoltar.setDisable(false);
+    homeButton.setVisible(false);
 
   }
 
@@ -630,7 +685,6 @@ public class ScreenController implements Initializable {
     homeButton.setVisible(true);
     groupFuncionario.setVisible(true);
     groupFuncionario.setDisable(false);
-    groupInicialScreen.setDisable(false);
   }
 
   public void showClientsTable() {
@@ -748,8 +802,7 @@ public class ScreenController implements Initializable {
     grupoRotas.setDisable(true);
     groupFuncionario.setVisible(false);
     groupFuncionario.setDisable(true);
-    groupBuscarCliente.setVisible(false);
-    groupBuscarCliente.setDisable(true);
+
     botaoFuncionario.setVisible(true);
   }
 
@@ -1063,6 +1116,11 @@ public class ScreenController implements Initializable {
       groupGerenciarCliente.setDisable(true);
       groupBuscarCliente.setVisible(false);
       groupBuscarCliente.setDisable(true);
+      groupBuscarRotas.setVisible(false);
+      groupBuscarRotas.setDisable(true);
+      groupCadastrarRotas.setVisible(false);
+      groupCadastrarRotas.setDisable(true);
+
       groupFuncionario.setVisible(true);
       groupFuncionario.setDisable(false);
       
@@ -1111,5 +1169,9 @@ public class ScreenController implements Initializable {
     } else {
       showCaixaAlerta("Digite o Valor Corretamente, USE EXCLUSIVAMENTE OS NUMEROS");
     }
+  }
+  @FXML
+  void clickBotaoCadastrarRotas(MouseEvent event) { //
+
   }
 }

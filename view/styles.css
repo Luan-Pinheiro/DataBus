@@ -32,7 +32,8 @@
 
   #editarEmail, #editarEndereco, #editarNome, 
   #editarSenha, #editarTelefone,
-  #funcionarIoEditarCliente {
+  #funcionarIoEditarCliente,
+  #textFuncionarioROTAS{
     -fx-text-fill: white;
     -fx-background-color: transparent;
   }
