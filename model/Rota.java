@@ -25,6 +25,87 @@ public class Rota {
     return textAlerta;
   }
 
+
+  public static void setTextAlerta(String textAlerta) {
+    Rota.textAlerta = textAlerta;
+}
+
+public static boolean conferePontoChegada(String PontoChegada){
+  boolean valido = true;
+  if (PontoChegada.length() < 3) {
+    valido = false;
+  }
+  if (!PontoChegada.matches("[a-zA-Z\\s]*")) {
+    valido = false;
+  }
+  if (valido == false) {
+    textAlerta += "Ponto chegada, ";
+  }
+
+  return valido;
+}
+
+public static boolean conferePontoPartida(String PontoChegada){
+  boolean valido = true;
+  if (PontoChegada.length() < 3) {
+    valido = false;
+  }
+  if (!PontoChegada.matches("[a-zA-Z\\s]*")) {
+    valido = false;
+  }
+  if (valido == false) {
+    textAlerta += "Ponto chegada, ";
+  }
+
+  return valido;
+}
+
+public static Boolean confereCdRota(String codigoRota) {
+  boolean valido = true;
+  if (codigoRota.length() != 3) {
+      valido = false;
+  }
+  if (!codigoRota.matches("[a-zA-Z0-9]*")) {
+      valido = false;
+  }
+  if (valido == false) {
+      textAlerta += "CodigoRota, ";
+  }
+  return valido;
+}
+
+
+
+public static Boolean confereHorarioSaida(String horarioSaida) {
+  horarioSaida = horarioSaida.replaceAll("[:]", "");
+  boolean valido = true;
+  if (horarioSaida.length() != 4) {
+      valido = false;
+  }
+  if (!horarioSaida.matches("[0-9]*")) {
+      valido = false;
+  }
+  if (valido == false) {
+      textAlerta += "horarioSaida, ";
+  }
+  return valido;
+}
+
+public static Boolean confereHorarioEntrada(String horarioEntrada) {
+  horarioEntrada = horarioEntrada.replaceAll("[:]", "");
+  boolean valido = true;
+  if (horarioEntrada.length() != 4) {
+      valido = false;
+  }
+  if (!horarioEntrada.matches("[0-9]*")) {
+      valido = false;
+  }
+  if (valido == false) {
+      textAlerta += "horarioSaida, ";
+  }
+  return valido;
+}
+
   //Getters e Setters
   public String getCodigoRota() {
     return codigoRota;

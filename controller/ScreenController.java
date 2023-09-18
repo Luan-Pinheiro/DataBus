@@ -619,9 +619,29 @@ public class ScreenController implements Initializable {
     botaoVoltar.setDisable(false);
     homeButton.setVisible(false);
   }
+
+   public boolean verificaRotas() {
+    boolean verify = true;
+    if (!Rota.confereCdRota(cadRotaID.getText()))
+          verify = false;
+    if (!Rota.conferePontoChegada(cadRotaChegada.getText())) 
+          verify = false;
+    if (!Rota.conferePontoPartida(cadRotaPartida.getText()))
+    verify = false;
+    if (!Rota.confereHorarioEntrada(cadRotahChegada.getText()))
+    verify = false;
+    if (!Rota.confereHorarioSaida(cadRotahSaida.getText()))
+    verify = false;
+    
+    return verify;
+   }
   
   @FXML
   void clickBotaoCadastrarRotas(MouseEvent event) { //
+    if (!verificaRotas()) {
+          showCaixaAlerta(Rota.alertas());
+          Rota.setTextAlerta("Voce digitou incorretamente os campos: ");
+        } else {
     FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
     String[] infos = new String[]{cadRotaID.getText(),cadRotaPartida.getText(),cadRotaChegada.getText(),cadRotahSaida.getText(),cadRotahChegada.getText()};
     String codRota = infos[0];
@@ -633,7 +653,8 @@ public class ScreenController implements Initializable {
     fDaoJDBC.createRota(rota);
     clearText();
     System.out.println("Rota criada!");
-
+    botaoVoltar(event);
+        }
   }
 
 
@@ -1226,6 +1247,30 @@ public class ScreenController implements Initializable {
         textCTPSCLT.setText(oldValue);
       }
     });
+
+    cadRotahChegada.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{4}")) {
+        String formattedNumber = newValue.substring(0, 2) + ":" +
+            newValue.substring(2);
+        cadRotahChegada.setText(formattedNumber);
+      }
+      if (cadRotahChegada.getLength() > 5) {
+        cadRotahChegada.setText(oldValue);
+      }
+    });
+
+    cadRotahSaida.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{4}")) {
+        String formattedNumber = newValue.substring(0, 2) + ":" +
+            newValue.substring(2);
+        cadRotahSaida.setText(formattedNumber);
+      }
+      if (cadRotahSaida.getLength() > 5) {
+        cadRotahSaida.setText(oldValue);
+      }
+    });
+
+
 
   }
 
