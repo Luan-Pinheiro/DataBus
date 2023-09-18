@@ -696,7 +696,7 @@
             <TextField fx:id="cadRotahChegada" layoutX="151.0" layoutY="471.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css" />
          </children>
       </Group>
-      <Group fx:id="groupClientesCadastrados">
+      <Group fx:id="groupClientesCadastrados" visible="false">
          <children>
             <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
                <image>

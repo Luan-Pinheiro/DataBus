@@ -166,6 +166,8 @@ public class ScreenController implements Initializable {
   @FXML
   private Group groupGerenciarCliente;
   @FXML
+  private Group groupClientesCadastrados;
+  @FXML
   private Label saldoCliente;
   @FXML
   private ImageView saldoIMG;
@@ -184,6 +186,16 @@ public class ScreenController implements Initializable {
   private TableColumn<Rota, String> hour;
   @FXML
   private TableColumn<Rota, String> hour1;
+  @FXML
+  private TableView<Cliente> tbwClientes;
+  @FXML
+  private TableColumn<Cliente, String> tableNome;
+  @FXML
+  private TableColumn<Cliente, String> tableCPF;
+  @FXML
+  private TableColumn<Cliente, String> tableTelefone;
+  @FXML
+  private TableColumn<Cliente, String> tablePasse;
   @FXML
   private TableView<Cliente> tbwClientes1;
   @FXML
@@ -637,9 +649,13 @@ public class ScreenController implements Initializable {
     botaoGerenciarRotas.setDisable(true);
     botaoBuscarRota.setVisible(false);
     botaoBuscarRota.setDisable(true);
+    groupClientesCadastrados.setVisible(true);
+    groupClientesCadastrados.setDisable(false);
     textOperacaoFuncionario.setVisible(false);
     botaoVoltar.setVisible(true);
     botaoVoltar.setDisable(false);
+    homeButton.setVisible(false);
+    showClientsTables();
   }
 
   @FXML
@@ -698,7 +714,7 @@ public class ScreenController implements Initializable {
     groupFuncionario.setDisable(false);
   }
 
-  public void showClientsTable() {
+  public void showClientTable() {
     FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
     ArrayList<Cliente> clientes = fDaoJDBC.getAllClientes();
     // criando lista observável para ser exibida no table view
@@ -731,6 +747,23 @@ public class ScreenController implements Initializable {
     auxList.add(cliente);
     tbwClientes1.setItems(auxList);
     tbwClientes2.setItems(auxList);
+  }
+  public void showClientsTables(){
+    FuncionarioDaoJDBC fDao = new FuncionarioDaoJDBC();
+    ArrayList<Cliente> clientes = fDao.getAllClientes();
+    // criando lista observável para ser exibida no table view
+    ObservableList<Cliente> auxList = FXCollections.observableArrayList();
+    tableNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+    tableCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
+    tableTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+    tablePasse.setCellValueFactory(new PropertyValueFactory<>("tipoPasse"));
+    for (Cliente cliente : clientes) {
+      Cliente clienteAux = fDao.readCliente(cliente.getCpf());
+      // Inserindo na lista
+      auxList.add(clienteAux);
+    }
+    // Inserindo na tabela
+    tbwClientes.setItems(auxList);
   }
 
   public void showRoutesTableClient() {
@@ -964,7 +997,9 @@ public class ScreenController implements Initializable {
       groupBuscarRotas.setDisable(true);
       groupCadastrarRotas.setVisible(false);
       groupCadastrarRotas.setDisable(true);
-
+      groupClientesCadastrados.setVisible(false);
+      groupClientesCadastrados.setDisable(true);
+      
       groupFuncionario.setVisible(true);
       groupFuncionario.setDisable(false);
       
