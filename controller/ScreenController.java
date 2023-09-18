@@ -256,19 +256,33 @@ public class ScreenController implements Initializable {
   @FXML
   private Group groupBuscarRotas;
   @FXML
-  private TextField textFuncionarioROTAS;
+  private TableView<Cliente> tbwRotasCadastradas;
   @FXML
-  private ImageView botaoBuscarRotaLUPA;
+  private TableColumn<Cliente, String> idRota;
   @FXML
-  private TableView<Cliente> tbwROTAS;
+  private TableColumn<Cliente, String> pontoSaida;
   @FXML
-  private TableColumn<Cliente, String> Partida;
+  private TableColumn<Cliente, String> pontoChegada;
   @FXML
-  private TableColumn<Cliente, String> Chegada;
+  private TableColumn<Cliente, String> saida;
   @FXML
-  private TableColumn<Cliente, String> horaSaida;
+  private TableColumn<Cliente, String> chegada;
+
   @FXML
-  private TableColumn<Cliente, String> horaChegada;
+  private TextField cadRotaID;
+  @FXML
+  private TextField cadRotaPartida;
+  @FXML
+  private TextField cadRotaChegada;
+  @FXML
+  private TextField cadRotahSaida;
+  @FXML
+  private TextField cadRotahChegada;
+  @FXML
+  private ImageView botaoCadastrarRotas;
+  @FXML
+  private Group groupCadastrarRotas;
+
 
   private Cliente ClienteAtual;
   private Passe passe;
@@ -576,6 +590,15 @@ public class ScreenController implements Initializable {
 
   @FXML
   void gerenciarRotas(MouseEvent event) {
+    groupFuncionario.setVisible(false);
+    groupFuncionario.setDisable(true);
+
+    groupCadastrarRotas.setVisible(true);
+    groupCadastrarRotas.setDisable(false);
+
+    botaoVoltar.setVisible(true);
+    botaoVoltar.setDisable(false);
+    homeButton.setVisible(false);
 
   }
 
@@ -1040,6 +1063,8 @@ public class ScreenController implements Initializable {
       groupBuscarCliente.setDisable(true);
       groupBuscarRotas.setVisible(false);
       groupBuscarRotas.setDisable(true);
+      groupCadastrarRotas.setVisible(false);
+      groupCadastrarRotas.setDisable(true);
 
       groupFuncionario.setVisible(true);
       groupFuncionario.setDisable(false);
@@ -1089,5 +1114,9 @@ public class ScreenController implements Initializable {
     } else {
       showCaixaAlerta("Digite o Valor Corretamente, USE EXCLUSIVAMENTE OS NUMEROS");
     }
+  }
+  @FXML
+  void clickBotaoCadastrarRotas(MouseEvent event) { //
+
   }
 }
