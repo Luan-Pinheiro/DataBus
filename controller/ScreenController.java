@@ -574,6 +574,7 @@ public class ScreenController implements Initializable {
       clienteDadosManutencao.setTelefone(editarTelefone.getText());
       clienteDadosManutencao.setEmail(editarEmail.getText());
       fDaoJDBC.updateCliente(clienteDadosManutencao);
+      botaoVoltar(event);
     }else{
       showCaixaAlerta("Dados inválidos!");
     }
@@ -893,7 +894,19 @@ public class ScreenController implements Initializable {
     textNome.clear();
     textSenha2.clear();
     textTelefone.clear();
-    valorRecarga.clear(); 
+    valorRecarga.clear();
+    funcionarIoBuscarCliente.clear();
+    funcionarIoEditarCliente.clear();
+    editarNome.clear();
+    editarSenha.clear();
+    editarEndereco.clear();
+    editarTelefone.clear();
+    editarEmail.clear();
+    cadRotaID.clear();
+    cadRotaPartida.clear();
+    cadRotaChegada.clear();
+    cadRotahSaida.clear();
+    cadRotahChegada.clear();
   }
 
   public static void showCaixaAlerta(String texto) { // metodo da caixa de alerta
@@ -978,6 +991,7 @@ public class ScreenController implements Initializable {
   @FXML
   void botaoVoltar(MouseEvent event) {
     if (funcionarioFlag) {
+      clearText();
       groupGerenciarCliente.setVisible(false);
       groupGerenciarCliente.setDisable(true);
       groupBuscarCliente.setVisible(false);
