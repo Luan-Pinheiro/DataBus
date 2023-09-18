@@ -696,6 +696,26 @@
             <TextField fx:id="cadRotahChegada" layoutX="151.0" layoutY="471.0" prefHeight="25.0" prefWidth="171.0" />
          </children>
       </Group>
+      <Group fx:id="groupClientesCadastrados">
+         <children>
+            <ImageView fitHeight="650.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/backgroundListarClientes.png" />
+               </image>
+            </ImageView>
+            <TableView fx:id="tbwClientes" layoutX="38.0" layoutY="191.0" prefHeight="361.0" prefWidth="393.0" stylesheets="@styles.css">
+               <columns>
+                  <TableColumn fx:id="tableNome" editable="false" prefWidth="132.0" resizable="false" sortable="false" text="Nome" />
+                  <TableColumn fx:id="tableCPF" editable="false" prefWidth="104.0" resizable="false" sortable="false" text="CPF" />
+                  <TableColumn fx:id="tableTelefone" editable="false" prefWidth="102.0" resizable="false" sortable="false" text="Telefone" />
+                  <TableColumn fx:id="tablePasse" editable="false" prefWidth="54.0" resizable="false" text="Passe" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </Group>
       <ImageView fx:id="botaoVoltar" fitHeight="36.0" fitWidth="50.0" layoutX="217.0" layoutY="582.0" onMouseClicked="#botaoVoltar" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../assets/botaoVoltar.png" />
