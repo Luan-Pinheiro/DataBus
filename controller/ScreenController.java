@@ -748,6 +748,7 @@ public class ScreenController implements Initializable {
     tbwClientes1.setItems(auxList);
     tbwClientes2.setItems(auxList);
   }
+  
   public void showClientsTables(){
     FuncionarioDaoJDBC fDao = new FuncionarioDaoJDBC();
     ArrayList<Cliente> clientes = fDao.getAllClientes();
@@ -999,7 +1000,7 @@ public class ScreenController implements Initializable {
       groupCadastrarRotas.setDisable(true);
       groupClientesCadastrados.setVisible(false);
       groupClientesCadastrados.setDisable(true);
-      
+
       groupFuncionario.setVisible(true);
       groupFuncionario.setDisable(false);
       
