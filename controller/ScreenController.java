@@ -648,7 +648,7 @@ public class ScreenController implements Initializable {
    }
   
   @FXML
-  void clickBotaoCadastrarRotas(MouseEvent event) { //
+  void clickBotaoCadastrarRotas(MouseEvent event) { //dsd adsdas
     if (!verificaRotas()) {
           showCaixaAlerta(Rota.alertas());
           Rota.setTextAlerta("Voce digitou incorretamente os campos: ");
