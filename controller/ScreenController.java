@@ -875,6 +875,7 @@ public class ScreenController implements Initializable {
   }
 
   public static void showCaixaAlerta(String texto) { // metodo da caixa de alerta
+    //teste
     Alert alert = new Alert(AlertType.WARNING);
     alert.setTitle("Aviso");
     alert.setHeaderText("Ocorreu um erro!");
