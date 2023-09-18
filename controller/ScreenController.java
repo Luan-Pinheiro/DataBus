@@ -639,19 +639,8 @@ public class ScreenController implements Initializable {
 
   @FXML
   void listarClientes(MouseEvent event) {
-    botaoListarClientes.setVisible(false);
-    botaoListarClientes.setDisable(true);
-    botaoBuscarCliente.setVisible(false);
-    botaoBuscarCliente.setDisable(true);
-    botaoGerenciarCliente.setVisible(false);
-    botaoGerenciarCliente.setDisable(true);
-    botaoGerenciarRotas.setVisible(false);
-    botaoGerenciarRotas.setDisable(true);
-    botaoBuscarRota.setVisible(false);
-    botaoBuscarRota.setDisable(true);
     groupClientesCadastrados.setVisible(true);
     groupClientesCadastrados.setDisable(false);
-    textOperacaoFuncionario.setVisible(false);
     botaoVoltar.setVisible(true);
     botaoVoltar.setDisable(false);
     homeButton.setVisible(false);
