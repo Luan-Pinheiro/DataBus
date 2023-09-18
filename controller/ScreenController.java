@@ -572,13 +572,15 @@ public class ScreenController implements Initializable {
     if(fDaoJDBC.readCliente(funcionarIoEditarCliente.getText())!=null){
       Cliente clienteDadosManutencao = fDaoJDBC.readCliente(funcionarIoEditarCliente.getText());
       if(isInDatabase(clienteDadosManutencao)){
-        if(!(editarNome.getText().isEmpty() && editarSenha.getText().isEmpty() &&editarEndereco.getText().isEmpty() && editarTelefone.getText().isEmpty() && editarEmail.getText().isEmpty())){
+        if(!(editarNome.getText().isEmpty() && editarSenha.getText().isEmpty() &&editarEndereco.getText().isEmpty() && editarTelefone.getText().isEmpty() && editarEmail.getText().isEmpty()) &&
+        Cliente.confereNome(editarNome.getText()) && Cliente.confereSenha(editarSenha.getText())&&Cliente.confereEndereco(editarEndereco.getText())&&Cliente.confereNumero(editarTelefone.getText())&&Cliente.confereEmail(editarEmail.getText())){
           clienteDadosManutencao.setNome(editarNome.getText());
           clienteDadosManutencao.setSenha(editarSenha.getText());
           clienteDadosManutencao.setEndereco(editarEndereco.getText());
           clienteDadosManutencao.setTelefone(editarTelefone.getText());
           clienteDadosManutencao.setEmail(editarEmail.getText());
           fDaoJDBC.updateCliente(clienteDadosManutencao);
+          botaoVoltar(event);
         }else{
           showCaixaAlerta("Dados inválidos!");
         }
