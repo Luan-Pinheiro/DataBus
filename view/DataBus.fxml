@@ -633,9 +633,18 @@
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="editarEndereco" layoutX="163.0" layoutY="397.0" prefHeight="16.0" prefWidth="149.0" stylesheets="@styles.css" />
-            <TextField fx:id="editarTelefone" layoutX="163.0" layoutY="446.0" prefHeight="16.0" prefWidth="149.0" stylesheets="@styles.css" />
-            <TextField fx:id="editarEmail" layoutX="163.0" layoutY="500.0" prefHeight="16.0" prefWidth="149.0" stylesheets="@styles.css" />
+            <TextField fx:id="editarEndereco" layoutX="163.0" layoutY="397.0" prefHeight="16.0" prefWidth="149.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font></TextField>
+            <TextField fx:id="editarTelefone" layoutX="163.0" layoutY="446.0" prefHeight="16.0" prefWidth="149.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font></TextField>
+            <TextField fx:id="editarEmail" layoutX="163.0" layoutY="500.0" prefHeight="16.0" prefWidth="149.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font></TextField>
             <TextField fx:id="editarSenha" layoutX="163.0" layoutY="341.0" prefHeight="16.0" prefWidth="149.0" stylesheets="@styles.css">
                <font>
                   <Font name="Microsoft Tai Le Bold" size="12.0" />
@@ -645,6 +654,9 @@
                <image>
                   <Image url="@../assets/botaoSalvar.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <TextField fx:id="funcionarIoEditarCliente" layoutX="138.0" layoutY="166.0" prefHeight="25.0" prefWidth="198.0" stylesheets="@styles.css">
                <font>
@@ -689,11 +701,26 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <TextField fx:id="cadRotaID" layoutX="151.0" layoutY="222.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css" />
-            <TextField fx:id="cadRotaPartida" layoutX="151.0" layoutY="285.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css" />
-            <TextField fx:id="cadRotaChegada" layoutX="151.0" layoutY="346.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css" />
-            <TextField fx:id="cadRotahSaida" layoutX="151.0" layoutY="409.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css" />
-            <TextField fx:id="cadRotahChegada" layoutX="151.0" layoutY="471.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css" />
+            <TextField fx:id="cadRotaID" layoutX="151.0" layoutY="222.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font></TextField>
+            <TextField fx:id="cadRotaPartida" layoutX="151.0" layoutY="285.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font></TextField>
+            <TextField fx:id="cadRotaChegada" layoutX="151.0" layoutY="346.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font></TextField>
+            <TextField fx:id="cadRotahSaida" layoutX="151.0" layoutY="409.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font></TextField>
+            <TextField fx:id="cadRotahChegada" layoutX="151.0" layoutY="471.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css">
+               <font>
+                  <Font name="Microsoft Tai Le Bold" size="12.0" />
+               </font></TextField>
          </children>
       </Group>
       <Group fx:id="groupClientesCadastrados" visible="false">

@@ -13,6 +13,7 @@ public interface iFuncionarioDao {
   ArrayList<Cliente> getAllClientes();
   void createCliente (Cliente cliente);
   Cliente readCliente (String cpf);
+  Cliente queryCliente (String cpf);
   void updateCliente (Cliente cliente);
   void deleteCliente (Cliente cliente);
   Cliente queryAccount (String cpf);

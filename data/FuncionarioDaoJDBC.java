@@ -148,6 +148,39 @@ public class FuncionarioDaoJDBC implements iFuncionarioDao{
           cliente = new Cliente();
           cliente.setNome(resultSet.getString("nome"));
           cliente.setCpf(resultSet.getString("cpf"));
+          cliente.setEmail(resultSet.getString("email"));
+          cliente.setTelefone(resultSet.getString("telefone"));
+          cliente.setSenha(resultSet.getString("senha"));
+          cliente.setTipoPasse(resultSet.getInt("tipoPasse"));
+          cliente.setEndereco(resultSet.getString("endereco"));
+        }
+        resultSet.close();
+        pst.close();
+        connection.close();
+      }
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+    }
+    return cliente;
+  }
+
+  @Override
+  public Cliente queryCliente(String cpf) {
+    String sqlQuery = "select * from databus.cliente where cpf=?";
+    PreparedStatement pst;
+    Connection connection;
+    ResultSet resultSet;
+    Cliente cliente = null;
+    try {
+      connection = new ConnectionFactory().getConnection();
+      pst = connection.prepareStatement(sqlQuery);
+      pst.setString(1, cpf);
+      resultSet = pst.executeQuery();
+      if (resultSet != null) {
+        while (resultSet.next()) {
+          cliente = new Cliente();
+          cliente.setNome(resultSet.getString("nome"));
+          cliente.setCpf(resultSet.getString("cpf"));
           cliente.setTelefone(resultSet.getString("telefone"));
           cliente.setTipoPasse(resultSet.getInt("tipoPasse"));
         }

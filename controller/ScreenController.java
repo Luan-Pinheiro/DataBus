@@ -554,11 +554,14 @@ public class ScreenController implements Initializable {
   @FXML
   void buscarCpfCliente(MouseEvent event) {
     FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
-    Cliente clienteSolicitado = fDaoJDBC.readCliente(funcionarIoBuscarCliente.getText());
-    if(isInDatabase(clienteSolicitado)){
-      showClient(clienteSolicitado.getCpf());
-      funcionarIoBuscarCliente.clear();
-    }else{
+    if(fDaoJDBC.readCliente(funcionarIoBuscarCliente.getText()) != null){
+      Cliente clienteSolicitado = fDaoJDBC.readCliente(funcionarIoBuscarCliente.getText());
+      if(isInDatabase(clienteSolicitado)){
+        showClient(clienteSolicitado.getCpf());
+        funcionarIoBuscarCliente.clear();
+      }
+    }
+    else{
       showCaixaAlerta("Dados inválidos!");
     }
   }
@@ -566,16 +569,24 @@ public class ScreenController implements Initializable {
   @FXML
   void salvarDadosEditados(MouseEvent event) {
     FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
-    Cliente clienteDadosManutencao = fDaoJDBC.readCliente(funcionarIoEditarCliente.getText());
-    if(isInDatabase(clienteDadosManutencao)){
-      clienteDadosManutencao.setNome(editarNome.getText());
-      clienteDadosManutencao.setSenha(editarSenha.getText());
-      clienteDadosManutencao.setEndereco(editarEndereco.getText());
-      clienteDadosManutencao.setTelefone(editarTelefone.getText());
-      clienteDadosManutencao.setEmail(editarEmail.getText());
-      fDaoJDBC.updateCliente(clienteDadosManutencao);
+    if(fDaoJDBC.readCliente(funcionarIoEditarCliente.getText())!=null){
+      Cliente clienteDadosManutencao = fDaoJDBC.readCliente(funcionarIoEditarCliente.getText());
+      if(isInDatabase(clienteDadosManutencao)){
+        if(!(editarNome.getText().isEmpty() && editarSenha.getText().isEmpty() &&editarEndereco.getText().isEmpty() && editarTelefone.getText().isEmpty() && editarEmail.getText().isEmpty()) &&
+        Cliente.confereNome(editarNome.getText()) && Cliente.confereSenha(editarSenha.getText())&&Cliente.confereEndereco(editarEndereco.getText())&&Cliente.confereNumero(editarTelefone.getText())&&Cliente.confereEmail(editarEmail.getText())){
+          clienteDadosManutencao.setNome(editarNome.getText());
+          clienteDadosManutencao.setSenha(editarSenha.getText());
+          clienteDadosManutencao.setEndereco(editarEndereco.getText());
+          clienteDadosManutencao.setTelefone(editarTelefone.getText());
+          clienteDadosManutencao.setEmail(editarEmail.getText());
+          fDaoJDBC.updateCliente(clienteDadosManutencao);
+          botaoVoltar(event);
+        }else{
+          showCaixaAlerta("Dados inválidos!");
+        }
+      }
     }else{
-      showCaixaAlerta("Dados inválidos!");
+      showCaixaAlerta("CPF Inexistente!");
     }
   }
   @FXML
@@ -724,20 +735,6 @@ public class ScreenController implements Initializable {
     groupFuncionario.setDisable(false);
   }
 
-  public void showClientTable() {
-    FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
-    ArrayList<Cliente> clientes = fDaoJDBC.getAllClientes();
-    // criando lista observável para ser exibida no table view
-    ObservableList<Cliente> auxList = FXCollections.observableArrayList(clientes);
-    clientInfoAddress();
-    for (Cliente cliente : clientes) {
-      Cliente clienteAux = fDaoJDBC.readCliente(cliente.getCpf());
-      auxList.add(clienteAux);
-    }
-    tbwClientes1.setItems(auxList);
-    tbwClientes2.setItems(auxList);
-  }
-
   public void   clientInfoAddress(){
     tCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
     tEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -758,6 +755,7 @@ public class ScreenController implements Initializable {
     tbwClientes1.setItems(auxList);
     tbwClientes2.setItems(auxList);
   }
+
   public void showClientsTables(){
     FuncionarioDaoJDBC fDao = new FuncionarioDaoJDBC();
     ArrayList<Cliente> clientes = fDao.getAllClientes();
@@ -768,7 +766,7 @@ public class ScreenController implements Initializable {
     tableTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
     tablePasse.setCellValueFactory(new PropertyValueFactory<>("tipoPasse"));
     for (Cliente cliente : clientes) {
-      Cliente clienteAux = fDao.readCliente(cliente.getCpf());
+      Cliente clienteAux = fDao.queryCliente(cliente.getCpf());
       // Inserindo na lista
       auxList.add(clienteAux);
     }
@@ -839,6 +837,9 @@ public class ScreenController implements Initializable {
         isInDatabase = true;
         return isInDatabase;
       }
+    }
+    if(!isInDatabase){
+      showCaixaAlerta("Este CPF não existe na nossa base de dados!");
     }
     return isInDatabase;
   }
@@ -914,7 +915,19 @@ public class ScreenController implements Initializable {
     textNome.clear();
     textSenha2.clear();
     textTelefone.clear();
-    valorRecarga.clear(); 
+    valorRecarga.clear();
+    funcionarIoBuscarCliente.clear();
+    funcionarIoEditarCliente.clear();
+    editarNome.clear();
+    editarSenha.clear();
+    editarEndereco.clear();
+    editarTelefone.clear();
+    editarEmail.clear();
+    cadRotaID.clear();
+    cadRotaPartida.clear();
+    cadRotaChegada.clear();
+    cadRotahSaida.clear();
+    cadRotahChegada.clear();
   }
 
   public static void showCaixaAlerta(String texto) { // metodo da caixa de alerta
@@ -999,6 +1012,7 @@ public class ScreenController implements Initializable {
   @FXML
   void botaoVoltar(MouseEvent event) {
     if (funcionarioFlag) {
+      clearText();
       groupGerenciarCliente.setVisible(false);
       groupGerenciarCliente.setDisable(true);
       groupBuscarCliente.setVisible(false);
@@ -1009,7 +1023,6 @@ public class ScreenController implements Initializable {
       groupCadastrarRotas.setDisable(true);
       groupClientesCadastrados.setVisible(false);
       groupClientesCadastrados.setDisable(true);
-      
       groupFuncionario.setVisible(true);
       groupFuncionario.setDisable(false);
       
