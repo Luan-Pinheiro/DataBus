@@ -13,7 +13,7 @@ public class Principal extends Application {
   public void start(Stage stagePrimary) throws Exception {
     stagePrimary.getIcons().add(new Image("./assets/icon.png"));//Definindo icone do programa
 
-    stagePrimary.setTitle("Camada Fisica"); // Setando Nome na barra de pesquisa
+    stagePrimary.setTitle("DataBus"); // Setando Nome na barra de pesquisa
     Parent fxmlStart = FXMLLoader.load(getClass().getResource("view/DataBus.fxml")); // Carregamento do FXML Tela
     telaEntrada = new Scene(fxmlStart); // Definicao cena nova com o fxml carregado
 
