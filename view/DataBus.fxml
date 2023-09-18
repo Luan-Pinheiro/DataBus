@@ -660,7 +660,7 @@
                   <Image url="@../assets/backgroundBuscarROT.png" />
                </image>
             </ImageView>
-            <TableView fx:id="tbwRotasCadastradas" layoutX="39.0" layoutY="224.0" prefHeight="303.0" prefWidth="390.0" stylesheets="@styles.css">
+            <TableView fx:id="tbwRotasCadastradas" layoutX="39.0" layoutY="224.0" prefHeight="343.0" prefWidth="390.0" stylesheets="@styles.css">
                <columns>
                   <TableColumn fx:id="idRota" editable="false" prefWidth="51.0" resizable="false" sortable="false" text="ID Rota" />
                   <TableColumn fx:id="pontoSaida" editable="false" prefWidth="85.0" resizable="false" sortable="false" text="Ponto Saída" />
@@ -689,11 +689,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <TextField fx:id="cadRotaID" layoutX="151.0" layoutY="222.0" prefHeight="25.0" prefWidth="171.0" />
-            <TextField fx:id="cadRotaPartida" layoutX="151.0" layoutY="285.0" prefHeight="25.0" prefWidth="171.0" />
-            <TextField fx:id="cadRotaChegada" layoutX="151.0" layoutY="346.0" prefHeight="25.0" prefWidth="171.0" />
-            <TextField fx:id="cadRotahSaida" layoutX="151.0" layoutY="409.0" prefHeight="25.0" prefWidth="171.0" />
-            <TextField fx:id="cadRotahChegada" layoutX="151.0" layoutY="471.0" prefHeight="25.0" prefWidth="171.0" />
+            <TextField fx:id="cadRotaID" layoutX="151.0" layoutY="222.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css" />
+            <TextField fx:id="cadRotaPartida" layoutX="151.0" layoutY="285.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css" />
+            <TextField fx:id="cadRotaChegada" layoutX="151.0" layoutY="346.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css" />
+            <TextField fx:id="cadRotahSaida" layoutX="151.0" layoutY="409.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css" />
+            <TextField fx:id="cadRotahChegada" layoutX="151.0" layoutY="471.0" prefHeight="25.0" prefWidth="171.0" stylesheets="@styles.css" />
          </children>
       </Group>
       <ImageView fx:id="botaoVoltar" fitHeight="36.0" fitWidth="50.0" layoutX="217.0" layoutY="582.0" onMouseClicked="#botaoVoltar" pickOnBounds="true" preserveRatio="true" visible="false">

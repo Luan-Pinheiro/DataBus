@@ -3,9 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import javax.swing.plaf.basic.BasicComboBoxUI.ItemHandler;
-
 import data.ClienteDaoJDBC;
 import data.FuncionarioDaoJDBC;
 import data.PasseDaoJDBC;
@@ -239,6 +236,8 @@ public class ScreenController implements Initializable {
   @FXML
   private TextField funcionarIoBuscarCliente;
   @FXML
+  private TextField funcionarIoEditarCliente;
+  @FXML
   private TextField editarEmail;
   @FXML
   private TextField editarEndereco;
@@ -256,7 +255,7 @@ public class ScreenController implements Initializable {
   @FXML
   private Group groupBuscarRotas;
   @FXML
-  private TableView<Cliente> tbwRotasCadastradas;
+  private TableView<Rota> tbwRotasCadastradas;
   @FXML
   private TableColumn<Cliente, String> idRota;
   @FXML
@@ -282,6 +281,7 @@ public class ScreenController implements Initializable {
   private ImageView botaoCadastrarRotas;
   @FXML
   private Group groupCadastrarRotas;
+  
 
 
   private Cliente ClienteAtual;
@@ -486,7 +486,6 @@ public class ScreenController implements Initializable {
             Passe.setTextAlerta("Voce digitou incorretamente os campos: ");
           }
         }
-
         break;
     }
   }
@@ -590,10 +589,10 @@ public class ScreenController implements Initializable {
 
     botaoBuscar.setVisible(true);
     botaoBuscar.setDisable(false);
-
     botaoVoltar.setVisible(true);
     botaoVoltar.setDisable(false);
     homeButton.setVisible(false);
+    showRoutesTable();
   }
 
   @FXML
@@ -607,6 +606,21 @@ public class ScreenController implements Initializable {
     botaoVoltar.setVisible(true);
     botaoVoltar.setDisable(false);
     homeButton.setVisible(false);
+  }
+  
+  @FXML
+  void clickBotaoCadastrarRotas(MouseEvent event) { //
+    FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
+    String[] infos = new String[]{cadRotaID.getText(),cadRotaPartida.getText(),cadRotaChegada.getText(),cadRotahSaida.getText(),cadRotahChegada.getText()};
+    String codRota = infos[0];
+    String pPartida = infos[1];
+    String pChegada = infos[2];
+    String hSaida = infos[3];
+    String hChegada = infos[4];
+    Rota rota = new Rota(codRota, pPartida, pChegada, hSaida, hChegada);
+    fDaoJDBC.createRota(rota);
+    clearText();
+    System.out.println("Rota criada!");
 
   }
 
@@ -624,7 +638,6 @@ public class ScreenController implements Initializable {
     botaoBuscarRota.setVisible(false);
     botaoBuscarRota.setDisable(true);
     textOperacaoFuncionario.setVisible(false);
-
     botaoVoltar.setVisible(true);
     botaoVoltar.setDisable(false);
   }
@@ -636,7 +649,6 @@ public class ScreenController implements Initializable {
   }
 
   public void ClienteLogado(Cliente cliente, Passe passe) {
-    showRoutesTable();
     botaoFuncionario.setVisible(false);
     groupInicialScreen.setVisible(false);
     groupInicialScreen.setDisable(true);
@@ -678,7 +690,6 @@ public class ScreenController implements Initializable {
     }
   }
   public void funcionarioLogado(Funcionario funcionario) {
-    showRoutesTable();
     botaoFuncionario.setVisible(false);
     groupInicialScreen.setVisible(false);
     groupInicialScreen.setDisable(true);
@@ -722,12 +733,11 @@ public class ScreenController implements Initializable {
     tbwClientes2.setItems(auxList);
   }
 
-  public void showRoutesTable() {
+  public void showRoutesTableClient() {
     RotaDaoJDBC RDao = new RotaDaoJDBC();
     ArrayList<Rota> rotas = RDao.getAllRotas();
-    System.out.println("TAMNHO DO ARRAY DE ROTAS: " + rotas.size());
     // criando lista observável para ser exibida no table view
-    ObservableList<Rota> auxList = FXCollections.observableArrayList(rotas);
+    ObservableList<Rota> auxList = FXCollections.observableArrayList();
     codRota.setCellValueFactory(new PropertyValueFactory<>("codigoRota"));
     pSaida.setCellValueFactory(new PropertyValueFactory<>("pontoPartida"));
     pChegada.setCellValueFactory(new PropertyValueFactory<>("pontoChegada"));
@@ -741,6 +751,26 @@ public class ScreenController implements Initializable {
     // Inserindo na tabela
     tbwRotas.setItems(auxList);
   }
+  public void showRoutesTable() {
+    FuncionarioDaoJDBC fDao = new FuncionarioDaoJDBC();
+    ArrayList<Rota> rotas = fDao.getAllRotas();
+    // criando lista observável para ser exibida no table view
+    ObservableList<Rota> auxList = FXCollections.observableArrayList();
+    idRota.setCellValueFactory(new PropertyValueFactory<>("codigoRota"));
+    pontoSaida.setCellValueFactory(new PropertyValueFactory<>("pontoPartida"));
+    pontoChegada.setCellValueFactory(new PropertyValueFactory<>("pontoChegada"));
+    saida.setCellValueFactory(new PropertyValueFactory<>("horarioSaida"));
+    chegada.setCellValueFactory(new PropertyValueFactory<>("horarioChegada"));
+    for (Rota rota : rotas) {
+      Rota rotaAux = fDao.readRota(rota.getCodigoRota());
+      // Inserindo na lista
+      auxList.add(rotaAux);
+    }
+    // Inserindo na tabela
+    tbwRotasCadastradas.setItems(auxList);
+  }
+
+  
 
   public boolean confirmLogin(Funcionario funcionario) {
     String email = textUsuario.getText();
@@ -807,6 +837,11 @@ public class ScreenController implements Initializable {
   }
 
   public void clearText() {
+    cadRotaID.clear();
+    cadRotaPartida.clear();
+    cadRotaPartida.clear();
+    cadRotahSaida.clear();
+    cadRotahChegada.clear();
     pwdFSenha.clear();
     textSenha.clear();
     textUsuario.clear();
@@ -847,7 +882,137 @@ public class ScreenController implements Initializable {
 
     alert.showAndWait();
   }
+  
+  @FXML
+  void consultarDados(MouseEvent event) {
+    saldoIMG.setVisible(false);
+    saldoCliente.setVisible(false);
 
+    botaoRecarregar.setDisable(true);
+    botaoConsultarDados.setDisable(true);
+    botaoConsultarRotas.setDisable(true);
+
+    botaoRecarregar.setVisible(false);
+    botaoConsultarDados.setVisible(false);
+    botaoConsultarRotas.setVisible(false);
+    textOperacao.setVisible(false);
+
+    groupConsultaDados.setVisible(true);
+    groupConsultaDados.setDisable(false);
+
+    botaoVoltar.setDisable(false);
+    botaoVoltar.setVisible(true);
+
+    homeButton.setVisible(false);
+  }
+
+  @FXML
+  void consultarRotas(MouseEvent event) {
+    saldoIMG.setVisible(false);
+    saldoCliente.setVisible(false);
+
+    botaoRecarregar.setDisable(true);
+    botaoConsultarDados.setDisable(true);
+    botaoConsultarRotas.setDisable(true);
+
+    botaoRecarregar.setVisible(false);
+    botaoConsultarDados.setVisible(false);
+    botaoConsultarRotas.setVisible(false);
+    textOperacao.setVisible(false);
+
+    botaoVoltar.setDisable(false);
+    botaoVoltar.setVisible(true);
+
+    grupoRotas.setVisible(true);
+    grupoRotas.setDisable(false);
+    homeButton.setVisible(false);
+    showRoutesTableClient(); 
+  }
+
+  @FXML
+  void recarregar(MouseEvent event) {
+    saldoIMG.setVisible(false);
+    saldoCliente.setVisible(false);
+
+    botaoRecarregar.setDisable(true);
+    botaoRecarregar.setVisible(false);
+    botaoConsultarDados.setDisable(true);
+    botaoConsultarRotas.setDisable(true);
+
+    botaoConsultarDados.setVisible(false);
+    botaoConsultarRotas.setVisible(false);
+    textOperacao.setVisible(false);
+
+    botaoVoltar.setDisable(false);
+    botaoVoltar.setVisible(true);
+
+    groupRecarga.setVisible(true);
+    groupRecarga.setDisable(false);
+    homeButton.setVisible(false);
+    valorRecarga.clear(); 
+  }
+
+  @FXML
+  void botaoVoltar(MouseEvent event) {
+    if (funcionarioFlag) {
+      groupGerenciarCliente.setVisible(false);
+      groupGerenciarCliente.setDisable(true);
+      groupBuscarCliente.setVisible(false);
+      groupBuscarCliente.setDisable(true);
+      groupBuscarRotas.setVisible(false);
+      groupBuscarRotas.setDisable(true);
+      groupCadastrarRotas.setVisible(false);
+      groupCadastrarRotas.setDisable(true);
+
+      groupFuncionario.setVisible(true);
+      groupFuncionario.setDisable(false);
+      
+    } else {
+      saldoIMG.setVisible(true);
+      saldoCliente.setVisible(true);
+
+      botaoRecarregar.setDisable(false);
+      botaoConsultarDados.setDisable(false);
+      botaoConsultarRotas.setDisable(false);
+
+      botaoRecarregar.setVisible(true);
+      botaoConsultarDados.setVisible(true);
+      botaoConsultarRotas.setVisible(true);
+      textOperacao.setVisible(true);
+
+      grupoRotas.setVisible(false);
+      grupoRotas.setDisable(true);
+
+      groupConsultaDados.setVisible(false);
+      groupConsultaDados.setDisable(true);
+
+      groupRecarga.setVisible(false);
+      groupRecarga.setDisable(true);
+
+      valorRecarga.clear();
+    }
+    botaoVoltar.setDisable(true);
+    botaoVoltar.setVisible(false);
+
+    homeButton.setVisible(true);
+
+  }
+
+  @FXML
+  void clickRecarregou(MouseEvent event) { 
+    String aux = valorRecarga.getText();
+    boolean isNumeric = (aux != null && aux.matches("[0-9]+"));
+    if (isNumeric == true) {
+      int Valor = Integer.parseInt(aux);
+      passe.setSaldo(Valor);
+      pDao.updatePasse(passe, ClienteAtual.getTipoPasse());
+      valorRecarga.clear();
+      saldoCliente.setText("R$ "+ passe.getSaldo());
+      botaoVoltar(event);
+    } else {
+      showCaixaAlerta("Digite o Valor Corretamente, USE EXCLUSIVAMENTE OS NUMEROS");
+    }
+  }
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
@@ -1039,139 +1204,4 @@ public class ScreenController implements Initializable {
 
   }
 
-  @FXML
-  void consultarDados(MouseEvent event) {
-    saldoIMG.setVisible(false);
-    saldoCliente.setVisible(false);
-
-    botaoRecarregar.setDisable(true);
-    botaoConsultarDados.setDisable(true);
-    botaoConsultarRotas.setDisable(true);
-
-    botaoRecarregar.setVisible(false);
-    botaoConsultarDados.setVisible(false);
-    botaoConsultarRotas.setVisible(false);
-    textOperacao.setVisible(false);
-
-    groupConsultaDados.setVisible(true);
-    groupConsultaDados.setDisable(false);
-
-    botaoVoltar.setDisable(false);
-    botaoVoltar.setVisible(true);
-
-    homeButton.setVisible(false);
-  }
-
-  @FXML
-  void consultarRotas(MouseEvent event) {
-    saldoIMG.setVisible(false);
-    saldoCliente.setVisible(false);
-
-    botaoRecarregar.setDisable(true);
-    botaoConsultarDados.setDisable(true);
-    botaoConsultarRotas.setDisable(true);
-
-    botaoRecarregar.setVisible(false);
-    botaoConsultarDados.setVisible(false);
-    botaoConsultarRotas.setVisible(false);
-    textOperacao.setVisible(false);
-
-    botaoVoltar.setDisable(false);
-    botaoVoltar.setVisible(true);
-
-    grupoRotas.setVisible(true);
-    grupoRotas.setDisable(false);
-
-    homeButton.setVisible(false);
-
-  }
-
-  @FXML
-  void recarregar(MouseEvent event) {
-    saldoIMG.setVisible(false);
-    saldoCliente.setVisible(false);
-
-    botaoRecarregar.setDisable(true);
-    botaoRecarregar.setVisible(false);
-    botaoConsultarDados.setDisable(true);
-    botaoConsultarRotas.setDisable(true);
-
-    botaoConsultarDados.setVisible(false);
-    botaoConsultarRotas.setVisible(false);
-    textOperacao.setVisible(false);
-
-    botaoVoltar.setDisable(false);
-    botaoVoltar.setVisible(true);
-
-    groupRecarga.setVisible(true);
-    groupRecarga.setDisable(false);
-    homeButton.setVisible(false);
-    valorRecarga.clear(); 
-  }
-
-  @FXML
-  void botaoVoltar(MouseEvent event) {
-    if (funcionarioFlag) {
-      groupGerenciarCliente.setVisible(false);
-      groupGerenciarCliente.setDisable(true);
-      groupBuscarCliente.setVisible(false);
-      groupBuscarCliente.setDisable(true);
-      groupBuscarRotas.setVisible(false);
-      groupBuscarRotas.setDisable(true);
-      groupCadastrarRotas.setVisible(false);
-      groupCadastrarRotas.setDisable(true);
-
-      groupFuncionario.setVisible(true);
-      groupFuncionario.setDisable(false);
-      
-    } else {
-      saldoIMG.setVisible(true);
-      saldoCliente.setVisible(true);
-
-      botaoRecarregar.setDisable(false);
-      botaoConsultarDados.setDisable(false);
-      botaoConsultarRotas.setDisable(false);
-
-      botaoRecarregar.setVisible(true);
-      botaoConsultarDados.setVisible(true);
-      botaoConsultarRotas.setVisible(true);
-      textOperacao.setVisible(true);
-
-      grupoRotas.setVisible(false);
-      grupoRotas.setDisable(true);
-
-      groupConsultaDados.setVisible(false);
-      groupConsultaDados.setDisable(true);
-
-      groupRecarga.setVisible(false);
-      groupRecarga.setDisable(true);
-
-      valorRecarga.clear();
-    }
-    botaoVoltar.setDisable(true);
-    botaoVoltar.setVisible(false);
-
-    homeButton.setVisible(true);
-
-  }
-
-  @FXML
-  void clickRecarregou(MouseEvent event) { 
-    String aux = valorRecarga.getText();
-    boolean isNumeric = (aux != null && aux.matches("[0-9]+"));
-    if (isNumeric == true) {
-      int Valor = Integer.parseInt(aux);
-      passe.setSaldo(Valor);
-      pDao.updatePasse(passe, ClienteAtual.getTipoPasse());
-      valorRecarga.clear();
-      saldoCliente.setText("R$ "+ passe.getSaldo());
-      botaoVoltar(event);
-    } else {
-      showCaixaAlerta("Digite o Valor Corretamente, USE EXCLUSIVAMENTE OS NUMEROS");
-    }
-  }
-  @FXML
-  void clickBotaoCadastrarRotas(MouseEvent event) { //
-
-  }
 }
