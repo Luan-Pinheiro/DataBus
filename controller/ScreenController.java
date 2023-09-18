@@ -3,9 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import javax.swing.plaf.basic.BasicComboBoxUI.ItemHandler;
-
 import data.ClienteDaoJDBC;
 import data.FuncionarioDaoJDBC;
 import data.PasseDaoJDBC;
@@ -239,6 +236,8 @@ public class ScreenController implements Initializable {
   @FXML
   private TextField funcionarIoBuscarCliente;
   @FXML
+  private TextField funcionarIoEditarCliente;
+  @FXML
   private TextField editarEmail;
   @FXML
   private TextField editarEndereco;
@@ -256,7 +255,7 @@ public class ScreenController implements Initializable {
   @FXML
   private Group groupBuscarRotas;
   @FXML
-  private TableView<Cliente> tbwRotasCadastradas;
+  private TableView<Rota> tbwRotasCadastradas;
   @FXML
   private TableColumn<Cliente, String> idRota;
   @FXML
@@ -282,6 +281,7 @@ public class ScreenController implements Initializable {
   private ImageView botaoCadastrarRotas;
   @FXML
   private Group groupCadastrarRotas;
+  
 
 
   private Cliente ClienteAtual;
@@ -486,7 +486,6 @@ public class ScreenController implements Initializable {
             Passe.setTextAlerta("Voce digitou incorretamente os campos: ");
           }
         }
-
         break;
     }
   }
@@ -543,21 +542,29 @@ public class ScreenController implements Initializable {
   @FXML
   void buscarCpfCliente(MouseEvent event) {
     FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
-    String cpf = funcionarIoBuscarCliente.getText();
-    boolean localFlag = Cliente.confereCpf(cpf);
-    System.out.println(funcionarIoBuscarCliente.getText());
     Cliente clienteSolicitado = fDaoJDBC.readCliente(funcionarIoBuscarCliente.getText());
-    showClient(clienteSolicitado.getCpf());
-    //if(verif)
-    if(localFlag){
+    if(isInDatabase(clienteSolicitado)){
+      showClient(clienteSolicitado.getCpf());
+      funcionarIoBuscarCliente.clear();
     }else{
-      Cliente.setTextAlerta("ERRO");
+      showCaixaAlerta("Dados inválidos!");
     }
   }
 
   @FXML
   void salvarDadosEditados(MouseEvent event) {
-    //FAZER O UPDATE CLIENTE
+    FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
+    Cliente clienteDadosManutencao = fDaoJDBC.readCliente(funcionarIoEditarCliente.getText());
+    if(isInDatabase(clienteDadosManutencao)){
+      clienteDadosManutencao.setNome(editarNome.getText());
+      clienteDadosManutencao.setSenha(editarSenha.getText());
+      clienteDadosManutencao.setEndereco(editarEndereco.getText());
+      clienteDadosManutencao.setTelefone(editarTelefone.getText());
+      clienteDadosManutencao.setEmail(editarEmail.getText());
+      fDaoJDBC.updateCliente(clienteDadosManutencao);
+    }else{
+      showCaixaAlerta("Dados inválidos!");
+    }
   }
   @FXML
   void gerenciarCliente(MouseEvent event) {
@@ -582,10 +589,10 @@ public class ScreenController implements Initializable {
 
     botaoBuscar.setVisible(true);
     botaoBuscar.setDisable(false);
-
     botaoVoltar.setVisible(true);
     botaoVoltar.setDisable(false);
     homeButton.setVisible(false);
+    showRoutesTable();
   }
 
   @FXML
@@ -599,6 +606,21 @@ public class ScreenController implements Initializable {
     botaoVoltar.setVisible(true);
     botaoVoltar.setDisable(false);
     homeButton.setVisible(false);
+  }
+  
+  @FXML
+  void clickBotaoCadastrarRotas(MouseEvent event) { //
+    FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
+    String[] infos = new String[]{cadRotaID.getText(),cadRotaPartida.getText(),cadRotaChegada.getText(),cadRotahSaida.getText(),cadRotahChegada.getText()};
+    String codRota = infos[0];
+    String pPartida = infos[1];
+    String pChegada = infos[2];
+    String hSaida = infos[3];
+    String hChegada = infos[4];
+    Rota rota = new Rota(codRota, pPartida, pChegada, hSaida, hChegada);
+    fDaoJDBC.createRota(rota);
+    clearText();
+    System.out.println("Rota criada!");
 
   }
 
@@ -616,7 +638,6 @@ public class ScreenController implements Initializable {
     botaoBuscarRota.setVisible(false);
     botaoBuscarRota.setDisable(true);
     textOperacaoFuncionario.setVisible(false);
-
     botaoVoltar.setVisible(true);
     botaoVoltar.setDisable(false);
   }
@@ -628,7 +649,6 @@ public class ScreenController implements Initializable {
   }
 
   public void ClienteLogado(Cliente cliente, Passe passe) {
-    showRoutesTable();
     botaoFuncionario.setVisible(false);
     groupInicialScreen.setVisible(false);
     groupInicialScreen.setDisable(true);
@@ -644,7 +664,7 @@ public class ScreenController implements Initializable {
     consultaNascimento.setText(cliente.getDataNascimento());
     consultaIndereco.setText(cliente.getEndereco());
     consultaTelefone.setText(cliente.getTelefone());
-    consultaEmail.setText(cliente.getemail());
+    consultaEmail.setText(cliente.getEmail());
     consultaSenha.setText(cliente.getSenha());
     consultaCartao.setText(passe.getNumCartao());
 
@@ -670,7 +690,6 @@ public class ScreenController implements Initializable {
     }
   }
   public void funcionarioLogado(Funcionario funcionario) {
-    showRoutesTable();
     botaoFuncionario.setVisible(false);
     groupInicialScreen.setVisible(false);
     groupInicialScreen.setDisable(true);
@@ -714,12 +733,11 @@ public class ScreenController implements Initializable {
     tbwClientes2.setItems(auxList);
   }
 
-  public void showRoutesTable() {
+  public void showRoutesTableClient() {
     RotaDaoJDBC RDao = new RotaDaoJDBC();
     ArrayList<Rota> rotas = RDao.getAllRotas();
-    System.out.println("TAMNHO DO ARRAY DE ROTAS: " + rotas.size());
     // criando lista observável para ser exibida no table view
-    ObservableList<Rota> auxList = FXCollections.observableArrayList(rotas);
+    ObservableList<Rota> auxList = FXCollections.observableArrayList();
     codRota.setCellValueFactory(new PropertyValueFactory<>("codigoRota"));
     pSaida.setCellValueFactory(new PropertyValueFactory<>("pontoPartida"));
     pChegada.setCellValueFactory(new PropertyValueFactory<>("pontoChegada"));
@@ -733,6 +751,26 @@ public class ScreenController implements Initializable {
     // Inserindo na tabela
     tbwRotas.setItems(auxList);
   }
+  public void showRoutesTable() {
+    FuncionarioDaoJDBC fDao = new FuncionarioDaoJDBC();
+    ArrayList<Rota> rotas = fDao.getAllRotas();
+    // criando lista observável para ser exibida no table view
+    ObservableList<Rota> auxList = FXCollections.observableArrayList();
+    idRota.setCellValueFactory(new PropertyValueFactory<>("codigoRota"));
+    pontoSaida.setCellValueFactory(new PropertyValueFactory<>("pontoPartida"));
+    pontoChegada.setCellValueFactory(new PropertyValueFactory<>("pontoChegada"));
+    saida.setCellValueFactory(new PropertyValueFactory<>("horarioSaida"));
+    chegada.setCellValueFactory(new PropertyValueFactory<>("horarioChegada"));
+    for (Rota rota : rotas) {
+      Rota rotaAux = fDao.readRota(rota.getCodigoRota());
+      // Inserindo na lista
+      auxList.add(rotaAux);
+    }
+    // Inserindo na tabela
+    tbwRotasCadastradas.setItems(auxList);
+  }
+
+  
 
   public boolean confirmLogin(Funcionario funcionario) {
     String email = textUsuario.getText();
@@ -749,6 +787,18 @@ public class ScreenController implements Initializable {
     login = (emailFlag & senhaFlag);
     return login;
   }
+  public boolean isInDatabase(Cliente cliente) {
+    boolean isInDatabase = false;
+    FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
+    ArrayList<Cliente> clientes = fDaoJDBC.getAllClientes();
+    for (Cliente verificador : clientes) {
+      if(verificador.getCpf().equals(cliente.getCpf())){
+        isInDatabase = true;
+        return isInDatabase;
+      }
+    }
+    return isInDatabase;
+  }
   public boolean verifyExist(Cliente cliente) {
     String email = textUsuario.getText();
     if (pwdFSenha.getLength() < textSenha.getLength()) {
@@ -757,7 +807,7 @@ public class ScreenController implements Initializable {
       textSenha.setText(pwdFSenha.getText());
     }
     String senha = pwdFSenha.getText();
-    emailFlag = (cDao.queryAccount(cliente.getCpf()).getemail().equals(email)) ? true : false;
+    emailFlag = (cDao.queryAccount(cliente.getCpf()).getEmail().equals(email)) ? true : false;
     if (emailFlag) {
       senhaFlag = (cDao.queryAccount(cliente.getCpf()).getSenha().equals(senha)) ? true : false;
     }
@@ -787,6 +837,11 @@ public class ScreenController implements Initializable {
   }
 
   public void clearText() {
+    cadRotaID.clear();
+    cadRotaPartida.clear();
+    cadRotaPartida.clear();
+    cadRotahSaida.clear();
+    cadRotahChegada.clear();
     pwdFSenha.clear();
     textSenha.clear();
     textUsuario.clear();
@@ -827,163 +882,7 @@ public class ScreenController implements Initializable {
 
     alert.showAndWait();
   }
-
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-
-    // Verifica o tamanho dos digitos da string e caso seja o tamanho do numero
-    // maximo
-    // insere a pontuação adequada para a formatacao necessaria e nao permite
-    // maiores quantidades que o limite
-    imgSeePassword.setImage(openedEye);
-    textSenha.setVisible(false);
-    botaoFuncionario.setVisible(true);
-
-    // Formatação Texto do Telefone
-    textTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
-            newValue.substring(2, 7) + "-" +
-            newValue.substring(7);
-        textTelefone.setText(formattedNumber);
-      }
-      if (textTelefone.getLength() > 14) {
-        textTelefone.setText(oldValue);
-      }
-    });
-    textTelefoneCLT.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
-            newValue.substring(2, 7) + "-" +
-            newValue.substring(7);
-        textTelefoneCLT.setText(formattedNumber);
-      }
-      if (textTelefoneCLT.getLength() > 14) {
-        textTelefoneCLT.setText(oldValue);
-      }
-    });
-    textTelefoneIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
-            newValue.substring(2, 7) + "-" +
-            newValue.substring(7);
-        textTelefoneIDOSO.setText(formattedNumber);
-      }
-      if (textTelefoneIDOSO.getLength() > 14) {
-        textTelefoneIDOSO.setText(oldValue);
-      }
-    });
-
-    // Formatacao das Datas
-    textNascimento.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{8}")) {
-        String formattedNumber = newValue.substring(0, 2) + "/" +
-            newValue.substring(2, 4) + "/" +
-            newValue.substring(4);
-        textNascimento.setText(formattedNumber);
-      }
-      if (textNascimento.getLength() > 10) {
-        textNascimento.setText(oldValue);
-      }
-    });
-    textNascimentoCLT.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{8}")) {
-        String formattedNumber = newValue.substring(0, 2) + "/" +
-            newValue.substring(2, 4) + "/" +
-            newValue.substring(4);
-        textNascimentoCLT.setText(formattedNumber);
-      }
-      if (textNascimentoCLT.getLength() > 10) {
-        textNascimentoCLT.setText(oldValue);
-      }
-    });
-    textNascimentoIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{8}")) {
-        String formattedNumber = newValue.substring(0, 2) + "/" +
-            newValue.substring(2, 4) + "/" +
-            newValue.substring(4);
-        textNascimentoIDOSO.setText(formattedNumber);
-      }
-      if (textNascimentoIDOSO.getLength() > 10) {
-        textNascimentoIDOSO.setText(oldValue);
-      }
-    });
-    // Formatacao dos CPFs
-    textCPF.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = newValue.substring(0, 3) + "." +
-            newValue.substring(3, 6) + "." +
-            newValue.substring(6, 9) + "-" +
-            newValue.substring(9);
-        textCPF.setText(formattedNumber);
-      }
-      if (textCPF.getLength() > 14) {
-        textCPF.setText(oldValue);
-      }
-    });
-    textCPFCLT.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = newValue.substring(0, 3) + "." +
-            newValue.substring(3, 6) + "." +
-            newValue.substring(6, 9) + "-" +
-            newValue.substring(9);
-        textCPFCLT.setText(formattedNumber);
-      }
-      if (textCPFCLT.getLength() > 14) {
-        textCPFCLT.setText(oldValue);
-      }
-    });
-    textCPFIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = newValue.substring(0, 3) + "." +
-            newValue.substring(3, 6) + "." +
-            newValue.substring(6, 9) + "-" +
-            newValue.substring(9);
-        textCPFIDOSO.setText(formattedNumber);
-      }
-      if (textCPFIDOSO.getLength() > 14) {
-        textCPFIDOSO.setText(oldValue);
-      }
-    });
-    // Formatacao dos RGs
-    textRGCLT.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{10}")) {
-        String formattedNumber = newValue.substring(0, 2) + "." +
-            newValue.substring(2, 5) + "." +
-            newValue.substring(5, 8) + "-" +
-            newValue.substring(8);
-        textRGCLT.setText(formattedNumber);
-      }
-      if (textRGCLT.getLength() > 13) {
-        textRGCLT.setText(oldValue);
-      }
-    });
-    textRGIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{10}")) {
-        String formattedNumber = newValue.substring(0, 2) + "." +
-            newValue.substring(2, 5) + "." +
-            newValue.substring(5, 8) + "-" +
-            newValue.substring(8);
-        textRGIDOSO.setText(formattedNumber);
-      }
-      if (textRGIDOSO.getLength() > 13) {
-        textRGIDOSO.setText(oldValue);
-      }
-    });
-    // Formatacao do CTPS
-    textCTPSCLT.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{9}")) {
-        String formattedNumber = newValue.substring(0, 6) + "/" +
-            newValue.substring(6);
-        textCTPSCLT.setText(formattedNumber);
-      }
-      if (textCTPSCLT.getLength() > 10) {
-        textCTPSCLT.setText(oldValue);
-      }
-    });
-
-  }
-
+  
   @FXML
   void consultarDados(MouseEvent event) {
     saldoIMG.setVisible(false);
@@ -1026,9 +925,8 @@ public class ScreenController implements Initializable {
 
     grupoRotas.setVisible(true);
     grupoRotas.setDisable(false);
-
     homeButton.setVisible(false);
-
+    showRoutesTableClient(); 
   }
 
   @FXML
@@ -1115,8 +1013,195 @@ public class ScreenController implements Initializable {
       showCaixaAlerta("Digite o Valor Corretamente, USE EXCLUSIVAMENTE OS NUMEROS");
     }
   }
-  @FXML
-  void clickBotaoCadastrarRotas(MouseEvent event) { //
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+
+    // Verifica o tamanho dos digitos da string e caso seja o tamanho do numero
+    // maximo
+    // insere a pontuação adequada para a formatacao necessaria e nao permite
+    // maiores quantidades que o limite
+    imgSeePassword.setImage(openedEye);
+    textSenha.setVisible(false);
+    botaoFuncionario.setVisible(true);
+
+    // Formatação Texto do Telefone
+    editarTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
+            newValue.substring(2, 7) + "-" +
+            newValue.substring(7);
+        editarTelefone.setText(formattedNumber);
+      }
+      if (editarTelefone.getLength() > 14) {
+        editarTelefone.setText(oldValue);
+      }
+    });
+    textTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
+            newValue.substring(2, 7) + "-" +
+            newValue.substring(7);
+        textTelefone.setText(formattedNumber);
+      }
+      if (textTelefone.getLength() > 14) {
+        textTelefone.setText(oldValue);
+      }
+    });
+    textTelefoneCLT.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
+            newValue.substring(2, 7) + "-" +
+            newValue.substring(7);
+        textTelefoneCLT.setText(formattedNumber);
+      }
+      if (textTelefoneCLT.getLength() > 14) {
+        textTelefoneCLT.setText(oldValue);
+      }
+    });
+    textTelefoneIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
+            newValue.substring(2, 7) + "-" +
+            newValue.substring(7);
+        textTelefoneIDOSO.setText(formattedNumber);
+      }
+      if (textTelefoneIDOSO.getLength() > 14) {
+        textTelefoneIDOSO.setText(oldValue);
+      }
+    });
+
+    // Formatacao das Datas
+    textNascimento.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{8}")) {
+        String formattedNumber = newValue.substring(0, 2) + "/" +
+            newValue.substring(2, 4) + "/" +
+            newValue.substring(4);
+        textNascimento.setText(formattedNumber);
+      }
+      if (textNascimento.getLength() > 10) {
+        textNascimento.setText(oldValue);
+      }
+    });
+    textNascimentoCLT.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{8}")) {
+        String formattedNumber = newValue.substring(0, 2) + "/" +
+            newValue.substring(2, 4) + "/" +
+            newValue.substring(4);
+        textNascimentoCLT.setText(formattedNumber);
+      }
+      if (textNascimentoCLT.getLength() > 10) {
+        textNascimentoCLT.setText(oldValue);
+      }
+    });
+    textNascimentoIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{8}")) {
+        String formattedNumber = newValue.substring(0, 2) + "/" +
+            newValue.substring(2, 4) + "/" +
+            newValue.substring(4);
+        textNascimentoIDOSO.setText(formattedNumber);
+      }
+      if (textNascimentoIDOSO.getLength() > 10) {
+        textNascimentoIDOSO.setText(oldValue);
+      }
+    });
+    // Formatacao dos CPFs
+    textCPF.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = newValue.substring(0, 3) + "." +
+            newValue.substring(3, 6) + "." +
+            newValue.substring(6, 9) + "-" +
+            newValue.substring(9);
+        textCPF.setText(formattedNumber);
+      }
+      if (textCPF.getLength() > 14) {
+        textCPF.setText(oldValue);
+      }
+    });
+    funcionarIoBuscarCliente.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = newValue.substring(0, 3) + "." +
+            newValue.substring(3, 6) + "." +
+            newValue.substring(6, 9) + "-" +
+            newValue.substring(9);
+        funcionarIoBuscarCliente.setText(formattedNumber);
+      }
+      if (funcionarIoBuscarCliente.getLength() > 14) {
+        funcionarIoBuscarCliente.setText(oldValue);
+      }
+    });
+    funcionarIoEditarCliente.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = newValue.substring(0, 3) + "." +
+            newValue.substring(3, 6) + "." +
+            newValue.substring(6, 9) + "-" +
+            newValue.substring(9);
+        funcionarIoEditarCliente.setText(formattedNumber);
+      }
+      if (funcionarIoEditarCliente.getLength() > 14) {
+        funcionarIoEditarCliente.setText(oldValue);
+      }
+    });
+    textCPFCLT.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = newValue.substring(0, 3) + "." +
+            newValue.substring(3, 6) + "." +
+            newValue.substring(6, 9) + "-" +
+            newValue.substring(9);
+        textCPFCLT.setText(formattedNumber);
+      }
+      if (textCPFCLT.getLength() > 14) {
+        textCPFCLT.setText(oldValue);
+      }
+    });
+    textCPFIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = newValue.substring(0, 3) + "." +
+            newValue.substring(3, 6) + "." +
+            newValue.substring(6, 9) + "-" +
+            newValue.substring(9);
+        textCPFIDOSO.setText(formattedNumber);
+      }
+      if (textCPFIDOSO.getLength() > 14) {
+        textCPFIDOSO.setText(oldValue);
+      }
+    });
+    // Formatacao dos RGs
+    textRGCLT.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{10}")) {
+        String formattedNumber = newValue.substring(0, 2) + "." +
+            newValue.substring(2, 5) + "." +
+            newValue.substring(5, 8) + "-" +
+            newValue.substring(8);
+        textRGCLT.setText(formattedNumber);
+      }
+      if (textRGCLT.getLength() > 13) {
+        textRGCLT.setText(oldValue);
+      }
+    });
+    textRGIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{10}")) {
+        String formattedNumber = newValue.substring(0, 2) + "." +
+            newValue.substring(2, 5) + "." +
+            newValue.substring(5, 8) + "-" +
+            newValue.substring(8);
+        textRGIDOSO.setText(formattedNumber);
+      }
+      if (textRGIDOSO.getLength() > 13) {
+        textRGIDOSO.setText(oldValue);
+      }
+    });
+    // Formatacao do CTPS
+    textCTPSCLT.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{9}")) {
+        String formattedNumber = newValue.substring(0, 6) + "/" +
+            newValue.substring(6);
+        textCTPSCLT.setText(formattedNumber);
+      }
+      if (textCTPSCLT.getLength() > 10) {
+        textCTPSCLT.setText(oldValue);
+      }
+    });
 
   }
+
 }
