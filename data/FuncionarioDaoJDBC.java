@@ -116,7 +116,7 @@ public class FuncionarioDaoJDBC implements iFuncionarioDao{
       connection = new ConnectionFactory().getConnection();
       pst = connection.prepareStatement(sqlQuery);
       pst.setString(1, cliente.getSenha());
-      pst.setString(2, cliente.getemail());
+      pst.setString(2, cliente.getEmail());
       pst.setString(3, cliente.getDataNascimento());
       pst.setString(4, cliente.getTelefone());
       pst.setString(5, cliente.getNome());
@@ -225,11 +225,12 @@ public class FuncionarioDaoJDBC implements iFuncionarioDao{
     try {
       connection = new ConnectionFactory().getConnection();
       pst = connection.prepareStatement(sqlQuery);
-      pst.setString(2, cliente.getSenha());
-      pst.setString(3, cliente.getemail());
-      pst.setString(5, cliente.getTelefone());
-      pst.setString(6, cliente.getNome());
-      pst.setString(8, cliente.getEndereco());
+      pst.setString(1, cliente.getSenha());
+      pst.setString(2, cliente.getEmail());
+      pst.setString(3, cliente.getTelefone());
+      pst.setString(4, cliente.getNome());
+      pst.setString(5, cliente.getEndereco());
+      pst.setString(6, cliente.getCpf());
       pst.execute();
       pst.close();
       connection.close();

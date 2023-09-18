@@ -250,8 +250,10 @@ public class ScreenController implements Initializable {
   private TextField editarTelefone;
   @FXML
   private TextField editarCliente;
-   @FXML
+  @FXML
   private ImageView IMGmodofuncionario;
+  @FXML
+  private TextField funcionarIoEditarCliente;
 
   private Cliente ClienteAtual;
   private Passe passe;
@@ -511,21 +513,29 @@ public class ScreenController implements Initializable {
   @FXML
   void buscarCpfCliente(MouseEvent event) {
     FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
-    String cpf = funcionarIoBuscarCliente.getText();
-    boolean localFlag = Cliente.confereCpf(cpf);
-    System.out.println(funcionarIoBuscarCliente.getText());
     Cliente clienteSolicitado = fDaoJDBC.readCliente(funcionarIoBuscarCliente.getText());
-    showClient(clienteSolicitado.getCpf());
-    //if(verif)
-    if(localFlag){
+    if(isInDatabase(clienteSolicitado)){
+      showClient(clienteSolicitado.getCpf());
+      funcionarIoBuscarCliente.clear();
     }else{
-      Cliente.setTextAlerta("ERRO");
+      showCaixaAlerta("Dados inválidos!");
     }
   }
 
   @FXML
   void salvarDadosEditados(MouseEvent event) {
-    //FAZER O UPDATE CLIENTE
+    FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
+    Cliente clienteDadosManutencao = fDaoJDBC.readCliente(funcionarIoEditarCliente.getText());
+    if(isInDatabase(clienteDadosManutencao)){
+      clienteDadosManutencao.setNome(editarNome.getText());
+      clienteDadosManutencao.setSenha(editarSenha.getText());
+      clienteDadosManutencao.setEndereco(editarEndereco.getText());
+      clienteDadosManutencao.setTelefone(editarTelefone.getText());
+      clienteDadosManutencao.setEmail(editarEmail.getText());
+      fDaoJDBC.updateCliente(clienteDadosManutencao);
+    }else{
+      showCaixaAlerta("Dados inválidos!");
+    }
   }
   @FXML
   void gerenciarCliente(MouseEvent event) {
@@ -534,7 +544,6 @@ public class ScreenController implements Initializable {
     
     groupGerenciarCliente.setVisible(true);
     groupGerenciarCliente.setDisable(false);
-    
   }
   
   @FXML
@@ -588,7 +597,7 @@ public class ScreenController implements Initializable {
     consultaNascimento.setText(cliente.getDataNascimento());
     consultaIndereco.setText(cliente.getEndereco());
     consultaTelefone.setText(cliente.getTelefone());
-    consultaEmail.setText(cliente.getemail());
+    consultaEmail.setText(cliente.getEmail());
     consultaSenha.setText(cliente.getSenha());
     consultaCartao.setText(passe.getNumCartao());
 
@@ -694,6 +703,18 @@ public class ScreenController implements Initializable {
     login = (emailFlag & senhaFlag);
     return login;
   }
+  public boolean isInDatabase(Cliente cliente) {
+    boolean isInDatabase = false;
+    FuncionarioDaoJDBC fDaoJDBC = new FuncionarioDaoJDBC();
+    ArrayList<Cliente> clientes = fDaoJDBC.getAllClientes();
+    for (Cliente verificador : clientes) {
+      if(verificador.getCpf().equals(cliente.getCpf())){
+        isInDatabase = true;
+        return isInDatabase;
+      }
+    }
+    return isInDatabase;
+  }
   public boolean verifyExist(Cliente cliente) {
     String email = textUsuario.getText();
     if (pwdFSenha.getLength() < textSenha.getLength()) {
@@ -702,7 +723,7 @@ public class ScreenController implements Initializable {
       textSenha.setText(pwdFSenha.getText());
     }
     String senha = pwdFSenha.getText();
-    emailFlag = (cDao.queryAccount(cliente.getCpf()).getemail().equals(email)) ? true : false;
+    emailFlag = (cDao.queryAccount(cliente.getCpf()).getEmail().equals(email)) ? true : false;
     if (emailFlag) {
       senhaFlag = (cDao.queryAccount(cliente.getCpf()).getSenha().equals(senha)) ? true : false;
     }
@@ -786,6 +807,17 @@ public class ScreenController implements Initializable {
     botaoFuncionario.setVisible(true);
 
     // Formatação Texto do Telefone
+    editarTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
+            newValue.substring(2, 7) + "-" +
+            newValue.substring(7);
+        editarTelefone.setText(formattedNumber);
+      }
+      if (editarTelefone.getLength() > 14) {
+        editarTelefone.setText(oldValue);
+      }
+    });
     textTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue.matches("\\d{11}")) {
         String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
@@ -865,6 +897,30 @@ public class ScreenController implements Initializable {
       }
       if (textCPF.getLength() > 14) {
         textCPF.setText(oldValue);
+      }
+    });
+    funcionarIoBuscarCliente.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = newValue.substring(0, 3) + "." +
+            newValue.substring(3, 6) + "." +
+            newValue.substring(6, 9) + "-" +
+            newValue.substring(9);
+        funcionarIoBuscarCliente.setText(formattedNumber);
+      }
+      if (funcionarIoBuscarCliente.getLength() > 14) {
+        funcionarIoBuscarCliente.setText(oldValue);
+      }
+    });
+    funcionarIoEditarCliente.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = newValue.substring(0, 3) + "." +
+            newValue.substring(3, 6) + "." +
+            newValue.substring(6, 9) + "-" +
+            newValue.substring(9);
+        funcionarIoEditarCliente.setText(formattedNumber);
+      }
+      if (funcionarIoEditarCliente.getLength() > 14) {
+        funcionarIoEditarCliente.setText(oldValue);
       }
     });
     textCPFCLT.textProperty().addListener((observable, oldValue, newValue) -> {

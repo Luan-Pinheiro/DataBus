@@ -169,7 +169,7 @@ public class Cliente {
   public void setSenha(String senha) {
     this.senha = senha;
   }
-  public String getemail() {
+  public String getEmail() {
     return email;
   }
   public String getSenha() {
