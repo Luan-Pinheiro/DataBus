@@ -3,6 +3,20 @@
 
 Projeto realizado para a disciplina de Banco de Dados 1, na Universidade Estadual do Sudoeste da Bahia (UESB). O software é uma simulação de um sistema de transporte público.
 
+## Aplicação 🚌
+Imagens da Aplicação
+<table>
+  <tr>
+    <td><img src="assets/Databus1.png" alt="Imagem 1"></td>
+    <td><img src="assets/Databus2.png" alt="Imagem 2"></td>
+    <td><img src="assets/Databus3.png" alt="Imagem 3"></td>
+  </tr>
+  <tr>
+    <td><img src="assets/Databus4.png" alt="Imagem 4"></td>
+    <td><img src="assets/Databus5.png" alt="Imagem 5"></td>
+    <td><img src="assets/Databus6.png" alt="Imagem 6"></td>
+  </tr>
+</table>
 
 ## Funcionalidades
 
@@ -31,19 +45,3 @@ Projeto realizado para a disciplina de Banco de Dados 1, na Universidade Estadua
 
 ## 🚀 Sobre nós
 Estudantes de Ciência da Computação na Universidade Estadual do Sudoeste da Bahia (UESB).
-
-
-## Aplicação 🚌
-Imagens da Aplicação
-<table>
-  <tr>
-    <td><img src="assets/Databus1.png" alt="Imagem 1"></td>
-    <td><img src="assets/Databus2.png" alt="Imagem 2"></td>
-    <td><img src="assets/Databus3.png" alt="Imagem 3"></td>
-  </tr>
-  <tr>
-    <td><img src="assets/Databus4.png" alt="Imagem 4"></td>
-    <td><img src="assets/Databus5.png" alt="Imagem 5"></td>
-    <td><img src="assets/Databus6.png" alt="Imagem 6"></td>
-  </tr>
-</table>
