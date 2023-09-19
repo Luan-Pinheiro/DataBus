@@ -36,9 +36,6 @@ Estudantes de Ciência da Computação na Universidade Estadual do Sudoeste da B
 ## Aplicação 🚌
 Imagens da Aplicação
 
-<img src="assets/Databus1.png">
-<img src="assets/Databus2.png">
-<img src="assets/Databus3.png">
-<img src="assets/Databus4.png">
-<img src="assets/Databus5.png">
-<img src="assets/Databus6.png">
+<img src="assets/Databus1.png">  <img src="assets/Databus2.png">
+<img src="assets/Databus3.png">  <img src="assets/Databus4.png"> 
+<img src="assets/Databus5.png">  <img src="assets/Databus6.png">
