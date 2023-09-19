@@ -21,7 +21,6 @@ public class Principal extends Application {
     stagePrimary.setResizable(false); // Impossibilitando mudar tamanho da janela
     stagePrimary.show(); // mostrando o stage
   }
-
   public static void main(String[] args) {
     new ScreenController();
     launch(args);
