@@ -1072,6 +1072,87 @@ public class ScreenController implements Initializable {
       showCaixaAlerta("Digite o Valor Corretamente, USE EXCLUSIVAMENTE OS NUMEROS");
     }
   }
+
+  public void formataTel(TextField txt){
+    // Formatação Texto do Telefone
+    txt.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
+            newValue.substring(2, 7) + "-" +
+            newValue.substring(7);
+        txt.setText(formattedNumber);
+      }
+      if (txt.getLength() > 14) {
+        txt.setText(oldValue);
+      }
+    });
+  }
+  public void formataData(TextField txt){
+    txt.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{8}")) {
+        String formattedNumber = newValue.substring(0, 2) + "/" +
+            newValue.substring(2, 4) + "/" +
+            newValue.substring(4);
+        txt.setText(formattedNumber);
+      }
+      if (txt.getLength() > 10) {
+        txt.setText(oldValue);
+      }
+    });
+  }
+  public void formataCpf(TextField txt){
+    txt.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{11}")) {
+        String formattedNumber = newValue.substring(0, 3) + "." +
+            newValue.substring(3, 6) + "." +
+            newValue.substring(6, 9) + "-" +
+            newValue.substring(9);
+        txt.setText(formattedNumber);
+      }
+      if (txt.getLength() > 14) {
+        txt.setText(oldValue);
+      }
+    });
+  }
+  public void formataRg(TextField txt){
+    txt.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{10}")) {
+        String formattedNumber = newValue.substring(0, 2) + "." +
+            newValue.substring(2, 5) + "." +
+            newValue.substring(5, 8) + "-" +
+            newValue.substring(8);
+        txt.setText(formattedNumber);
+      }
+      if (txt.getLength() > 13) {
+        txt.setText(oldValue);
+      }
+    });
+  }
+  public void formataRota(TextField txt){
+    txt.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{4}")) {
+        String formattedNumber = newValue.substring(0, 2) + ":" +
+            newValue.substring(2);
+        txt.setText(formattedNumber);
+      }
+      if (txt.getLength() > 5) {
+        txt.setText(oldValue);
+      }
+    });
+  }
+  public void formataCtps(TextField txt){
+    txt.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.matches("\\d{9}")) {
+        String formattedNumber = newValue.substring(0, 6) + "/" +
+            newValue.substring(6);
+        txt.setText(formattedNumber);
+      }
+      if (txt.getLength() > 10) {
+        txt.setText(oldValue);
+      }
+    });
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
@@ -1084,207 +1165,27 @@ public class ScreenController implements Initializable {
     botaoFuncionario.setVisible(true);
 
     // Formatação Texto do Telefone
-    editarTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
-            newValue.substring(2, 7) + "-" +
-            newValue.substring(7);
-        editarTelefone.setText(formattedNumber);
-      }
-      if (editarTelefone.getLength() > 14) {
-        editarTelefone.setText(oldValue);
-      }
-    });
-    textTelefone.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
-            newValue.substring(2, 7) + "-" +
-            newValue.substring(7);
-        textTelefone.setText(formattedNumber);
-      }
-      if (textTelefone.getLength() > 14) {
-        textTelefone.setText(oldValue);
-      }
-    });
-    textTelefoneCLT.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
-            newValue.substring(2, 7) + "-" +
-            newValue.substring(7);
-        textTelefoneCLT.setText(formattedNumber);
-      }
-      if (textTelefoneCLT.getLength() > 14) {
-        textTelefoneCLT.setText(oldValue);
-      }
-    });
-    textTelefoneIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = "(" + newValue.substring(0, 2) + ")" +
-            newValue.substring(2, 7) + "-" +
-            newValue.substring(7);
-        textTelefoneIDOSO.setText(formattedNumber);
-      }
-      if (textTelefoneIDOSO.getLength() > 14) {
-        textTelefoneIDOSO.setText(oldValue);
-      }
-    });
-
+    formataTel(editarTelefone);
+    formataTel(textTelefone);
+    formataTel(textTelefoneCLT);
+    formataTel(textTelefoneIDOSO);
     // Formatacao das Datas
-    textNascimento.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{8}")) {
-        String formattedNumber = newValue.substring(0, 2) + "/" +
-            newValue.substring(2, 4) + "/" +
-            newValue.substring(4);
-        textNascimento.setText(formattedNumber);
-      }
-      if (textNascimento.getLength() > 10) {
-        textNascimento.setText(oldValue);
-      }
-    });
-    textNascimentoCLT.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{8}")) {
-        String formattedNumber = newValue.substring(0, 2) + "/" +
-            newValue.substring(2, 4) + "/" +
-            newValue.substring(4);
-        textNascimentoCLT.setText(formattedNumber);
-      }
-      if (textNascimentoCLT.getLength() > 10) {
-        textNascimentoCLT.setText(oldValue);
-      }
-    });
-    textNascimentoIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{8}")) {
-        String formattedNumber = newValue.substring(0, 2) + "/" +
-            newValue.substring(2, 4) + "/" +
-            newValue.substring(4);
-        textNascimentoIDOSO.setText(formattedNumber);
-      }
-      if (textNascimentoIDOSO.getLength() > 10) {
-        textNascimentoIDOSO.setText(oldValue);
-      }
-    });
+    formataData(textNascimento);
+    formataData(textNascimentoCLT);
+    formataData(textNascimentoIDOSO);
     // Formatacao dos CPFs
-    textCPF.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = newValue.substring(0, 3) + "." +
-            newValue.substring(3, 6) + "." +
-            newValue.substring(6, 9) + "-" +
-            newValue.substring(9);
-        textCPF.setText(formattedNumber);
-      }
-      if (textCPF.getLength() > 14) {
-        textCPF.setText(oldValue);
-      }
-    });
-    funcionarIoBuscarCliente.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = newValue.substring(0, 3) + "." +
-            newValue.substring(3, 6) + "." +
-            newValue.substring(6, 9) + "-" +
-            newValue.substring(9);
-        funcionarIoBuscarCliente.setText(formattedNumber);
-      }
-      if (funcionarIoBuscarCliente.getLength() > 14) {
-        funcionarIoBuscarCliente.setText(oldValue);
-      }
-    });
-    funcionarIoEditarCliente.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = newValue.substring(0, 3) + "." +
-            newValue.substring(3, 6) + "." +
-            newValue.substring(6, 9) + "-" +
-            newValue.substring(9);
-        funcionarIoEditarCliente.setText(formattedNumber);
-      }
-      if (funcionarIoEditarCliente.getLength() > 14) {
-        funcionarIoEditarCliente.setText(oldValue);
-      }
-    });
-    textCPFCLT.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = newValue.substring(0, 3) + "." +
-            newValue.substring(3, 6) + "." +
-            newValue.substring(6, 9) + "-" +
-            newValue.substring(9);
-        textCPFCLT.setText(formattedNumber);
-      }
-      if (textCPFCLT.getLength() > 14) {
-        textCPFCLT.setText(oldValue);
-      }
-    });
-    textCPFIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{11}")) {
-        String formattedNumber = newValue.substring(0, 3) + "." +
-            newValue.substring(3, 6) + "." +
-            newValue.substring(6, 9) + "-" +
-            newValue.substring(9);
-        textCPFIDOSO.setText(formattedNumber);
-      }
-      if (textCPFIDOSO.getLength() > 14) {
-        textCPFIDOSO.setText(oldValue);
-      }
-    });
+    formataCpf(textCPF);
+    formataCpf(funcionarIoBuscarCliente);
+    formataCpf(funcionarIoEditarCliente);
+    formataCpf(textCPFCLT);
+    formataCpf(textCPFIDOSO);
     // Formatacao dos RGs
-    textRGCLT.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{10}")) {
-        String formattedNumber = newValue.substring(0, 2) + "." +
-            newValue.substring(2, 5) + "." +
-            newValue.substring(5, 8) + "-" +
-            newValue.substring(8);
-        textRGCLT.setText(formattedNumber);
-      }
-      if (textRGCLT.getLength() > 13) {
-        textRGCLT.setText(oldValue);
-      }
-    });
-    textRGIDOSO.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{10}")) {
-        String formattedNumber = newValue.substring(0, 2) + "." +
-            newValue.substring(2, 5) + "." +
-            newValue.substring(5, 8) + "-" +
-            newValue.substring(8);
-        textRGIDOSO.setText(formattedNumber);
-      }
-      if (textRGIDOSO.getLength() > 13) {
-        textRGIDOSO.setText(oldValue);
-      }
-    });
+    formataRg(textRGCLT);
+    formataRg(textRGIDOSO);
     // Formatacao do CTPS
-    textCTPSCLT.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{9}")) {
-        String formattedNumber = newValue.substring(0, 6) + "/" +
-            newValue.substring(6);
-        textCTPSCLT.setText(formattedNumber);
-      }
-      if (textCTPSCLT.getLength() > 10) {
-        textCTPSCLT.setText(oldValue);
-      }
-    });
-
-    cadRotahChegada.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{4}")) {
-        String formattedNumber = newValue.substring(0, 2) + ":" +
-            newValue.substring(2);
-        cadRotahChegada.setText(formattedNumber);
-      }
-      if (cadRotahChegada.getLength() > 5) {
-        cadRotahChegada.setText(oldValue);
-      }
-    });
-
-    cadRotahSaida.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (newValue.matches("\\d{4}")) {
-        String formattedNumber = newValue.substring(0, 2) + ":" +
-            newValue.substring(2);
-        cadRotahSaida.setText(formattedNumber);
-      }
-      if (cadRotahSaida.getLength() > 5) {
-        cadRotahSaida.setText(oldValue);
-      }
-    });
-
-
-
+    formataCtps(textCTPSCLT);
+    // Formatacao Rotas
+    formataRota(cadRotahChegada);
+    formataRota(cadRotahSaida);
   }
-
 }
