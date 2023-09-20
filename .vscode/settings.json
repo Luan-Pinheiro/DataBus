@@ -1,14 +1,11 @@
 {
-    "sqltools.connections": [
-        {
-            "previewLimit": 50,
-            "server": "localhost",
-            "port": 5432,
-            "driver": "PostgreSQL",
-            "name": "postgresDataBus",
-            "database": "databus",
-            "username": "postgres",
-            "password": "123"
-        }
+  "java.project.referencedLibraries": {
+    "include": [
+      "lib/**/*.jar",
+      "c:\\Program Files\\PostgreSQL\\postgresql-42.3.7.jar"
+    ],
+    "exclude": [
+      "lib/postgresql-42.3.7.jar"
     ]
+  }
 }
